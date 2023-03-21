@@ -1,5 +1,12 @@
+import React from 'react';
+import Encounter from './Encounter';
+
 const App = () => {
-	return <div></div>;
+	return (
+		<div>
+			<Encounter />
+		</div>
+	);
 };
 
 export default App;
