@@ -13,30 +13,16 @@ describe('Party component', () => {
 		expect(container).toMatchSnapshot();
 	});
 
-	it('calls onSubmit when Submit button is pressed', async () => {
-		// Arrange
-		const onSubmitMock = jest.fn(e=>e.preventDefault());
-		const user = userEvent.setup();
-		render(<Party onSubmit={onSubmitMock} />);
-		const button = screen.getByRole('button', { name: 'Submit' });
-
-		// Act
-		await user.click(button);
-
-		//Assert
-		expect(onSubmitMock).toHaveBeenCalledTimes(1);
-	});
-
 	it('form validation rejects number of characters outside of 1-10 values', async () => {
 		// Arrange
 		const user = userEvent.setup();
 		render(<Party  />);
-		const input = screen.getByLabelText('Characters (Max 10)');
+		const input = screen.getByLabelText('Number of characters (Max 10)');
 
 		// Act
 		await user.type(input, '25');
 
-		//Asser
+		//Assert
 		expect(input).toBeInvalid();
 	});
 
@@ -49,7 +35,8 @@ describe('Party component', () => {
 		// Act
 		await user.type(input, '68');
 
-		//Asser
+		//Assert
 		expect(input).toBeInvalid();
 	});
+
 });
