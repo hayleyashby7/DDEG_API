@@ -15,7 +15,7 @@ describe('Party component', () => {
 
 	it('calls onSubmit when Submit button is pressed', async () => {
 		// Arrange
-		const onSubmitMock = jest.fn();
+		const onSubmitMock = jest.fn(e=>e.preventDefault());
 		const user = userEvent.setup();
 		render(<Party onSubmit={onSubmitMock} />);
 		const button = screen.getByRole('button', { name: 'Submit' });
@@ -29,31 +29,25 @@ describe('Party component', () => {
 
 	it('form validation rejects number of characters outside of 1-10 values', async () => {
 		// Arrange
-		const onSubmitMock = jest.fn();
 		const user = userEvent.setup();
-		render(<Party onSubmit={onSubmitMock} />);
-		const button = screen.getByRole('button', { name: 'Submit' });
+		render(<Party  />);
 		const input = screen.getByLabelText('Characters (Max 10)');
 
 		// Act
 		await user.type(input, '25');
-		await user.click(button);
 
 		//Asser
 		expect(input).toBeInvalid();
 	});
 
-	it('form validation  rejects character level outside of 1-20 values', async () => {
+	it('form validation rejects character level outside of 1-20 values', async () => {
 		// Arrange
-		const onSubmitMock = jest.fn();
 		const user = userEvent.setup();
-		render(<Party onSubmit={onSubmitMock} />);
-		const button = screen.getByRole('button', { name: 'Submit' });
+		render(<Party />);
 		const input = screen.getByLabelText('Level (1-20)');
 
 		// Act
 		await user.type(input, '68');
-		await user.click(button);
 
 		//Asser
 		expect(input).toBeInvalid();
