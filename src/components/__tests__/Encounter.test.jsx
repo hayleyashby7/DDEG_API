@@ -1,10 +1,10 @@
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import Encounter from '../Encounter';
 import { getMonstersFromAPI } from '../utilities/API';
 
-vi.mock('../API');
+vi.mock('../utilities/API');
 
 describe('Encounter Component', () => {
 	// Clear the mock after each test
