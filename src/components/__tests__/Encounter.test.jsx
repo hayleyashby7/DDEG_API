@@ -2,7 +2,7 @@ import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import Encounter from '../Encounter';
-import { getMonstersFromAPI } from '../API';
+import { getMonstersFromAPI } from '../utilities/API';
 
 vi.mock('../API');
 
