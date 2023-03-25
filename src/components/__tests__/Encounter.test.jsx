@@ -26,4 +26,17 @@ describe('Encounter Component', () => {
 			screen.getByText('Goblin');
 		});
 	});
+
+	it('renders error message when api responds with a failure', async () => {
+		// Arrange
+		getMonstersFromAPI.mockResolvedValue({});
+
+		// Act
+		render(<Encounter />);
+
+		// Assert
+		await waitFor(() => {
+			screen.getByText('Unable to retrieve data');
+		});
+	});
 });
