@@ -1,6 +1,6 @@
 import React from 'react';
-import { describe, it, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import Encounter from '../Encounter';
 import { getMonstersFromAPI } from '../utilities/API';
 
@@ -19,24 +19,32 @@ describe('Encounter Component', () => {
 		});
 
 		// Act
-		render(<Encounter />);
+		act(() => {
+			render(<Encounter />);
+		});
 
 		// Assert
-		await waitFor(() => {
-			screen.getByText('Goblin');
+		await act(() => {
+			waitFor(() => {
+				expect(screen.getByText('Goblin')).toBeInTheDocument();
+			});
 		});
 	});
 
-	it('renders error message when api responds with a failure', async () => {
+	it('renders error message when api responds without data', async () => {
 		// Arrange
 		getMonstersFromAPI.mockResolvedValue({});
 
 		// Act
-		render(<Encounter />);
+		act(() => {
+			render(<Encounter />);
+		});
 
 		// Assert
-		await waitFor(() => {
-			screen.getByText('Unable to retrieve data');
+		await act(() => {
+			waitFor(() => {
+				expect(screen.getByText('Unable to retrieve data')).toBeInTheDocument();
+			});
 		});
 	});
 });
