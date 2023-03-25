@@ -14,7 +14,9 @@
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build",
 		"start": "vite",
-		"build": "vite build"
+		"build": "vite build",
+		"test": "vitest",
+		"coverage": "vitest run --coverage"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -35,8 +37,10 @@
 		]
 	},
 	"devDependencies": {
-		"gh-pages": "^5.0.0",
 		"@vitejs/plugin-react": "^2.0.1",
-		"vite": "^3.0.7"
+		"gh-pages": "^5.0.0",
+		"jsdom": "^21.1.1",
+		"vite": "^3.0.7",
+		"vitest": "^0.29.7"
 	}
 }

@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Encounter has correct header and content > renders Encounter heading 1`] = `
+<div>
+  <div>
+    <h2>
+      Encounter
+    </h2>
+  </div>
+</div>
+`;

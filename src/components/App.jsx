@@ -1,6 +1,6 @@
 import React from 'react';
-import Encounter from './Encounter';
-import Party from './Party';
+import Encounter from './Encounter.jsx';
+import Party from './Party.jsx';
 
 const App = () => {
 	return (
