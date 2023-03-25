@@ -1,14 +1,29 @@
 import React from 'react';
-import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
 import Encounter from '../Encounter';
+import { getMonstersFromAPI } from '../API';
 
-describe('Encounter has correct header and content', () => {
-	it('renders Encounter heading', () => {
+vi.mock('../API');
+
+describe('Encounter Component', () => {
+	// Clear the mock after each test
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
+
+	it('renders monster names when api responds successfully', async () => {
 		// Arrange
-		const { container } = render(<Encounter />);
+		getMonstersFromAPI.mockResolvedValue({
+			results: [{ slug: 'goblin', name: 'Goblin' }],
+		});
+
+		// Act
+		render(<Encounter />);
 
 		// Assert
-		expect(container).toMatchSnapshot();
+		await waitFor(() => {
+			screen.getByText('Goblin');
+		});
 	});
 });
