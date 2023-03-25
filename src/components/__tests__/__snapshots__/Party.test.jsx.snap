@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Party component > renders the party composition form 1`] = `
+<div>
+  <form>
+    <label
+      for="numCharacters"
+    >
+      Number of characters (Max 10)
+    </label>
+    <input
+      id="numCharacters"
+      max="10"
+      min="1"
+      name="numCharacters"
+      placeholder="Number of characters (Max 10)"
+      type="number"
+      value="1"
+    />
+    <label
+      for="level"
+    >
+      Level (1-20)
+    </label>
+    <input
+      id="level"
+      max="20"
+      min="1"
+      name="level"
+      placeholder="Level (1-20)"
+      type="number"
+      value="1"
+    />
+    <button
+      name="partySubmit"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

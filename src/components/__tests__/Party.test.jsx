@@ -1,6 +1,6 @@
 import React from 'react';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import Party from '../Party';
 
@@ -16,7 +16,7 @@ describe('Party component', () => {
 	it('form validation rejects number of characters outside of 1-10 values', async () => {
 		// Arrange
 		const user = userEvent.setup();
-		render(<Party  />);
+		render(<Party />);
 		const input = screen.getByLabelText('Number of characters (Max 10)');
 
 		// Act
@@ -38,5 +38,4 @@ describe('Party component', () => {
 		//Assert
 		expect(input).toBeInvalid();
 	});
-
 });
