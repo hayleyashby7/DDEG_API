@@ -32,6 +32,25 @@ describe('Party component', () => {
 		});
 	});
 
+	it('form validation accepts number of characters inside of 1-10 values', async () => {
+		// Arrange
+		const user = userEvent.setup();
+
+		render(<Party />);
+
+		const input = screen.getByLabelText('Number of characters');
+
+		// Act
+		await user.type(input, '5');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(input).toBeValid();
+			});
+		});
+	});
+
 	it('form validation rejects character level outside of 1-20 values', async () => {
 		// Arrange
 		const user = userEvent.setup();
@@ -45,6 +64,23 @@ describe('Party component', () => {
 		await act(() => {
 			waitFor(() => {
 				expect(input).toBeInvalid();
+			});
+		});
+	});
+
+	it('form validation accepts character level inside of 1-20 values', async () => {
+		// Arrange
+		const user = userEvent.setup();
+		render(<Party />);
+		const input = screen.getByLabelText('Level (1-20)');
+
+		// Act
+		await user.type(input, '13');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(input).toBeValid();
 			});
 		});
 	});
