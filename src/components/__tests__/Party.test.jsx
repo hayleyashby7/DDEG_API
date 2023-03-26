@@ -84,4 +84,89 @@ describe('Party component', () => {
 			});
 		});
 	});
+
+	it('form validation accepts an Easy encounter difficulty', async () => {
+		// Arrange
+		const user = userEvent.setup();
+		render(<Party />);
+		const difficulty = screen.getByLabelText('Difficulty');
+
+		// Act
+		await user.type(difficulty, 'Easy');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(difficulty).toBeValid();
+			});
+		});
+	});
+
+	it('form validation accepts a Medium encounter difficulty', async () => {
+		// Arrange
+		const user = userEvent.setup();
+		render(<Party />);
+		const difficulty = screen.getByLabelText('Difficulty');
+
+		// Act
+		await user.type(difficulty, 'Medium');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(difficulty).toBeValid();
+			});
+		});
+	});
+
+	it('form validation accepts a Hard encounter difficulty', async () => {
+		// Arrange
+		const user = userEvent.setup();
+		render(<Party />);
+		const difficulty = screen.getByLabelText('Difficulty');
+
+		// Act
+		await user.type(difficulty, 'Hard');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(difficulty).toBeValid();
+			});
+		});
+	});
+
+	it('form validation accepts a Deadly encounter difficulty', async () => {
+		// Arrange
+		const user = userEvent.setup();
+		render(<Party />);
+		const difficulty = screen.getByLabelText('Difficulty');
+
+		// Act
+		await user.type(difficulty, 'Deadly');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(difficulty).toBeValid();
+			});
+		});
+	});
+
+	it('form validation rejects an invalid encounter difficulty', async () => {
+		// Arrange
+		const user = userEvent.setup();
+		render(<Party />);
+		const difficulty = screen.getByLabelText('Difficulty');
+
+		// Act
+		await user.type(difficulty, 'SuperDuperReallyChallenging');
+
+		//Assert
+		await act(() => {
+			waitFor(() => {
+				expect(difficulty).toBeInvalid();
+			});
+		});
+	});
 });
