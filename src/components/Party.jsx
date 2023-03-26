@@ -1,18 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { difficultyEnum } from './utilities/difficulty';
 
 const Party = ({ handleForm }) => {
 	const { register, handleSubmit } = useForm();
 	const [numCharacters, setNumCharacters] = useState(1);
 	const [level, setLevel] = useState(1);
+	const [difficulty, setDifficulty] = useState(difficultyEnum.Easy);
 
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
 				console.log(data);
-				console.log(numCharacters);
-				console.log(level);
 			})}
 		>
 			<label htmlFor='numCharacters'>Number of characters</label>
@@ -43,6 +43,21 @@ const Party = ({ handleForm }) => {
 				})}
 				placeholder='1-20'
 			/>
+			<label htmlFor='difficulty'>Difficulty</label>
+			<select
+				id='difficulty'
+				{...register('difficulty', {
+					required: true,
+					value: { difficulty },
+					onChange: (e) => setDifficulty(e.target.value),
+				})}
+			>
+				<option value={difficultyEnum.Easy.toString()}>Easy</option>
+				<option value={difficultyEnum.Medium.toString()}>Medium</option>
+				<option value={difficultyEnum.Hard.toString()}>Hard</option>
+				<option value={difficultyEnum.Deadly.toString()}>Deadly</option>
+			</select>
+
 			<input name='partySubmit' type='submit' />
 		</form>
 	);
