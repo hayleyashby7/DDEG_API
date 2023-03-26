@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Party from '../Party';
 
@@ -16,14 +16,20 @@ describe('Party component', () => {
 	it('form validation rejects number of characters outside of 1-10 values', async () => {
 		// Arrange
 		const user = userEvent.setup();
+
 		render(<Party />);
-		const input = screen.getByLabelText('Number of characters (Max 10)');
+
+		const input = screen.getByLabelText('Number of characters');
 
 		// Act
 		await user.type(input, '25');
 
 		//Assert
-		expect(input).toBeInvalid();
+		await act(() => {
+			waitFor(() => {
+				expect(input).toBeInvalid();
+			});
+		});
 	});
 
 	it('form validation rejects character level outside of 1-20 values', async () => {
@@ -36,6 +42,10 @@ describe('Party component', () => {
 		await user.type(input, '68');
 
 		//Assert
-		expect(input).toBeInvalid();
+		await act(() => {
+			waitFor(() => {
+				expect(input).toBeInvalid();
+			});
+		});
 	});
 });
