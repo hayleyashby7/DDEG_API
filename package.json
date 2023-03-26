@@ -8,7 +8,8 @@
 		"@testing-library/react": "^14.0.0",
 		"@testing-library/user-event": "^14.0.0",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"react-hook-form": "^7.43.8"
 	},
 	"scripts": {
 		"predeploy": "npm run build",
@@ -39,6 +40,8 @@
 	"devDependencies": {
 		"@vitejs/plugin-react": "^2.0.1",
 		"@vitest/coverage-c8": "^0.29.7",
+		"eslint": "^8.36.0",
+		"eslint-plugin-testing-library": "^5.10.2",
 		"gh-pages": "^5.0.0",
 		"jsdom": "^21.1.1",
 		"vite": "^3.0.7",

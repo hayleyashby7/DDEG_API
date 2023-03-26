@@ -12,7 +12,7 @@ describe('Encounter Component', () => {
 		vi.clearAllMocks();
 	});
 
-	it('renders monster names when api responds successfully', async () => {
+	it('renders a monster name when api responds successfully', async () => {
 		// Arrange
 		getMonstersFromAPI.mockResolvedValue({
 			results: [{ slug: 'goblin', name: 'Goblin' }],
@@ -27,6 +27,34 @@ describe('Encounter Component', () => {
 		await act(() => {
 			waitFor(() => {
 				expect(screen.getByText('Goblin')).toBeInTheDocument();
+			});
+		});
+	});
+
+	it('renders several monster names when api responds successfully', async () => {
+		// Arrange
+		getMonstersFromAPI.mockResolvedValue({
+			results: [
+				{ slug: 'goblin', name: 'Goblin' },
+				{ slug: 'orc', name: 'Orc' },
+			],
+		});
+
+		// Act
+		act(() => {
+			render(<Encounter />);
+		});
+
+		// Assert
+		await act(() => {
+			waitFor(() => {
+				expect(screen.getByText('Goblin')).toBeInTheDocument();
+			});
+		});
+
+		await act(() => {
+			waitFor(() => {
+				expect(screen.getByText('Orc')).toBeInTheDocument();
 			});
 		});
 	});
