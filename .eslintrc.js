@@ -18,5 +18,5 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: ['react', 'vitest'],
-    rules: {},
+    rules: { 'react/jsx-props-no-spreading': 'off' },
 };
