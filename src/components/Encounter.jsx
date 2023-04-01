@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getMonstersFromAPI } from './utilities/API';
+import getMonstersFromAPI from './utilities/API';
 
 function Encounter({ challengeRating = 3 }) {
     const [monsters, setMonsters] = useState([]);
