@@ -1,14 +1,14 @@
 import React from 'react';
-import Encounter from './Encounter.jsx';
-import Party from './Party.jsx';
+import Encounter from './Encounter';
+import Party from './Party';
 
-const App = () => {
-	return (
-		<div>
-			<Party />
-			<Encounter />
-		</div>
-	);
-};
+function App() {
+    return (
+        <div>
+            <Party />
+            <Encounter />
+        </div>
+    );
+}
 
 export default App;
