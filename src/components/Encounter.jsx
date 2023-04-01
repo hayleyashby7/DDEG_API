@@ -29,11 +29,6 @@ const Encounter = ({ challengeRating = 3 }) => {
 		};
 	}, [challengeRating]);
 
-	const hasData = (data) => {
-		if (data === undefined) return false;
-		else return true;
-	};
-
 	return error ? (
 		<p>Unable to retrieve data</p>
 	) : (
