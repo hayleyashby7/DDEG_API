@@ -7,9 +7,10 @@
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^14.0.0",
 		"@testing-library/user-event": "^14.0.0",
+		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-hook-form": "^7.43.8"
+		"react-hook-form": "^7.43.9"
 	},
 	"scripts": {
 		"predeploy": "npm run build",
@@ -17,13 +18,10 @@
 		"start": "vite",
 		"build": "vite build",
 		"test": "vitest",
-		"coverage": "vitest run --coverage"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
+		"coverage": "vitest run --coverage",
+		"lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
+		"lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
+		"format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc"
 	},
 	"browserslist": {
 		"production": [
@@ -38,13 +36,21 @@
 		]
 	},
 	"devDependencies": {
-		"@vitejs/plugin-react": "^2.0.1",
-		"@vitest/coverage-c8": "^0.29.7",
-		"eslint": "^8.36.0",
+		"@vitejs/plugin-react": "^3.1.0",
+		"eslint": "^8.37.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-jsx-a11y": "^6.7.1",
+		"eslint-plugin-react": "^7.32.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-testing-library": "^5.10.2",
+		"eslint-plugin-vitest": "^0.0.57",
 		"gh-pages": "^5.0.0",
 		"jsdom": "^21.1.1",
-		"vite": "^3.0.7",
-		"vitest": "^0.29.7"
+		"prettier": "2.8.7",
+		"vite": "^4.2.1",
+		"vite-plugin-eslint": "^1.8.1",
+		"vitest": "^0.29.8"
 	}
 }
