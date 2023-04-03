@@ -1,13 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import fetch from 'node-fetch';
-
-export const getMonstersFromAPI = async ({ challengeRating = 3 }) => {
+export const getMonstersFromAPI = async ({ challengeRating }) => {
     try {
         const response = await fetch(
             `https://api.open5e.com/monsters/?challenge_rating=${challengeRating}`,
         );
-        const data = await response.json();
-        return data;
+        return await response.json();
     } catch (e) {
         return null;
     }

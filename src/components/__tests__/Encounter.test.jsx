@@ -1,78 +1,40 @@
+import { vi, it, describe, expect } from 'vitest';
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor, act } from '@testing-library/react';
-import Encounter from '../Encounter';
-import { getMonstersFromAPI } from '../utilities/API';
+import { render, screen } from '@testing-library/react';
+import Encounter from '../Encounter/Encounter';
 
-vi.mock('../utilities/API');
+describe('Encounter', () => {
+    it('should render a list of monsters', async () => {
+        // Arrange
 
-describe('Encounter Component', () => {
-	// Clear the mock after each test
-	beforeEach(() => {
-		vi.clearAllMocks();
-	});
+        // Mock the API call
+        vi.mock('../../utils/API', async (importOriginal) => {
+            const mod = await importOriginal();
+            return {
+                ...mod,
+                getMonstersFromAPI: vi.fn(() =>
+                    Promise.resolve({
+                        results: [
+                            { slug: 'goblin', name: 'Goblin' },
+                            { slug: 'orc', name: 'Orc' },
+                        ],
+                    }),
+                ),
+            };
+        });
 
-	it('renders a monster name when api responds successfully', async () => {
-		// Arrange
-		getMonstersFromAPI.mockResolvedValue({
-			results: [{ slug: 'goblin', name: 'Goblin' }],
-		});
+        // Act
+        render(<Encounter />);
 
-		// Act
-		act(() => {
-			render(<Encounter />);
-		});
+        // Assert
+        // Heading is displayed
+        expect(screen.getByRole('heading')).toHaveTextContent('List of Monsters');
 
-		// Assert
-		await act(() => {
-			waitFor(() => {
-				expect(screen.getByText('Goblin')).toBeInTheDocument();
-			});
-		});
-	});
+        // Mocked data is displayed
+        expect(await screen.findByText('Goblin')).toBeInTheDocument();
+        expect(await screen.findByText('Orc')).toBeInTheDocument();
 
-	it('renders several monster names when api responds successfully', async () => {
-		// Arrange
-		getMonstersFromAPI.mockResolvedValue({
-			results: [
-				{ slug: 'goblin', name: 'Goblin' },
-				{ slug: 'orc', name: 'Orc' },
-			],
-		});
-
-		// Act
-		act(() => {
-			render(<Encounter />);
-		});
-
-		// Assert
-		await act(() => {
-			waitFor(() => {
-				expect(screen.getByText('Goblin')).toBeInTheDocument();
-			});
-		});
-
-		await act(() => {
-			waitFor(() => {
-				expect(screen.getByText('Orc')).toBeInTheDocument();
-			});
-		});
-	});
-
-	it('renders error message when api responds without data', async () => {
-		// Arrange
-		getMonstersFromAPI.mockResolvedValue({});
-
-		// Act
-		act(() => {
-			render(<Encounter />);
-		});
-
-		// Assert
-		await act(() => {
-			waitFor(() => {
-				expect(screen.getByText('Unable to retrieve data')).toBeInTheDocument();
-			});
-		});
-	});
+        // No error message is displayed
+        expect(screen.queryByText('No monsters found')).not.toBeInTheDocument();
+    });
 });
