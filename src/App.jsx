@@ -1,6 +1,6 @@
 import React from 'react';
-import Encounter from './Encounter';
-import Party from './Party';
+import Encounter from './components/Encounter/Encounter';
+import Party from './components/Party';
 
 function App() {
     return (
