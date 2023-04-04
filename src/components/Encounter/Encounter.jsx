@@ -16,6 +16,10 @@ function Encounter({ challengeRating = 3 }) {
                         'Unable to retrieve monsters from server. Please try again later.',
                     );
                 }
+                if (data.count === 0) {
+                    throw new Error('No suitable monsters found.');
+                }
+
                 setMonsters(data.results);
             } catch (err) {
                 setError(true);
