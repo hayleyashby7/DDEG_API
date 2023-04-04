@@ -1,172 +1,93 @@
 import React from 'react';
-import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Party from '../Party';
+import Difficulty from '../../utils/difficulty';
 
 describe('Party component', () => {
-	it('renders the party composition form', () => {
-		// Arrange
-		const { container } = render(<Party />);
+    it('renders the party composition form', () => {
+        // Arrange
+        const { container } = render(<Party />);
 
-		//Assert
-		expect(container).toMatchSnapshot();
-	});
+        // Assert
+        expect(container).toMatchSnapshot();
+    });
 
-	it('form validation rejects number of characters outside of 1-10 values', async () => {
-		// Arrange
-		const user = userEvent.setup();
+    it('should successfully validate form with valid inputs', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
 
-		render(<Party />);
+        // Act
+        render(<Party saveData={mockSaveData} />);
 
-		const input = screen.getByLabelText('Number of characters');
+        await user.type(screen.getByLabelText('Number of characters'), '4');
+        await user.type(screen.getByLabelText('Level'), '10');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-		// Act
-		await user.type(input, '25');
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
 
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(input).toBeInvalid();
-			});
-		});
-	});
+        // Assert
+        expect(screen.getByLabelText('Number of characters')).toHaveValue(4);
+        expect(screen.getByLabelText('Level')).toHaveValue(10);
+        expect(screen.getByLabelText('Difficulty')).toHaveValue('Easy');
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(true);
 
-	it('form validation accepts number of characters inside of 1-10 values', async () => {
-		// Arrange
-		const user = userEvent.setup();
+        expect(mockSaveData).toBeCalled();
+    });
 
-		render(<Party />);
+    it('should not validate form with invalid number of characters', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
 
-		const input = screen.getByLabelText('Number of characters');
+        // Act
+        render(<Party saveData={mockSaveData} />);
 
-		// Act
-		await user.type(input, '5');
+        await user.type(screen.getByLabelText('Number of characters'), '800');
+        await user.type(screen.getByLabelText('Level'), '10');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(input).toBeValid();
-			});
-		});
-	});
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
 
-	it('form validation rejects character level outside of 1-20 values', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const input = screen.getByLabelText('Level (1-20)');
+        // Assert
+        expect(mockSaveData).not.toBeCalled();
+    });
 
-		// Act
-		await user.type(input, '68');
+    it('should not validate form with invalid character level', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
 
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(input).toBeInvalid();
-			});
-		});
-	});
+        // Act
+        render(<Party saveData={mockSaveData} />);
 
-	it('form validation accepts character level inside of 1-20 values', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const input = screen.getByLabelText('Level (1-20)');
+        await user.type(screen.getByLabelText('Number of characters'), '5');
+        await user.type(screen.getByLabelText('Level'), '18510');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-		// Act
-		await user.type(input, '13');
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
 
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(input).toBeValid();
-			});
-		});
-	});
+        // Assert
+        expect(mockSaveData).not.toBeCalled();
+    });
 
-	it('form validation accepts an Easy encounter difficulty', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const difficulty = screen.getByLabelText('Difficulty');
+    it('should not validate form with invalid difficulty', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
 
-		// Act
-		await user.type(difficulty, 'Easy');
+        // Act
+        render(<Party saveData={mockSaveData} />);
 
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(difficulty).toBeValid();
-			});
-		});
-	});
+        await user.type(screen.getByLabelText('Number of characters'), '5');
+        await user.type(screen.getByLabelText('Level'), '10');
 
-	it('form validation accepts a Medium encounter difficulty', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const difficulty = screen.getByLabelText('Difficulty');
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
 
-		// Act
-		await user.type(difficulty, 'Medium');
-
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(difficulty).toBeValid();
-			});
-		});
-	});
-
-	it('form validation accepts a Hard encounter difficulty', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const difficulty = screen.getByLabelText('Difficulty');
-
-		// Act
-		await user.type(difficulty, 'Hard');
-
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(difficulty).toBeValid();
-			});
-		});
-	});
-
-	it('form validation accepts a Deadly encounter difficulty', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const difficulty = screen.getByLabelText('Difficulty');
-
-		// Act
-		await user.type(difficulty, 'Deadly');
-
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(difficulty).toBeValid();
-			});
-		});
-	});
-
-	it('form validation rejects an invalid encounter difficulty', async () => {
-		// Arrange
-		const user = userEvent.setup();
-		render(<Party />);
-		const difficulty = screen.getByLabelText('Difficulty');
-
-		// Act
-		await user.type(difficulty, 'SuperDuperReallyChallenging');
-
-		//Assert
-		await act(() => {
-			waitFor(() => {
-				expect(difficulty).toBeInvalid();
-			});
-		});
-	});
+        // Assert
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(false);
+        expect(mockSaveData).not.toBeCalled();
+    });
 });
