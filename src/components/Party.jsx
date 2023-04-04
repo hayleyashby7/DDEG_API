@@ -1,65 +1,75 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import difficultyEnum from './utilities/difficulty';
+import Difficulty from '../utils/difficulty';
 
-function Party() {
-    const { register, handleSubmit } = useForm();
-    const [numCharacters, setNumCharacters] = useState(1);
-    const [level, setLevel] = useState(1);
-    const [difficulty, setDifficulty] = useState(difficultyEnum.Easy);
+function Party({ saveData }) {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ mode: 'onBlur' });
+
+    const onSubmit = (data) => {
+        saveData(data);
+    };
 
     return (
-        <form
-            onSubmit={handleSubmit((data) => {
-                console.log(data);
-            })}
-        >
-            <label htmlFor='numCharacters'>Number of characters</label>
-            <input
-                id='numCharacters'
-                type='number'
-                {...register('numCharacters', {
-                    required: true,
-                    min: 1,
-                    max: 10,
-                    valueAsNumber: true,
-                    value: { numCharacters },
-                    onChange: (e) => setNumCharacters(e.target.value),
-                })}
-                placeholder='1-10'
-            />
-            <label htmlFor='level'>Level (1-20)</label>
-            <input
-                id='level'
-                type='number'
-                {...register('level', {
-                    required: true,
-                    min: 1,
-                    max: 12,
-                    valueAsNumber: true,
-                    value: { level },
-                    onChange: (e) => setLevel(e.target.value),
-                })}
-                placeholder='1-20'
-            />
-            <label htmlFor='difficulty'>Difficulty</label>
-            <select
-                id='difficulty'
-                {...register('difficulty', {
-                    required: true,
-                    value: { difficulty },
-                    onChange: (e) => setDifficulty(e.target.value),
-                })}
-            >
-                <option value={difficultyEnum.Easy.toString()}>Easy</option>
-                <option value={difficultyEnum.Medium.toString()}>Medium</option>
-                <option value={difficultyEnum.Hard.toString()}>Hard</option>
-                <option value={difficultyEnum.Deadly.toString()}>Deadly</option>
-            </select>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor='numCharacters' aria-labelledby='numCharacters'>
+                Number of characters
+                <input
+                    id='numCharacters'
+                    type='number'
+                    placeholder='1-10'
+                    {...register('numCharacters', {
+                        required: true,
+                        max: 10,
+                        min: 1,
+                        valueAsNumber: true,
+                    })}
+                />
+            </label>
+            {errors.numCharacters && <p>Must be between 1-10</p>}
+
+            <label htmlFor='level' aria-labelledby='level'>
+                Level
+                <input
+                    id='level'
+                    type='number'
+                    placeholder='1-20'
+                    {...register('level', {
+                        required: true,
+                        min: 1,
+                        max: 20,
+                        valueAsNumber: true,
+                    })}
+                />
+            </label>
+            {errors.level && <p>Must be between 1-20</p>}
+
+            <label htmlFor='difficulty' aria-labelledby='difficulty'>
+                Difficulty
+                <select
+                    id='difficulty'
+                    {...register('difficulty', {
+                        required: true,
+                    })}
+                >
+                    {' '}
+                    <option value={Difficulty.Easy}>Easy</option>
+                    <option value={Difficulty.Medium}>Medium</option>
+                    <option value={Difficulty.Hard}>Hard</option>
+                    <option value={Difficulty.Deadly}>Deadly</option>
+                </select>
+            </label>
 
             <input name='partySubmit' type='submit' />
         </form>
     );
 }
+
+Party.propTypes = { saveData: PropTypes.func };
+Party.defaultProps = { saveData: () => {} };
 
 export default Party;
