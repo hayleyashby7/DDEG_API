@@ -31,4 +31,57 @@ describe('Party component', () => {
         expect(mockSaveData).toBeCalled();
     });
 
+    it('should not validate form with invalid number of characters', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
+
+        // Act
+        render(<Party saveData={mockSaveData} />);
+
+        await user.type(screen.getByLabelText('Number of characters'), '800');
+        await user.type(screen.getByLabelText('Level'), '10');
+        await user.type(screen.getByLabelText('Difficulty'), 'Easy');
+
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
+
+        // Assert
+        expect(mockSaveData).not.toBeCalled();
+    });
+
+    it('should not validate form with invalid character level', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
+
+        // Act
+        render(<Party saveData={mockSaveData} />);
+
+        await user.type(screen.getByLabelText('Number of characters'), '5');
+        await user.type(screen.getByLabelText('Level'), '18510');
+        await user.type(screen.getByLabelText('Difficulty'), 'Easy');
+
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
+
+        // Assert
+        expect(mockSaveData).not.toBeCalled();
+    });
+
+    it('should not validate form with invalid difficulty', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
+
+        // Act
+        render(<Party saveData={mockSaveData} />);
+
+        await user.type(screen.getByLabelText('Number of characters'), '5');
+        await user.type(screen.getByLabelText('Level'), '10');
+        await user.type(screen.getByLabelText('Difficulty'), 'Really REALLY hard');
+
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
+
+        // Assert
+        expect(mockSaveData).not.toBeCalled();
+    });
 });
