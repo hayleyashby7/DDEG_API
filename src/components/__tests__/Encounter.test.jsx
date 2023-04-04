@@ -86,4 +86,33 @@ describe('Encounter', () => {
         expect(screen.queryByText(/Goblin/i)).not.toBeInTheDocument();
         expect(screen.queryByText(/Orc/i)).not.toBeInTheDocument();
     });
+
+    it('should not make API call if no challenge rating passed to component', async () => {
+        // Arrange
+
+        // Mock the API call
+        getMonstersFromAPI.mockReturnValue(
+            Promise.resolve({
+                count: 2,
+                results: [
+                    { slug: 'goblin', name: 'Goblin' },
+                    { slug: 'orc', name: 'Orc' },
+                ],
+            }),
+        );
+
+        // Act
+        render(<Encounter />);
+
+        // Assert
+        // Heading is displayed
+        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
+
+        // Error message is displayed
+        expect(await screen.findByText(/Unable to request data./i)).toBeInTheDocument();
+
+        // Mocked data is not displayed
+        expect(screen.queryByText(/Goblin/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Orc/i)).not.toBeInTheDocument();
+    });
 });
