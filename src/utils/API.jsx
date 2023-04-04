@@ -5,7 +5,7 @@ export const getMonstersFromAPI = async ({ challengeRating }) => {
         );
         return await response.json();
     } catch (e) {
-        return null;
+        return Error(e);
     }
 };
 

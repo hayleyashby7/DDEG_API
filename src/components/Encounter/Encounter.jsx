@@ -5,14 +5,21 @@ import { getMonstersFromAPI } from '../../utils/API';
 function Encounter({ challengeRating = 3 }) {
     const [monsters, setMonsters] = useState([]);
     const [error, setError] = useState(null);
+    const [message, setMessage] = useState('Loading...');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getMonstersFromAPI({ challengeRating });
+                if (data instanceof Error) {
+                    throw new Error(
+                        'Unable to retrieve monsters from server. Please try again later.',
+                    );
+                }
                 setMonsters(data.results);
             } catch (err) {
-                setError(err);
+                setError(true);
+                setMessage(err.message);
             }
         };
 
@@ -22,7 +29,7 @@ function Encounter({ challengeRating = 3 }) {
     return (
         <>
             <h1>List of Monsters</h1>
-            {error && <div>{error}</div>}{' '}
+            {error && <div>{message}</div>}{' '}
             {monsters ? (
                 <ul>
                     {' '}
@@ -31,7 +38,7 @@ function Encounter({ challengeRating = 3 }) {
                     ))}{' '}
                 </ul>
             ) : (
-                <p>No monsters found</p>
+                <p>{message}</p>
             )}{' '}
         </>
     );
