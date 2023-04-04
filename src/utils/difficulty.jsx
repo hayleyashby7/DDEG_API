@@ -1,8 +1,19 @@
-const difficultyEnum = Object.freeze({
-    Easy: Symbol('Easy'),
-    Medium: Symbol('Medium'),
-    Hard: Symbol('Hard'),
-    Deadly: Symbol('Deadly'),
-});
+class Difficulty {
+    static Easy = new Difficulty('Easy');
 
-export default difficultyEnum
+    static Medium = new Difficulty('Medium');
+
+    static Hard = new Difficulty('Hard');
+
+    static Deadly = new Difficulty('Deadly');
+
+    constructor(name) {
+        this.name = name;
+    }
+
+    toString() {
+        return `${this.name}`;
+    }
+}
+
+export default Difficulty;
