@@ -1,32 +1,34 @@
-import { vi, it, describe, expect } from 'vitest';
+import { vi, it, describe, expect, afterEach } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Encounter from '../Encounter/Encounter';
+import { getMonstersFromAPI } from '../../utils/API';
+
+vi.mock('../../utils/API');
 
 describe('Encounter', () => {
-    it('should render a list of monsters', async () => {
+    afterEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it('should render a list of monsters with successful API call', async () => {
         // Arrange
 
         // Mock the API call
-        vi.mock('../../utils/API', async (importOriginal) => {
-            const mod = await importOriginal();
-            return {
-                ...mod,
-                getMonstersFromAPI: vi.fn(() =>
-                    Promise.resolve({
-                        results: [
-                            { slug: 'goblin', name: 'Goblin' },
-                            { slug: 'orc', name: 'Orc' },
-                        ],
-                    }),
-                ),
-            };
-        });
+        getMonstersFromAPI.mockReturnValue(
+            Promise.resolve({
+                results: [
+                    { slug: 'goblin', name: 'Goblin' },
+                    { slug: 'orc', name: 'Orc' },
+                ],
+            }),
+        );
 
         // Act
         render(<Encounter />);
 
         // Assert
+
         // Heading is displayed
         expect(screen.getByRole('heading')).toHaveTextContent('List of Monsters');
 
@@ -37,4 +39,5 @@ describe('Encounter', () => {
         // No error message is displayed
         expect(screen.queryByText('No monsters found')).not.toBeInTheDocument();
     });
+
 });
