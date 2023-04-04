@@ -53,7 +53,7 @@ describe('Encounter', () => {
         expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
 
         // Error message is displayed
-        expect(await screen.findByText(/No monsters found/i)).toBeInTheDocument();
+        expect(await screen.findByText(/API call failed/i)).toBeInTheDocument();
 
         // Mocked data is not displayed
         expect(screen.queryByText(/Goblin/i)).not.toBeInTheDocument();
