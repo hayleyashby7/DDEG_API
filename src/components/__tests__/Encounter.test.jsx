@@ -17,6 +17,7 @@ describe('Encounter', () => {
         // Mock the API call
         getMonstersFromAPI.mockReturnValue(
             Promise.resolve({
+                count: 2,
                 results: [
                     { slug: 'goblin', name: 'Goblin' },
                     { slug: 'orc', name: 'Orc' },
@@ -54,6 +55,32 @@ describe('Encounter', () => {
 
         // Error message is displayed
         expect(await screen.findByText(/API call failed/i)).toBeInTheDocument();
+
+        // Mocked data is not displayed
+        expect(screen.queryByText(/Goblin/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Orc/i)).not.toBeInTheDocument();
+    });
+
+    it('should render a message to advise if no data recieved on a successful API call', async () => {
+        // Arrange
+
+        // Mock the API call
+        getMonstersFromAPI.mockReturnValue(
+            Promise.resolve({
+                count: 0,
+                results: [],
+            }),
+        );
+
+        // Act
+        render(<Encounter />);
+
+        // Assert
+        // Heading is displayed
+        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
+
+        // Error message is displayed
+        expect(await screen.findByText(/No suitable monsters found./i)).toBeInTheDocument();
 
         // Mocked data is not displayed
         expect(screen.queryByText(/Goblin/i)).not.toBeInTheDocument();
