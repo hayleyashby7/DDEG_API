@@ -54,9 +54,10 @@ function Party({ saveData }) {
                     id='difficulty'
                     {...register('difficulty', {
                         required: true,
+                        validate: (value) => Difficulty.difficultyType(value),
                     })}
                 >
-                    {' '}
+                    <option value={null}>Select a difficulty</option>
                     <option value={Difficulty.Easy}>Easy</option>
                     <option value={Difficulty.Medium}>Medium</option>
                     <option value={Difficulty.Hard}>Hard</option>

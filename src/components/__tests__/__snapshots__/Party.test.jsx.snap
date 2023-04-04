@@ -36,7 +36,9 @@ exports[`Party component > renders the party composition form 1`] = `
         id="difficulty"
         name="difficulty"
       >
-         
+        <option>
+          Select a difficulty
+        </option>
         <option
           value="Easy"
         >

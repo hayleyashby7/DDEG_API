@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Party from '../Party';
+import Difficulty from '../../utils/difficulty';
 
 describe('Party component', () => {
     it('renders the party composition form', () => {
@@ -23,11 +24,16 @@ describe('Party component', () => {
 
         await user.type(screen.getByLabelText('Number of characters'), '4');
         await user.type(screen.getByLabelText('Level'), '10');
-        await user.type(screen.getByLabelText('Difficulty'), 'Easy');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
         await user.click(screen.getByRole('button', { name: 'Submit' }));
 
         // Assert
+        expect(screen.getByLabelText('Number of characters')).toHaveValue(4);
+        expect(screen.getByLabelText('Level')).toHaveValue(10);
+        expect(screen.getByLabelText('Difficulty')).toHaveValue('Easy');
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(true);
+
         expect(mockSaveData).toBeCalled();
     });
 
@@ -41,7 +47,7 @@ describe('Party component', () => {
 
         await user.type(screen.getByLabelText('Number of characters'), '800');
         await user.type(screen.getByLabelText('Level'), '10');
-        await user.type(screen.getByLabelText('Difficulty'), 'Easy');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
         await user.click(screen.getByRole('button', { name: 'Submit' }));
 
@@ -59,7 +65,7 @@ describe('Party component', () => {
 
         await user.type(screen.getByLabelText('Number of characters'), '5');
         await user.type(screen.getByLabelText('Level'), '18510');
-        await user.type(screen.getByLabelText('Difficulty'), 'Easy');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
         await user.click(screen.getByRole('button', { name: 'Submit' }));
 
@@ -77,11 +83,11 @@ describe('Party component', () => {
 
         await user.type(screen.getByLabelText('Number of characters'), '5');
         await user.type(screen.getByLabelText('Level'), '10');
-        await user.type(screen.getByLabelText('Difficulty'), 'Really REALLY hard');
 
         await user.click(screen.getByRole('button', { name: 'Submit' }));
 
         // Assert
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(false);
         expect(mockSaveData).not.toBeCalled();
     });
 });

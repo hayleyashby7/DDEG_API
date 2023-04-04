@@ -14,6 +14,18 @@ class Difficulty {
     toString() {
         return `${this.name}`;
     }
+
+    static difficultyType(value) {
+        switch (value) {
+            case 'Easy':
+            case 'Medium':
+            case 'Hard':
+            case 'Deadly':
+                return true;
+            default:
+                return false;
+        }
+    }
 }
 
 export default Difficulty;
