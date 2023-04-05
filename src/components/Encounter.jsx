@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getMonstersFromAPI } from '../../utils/API';
-import isValidChallengeRating from '../../utils/challengeRating';
+import { getMonstersFromAPI } from '../utils/API';
+import isValidChallengeRating from '../utils/challengeRating';
 
 function Encounter({ challengeRating }) {
     const [monsters, setMonsters] = useState([]);
@@ -11,11 +11,10 @@ function Encounter({ challengeRating }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-
                 if (!isValidChallengeRating({ challengeRating })) {
                     throw new Error('Unable to request data.');
                 }
-                
+
                 const data = await getMonstersFromAPI({ challengeRating });
 
                 if (data instanceof Error) {
@@ -28,8 +27,10 @@ function Encounter({ challengeRating }) {
                 }
 
                 setMonsters(data.results);
+                setError(false);
             } catch (err) {
                 setError(true);
+                setMonsters([]);
                 setMessage(err.message);
             }
         };
