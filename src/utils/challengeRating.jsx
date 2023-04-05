@@ -45,7 +45,7 @@ const getClosestChallengeRating = (data, targetValue, numCharacters) => {
 };
 
 export const isValidChallengeRating = ({ challengeRating }) => {
-    if (challengeRating > 0 && challengeRating < 30) {
+    if (challengeRating >= 0 && challengeRating <= 30) {
         return true;
     }
     return false;

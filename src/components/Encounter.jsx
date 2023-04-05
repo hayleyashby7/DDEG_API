@@ -57,6 +57,6 @@ function Encounter({ challengeRating }) {
 }
 
 Encounter.propTypes = { challengeRating: PropTypes.number };
-Encounter.defaultProps = { challengeRating: null };
+Encounter.defaultProps = { challengeRating: -1 };
 
 export default Encounter;
