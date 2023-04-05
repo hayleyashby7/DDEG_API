@@ -7,18 +7,12 @@ import { calculateChallengeRating } from './utils/challengeRating';
 function App() {
     const [challengeRating, setChallengeRating] = useState(null);
     const [seeEncounter, setSeeEncounter] = useState(false);
-    
 
-    const submitData = (formData) => {
-        calculateChallengeRating(formData.numCharacters, formData.difficulty);
+    const submitData = (formData) => {    
 
-        // placeholder for now
-        setChallengeRating(12);
+        setChallengeRating( calculateChallengeRating(formData.numCharacters, formData.level, formData.difficulty));
         setSeeEncounter(true);
-        console.log(formData);
     };
-
-    calculateChallengeRating(1, 'Easy');
 
     return (
         <div>
