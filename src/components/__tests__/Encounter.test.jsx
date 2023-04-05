@@ -1,7 +1,7 @@
 import { vi, it, describe, expect, afterEach } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Encounter from '../Encounter/Encounter';
+import Encounter from '../Encounter';
 import { getMonstersFromAPI } from '../../utils/API';
 
 vi.mock('../../utils/API');
