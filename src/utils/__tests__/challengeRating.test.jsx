@@ -11,3 +11,12 @@ describe('Valid Challenge Rating', () => {
         expect(CR.isValidChallengeRating({ challengeRating: 31 })).toBe(false);
     });
 });
+
+describe('Calculate Challenge Rating', () => {
+    it('returns correct challenge rating for a standard party at each difficulty point.', () => {
+        expect(CR.calculateChallengeRating(6, 3, 'Easy')).toBe('3');
+        expect(CR.calculateChallengeRating(4, 4, 'Medium')).toBe('4');
+        expect(CR.calculateChallengeRating(4, 6, 'Hard')).toBe('8');
+        expect(CR.calculateChallengeRating(5, 12, 'Deadly')).toBe('20');
+    });
+});
