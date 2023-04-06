@@ -8,9 +8,16 @@ function App() {
     const [challengeRating, setChallengeRating] = useState(null);
     const [seeEncounter, setSeeEncounter] = useState(false);
 
-    const submitData = (formData) => {    
-
-        setChallengeRating( calculateChallengeRating(formData.numCharacters, formData.level, formData.difficulty));
+    const submitData = (formData) => {
+        setChallengeRating(
+            Number(
+                calculateChallengeRating(
+                    formData.numCharacters,
+                    formData.level,
+                    formData.difficulty,
+                ),
+            ),
+        );
         setSeeEncounter(true);
     };
 
