@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getMonstersFromAPI } from '../utils/API';
-import isValidChallengeRating from '../utils/challengeRating';
+import { isValidChallengeRating } from '../utils/challengeRating';
 
 function Encounter({ challengeRating }) {
     const [monsters, setMonsters] = useState([]);
@@ -57,6 +57,6 @@ function Encounter({ challengeRating }) {
 }
 
 Encounter.propTypes = { challengeRating: PropTypes.number };
-Encounter.defaultProps = { challengeRating: null };
+Encounter.defaultProps = { challengeRating: -1 };
 
 export default Encounter;
