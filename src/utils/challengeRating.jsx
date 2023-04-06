@@ -76,13 +76,22 @@ export const isValidChallengeRating = ({ challengeRating }) => {
 };
 
 export const calculateChallengeRating = (numCharacters, level, difficulty) => {
-    // Determine XP Threshold for character level by difficulty
-    const diff = xpThresholdssByCharLevel.level[level - 1].difficulty;
-
-    if (diff === undefined) {
-        console.error('Error: Cannot calculate Challenge Rating - Invalid character level');
+    if (level > 20 || level < 1) {
+        console.error(
+            `Error: Cannot calculate Challenge Rating - Invalid character level: ${level}`,
+        );
         return null;
     }
+
+    if (numCharacters < 1 || numCharacters > 10) {
+        console.error(
+            `Error: Cannot calculate Challenge Rating - Invalid number of characters: ${numCharacters}`,
+        );
+        return null;
+    }
+
+    // Determine XP Threshold for character level by difficulty
+    const diff = xpThresholdssByCharLevel.level[level - 1].difficulty;
 
     // Get XP Thresholds [min, max] for difficulty
     let xpThresholds;
@@ -105,7 +114,9 @@ export const calculateChallengeRating = (numCharacters, level, difficulty) => {
     }
 
     if (xpThresholds === null) {
-        console.error('Error: Cannot calculate Challenge Rating - Invalid difficulty');
+        console.error(
+            `Error: Cannot calculate Challenge Rating - Invalid difficulty ${difficulty}`,
+        );
         return null;
     }
 
