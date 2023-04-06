@@ -61,6 +61,31 @@ describe('Encounter', () => {
         expect(screen.queryByText(/Orc/i)).not.toBeInTheDocument();
     });
 
+    it('should render a message to advise if API call resolves but an error is returned', async () => {
+        // Arrange
+
+        // Mock the API call
+        getMonstersFromAPI.mockReturnValue(Promise.resolve(new Error('API call failed')));
+
+        // Act
+        render(<Encounter challengeRating={1} />);
+
+        // Assert
+        // Heading is displayed
+        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
+
+        // Error message is displayed
+        expect(
+            await screen.findByText(
+                /Unable to retrieve monsters from server. Please try again later./i,
+            ),
+        ).toBeInTheDocument();
+
+        // Mocked data is not displayed
+        expect(screen.queryByText(/Goblin/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Orc/i)).not.toBeInTheDocument();
+    });
+
     it('should render a message to advise if no data recieved on a successful API call', async () => {
         // Arrange
 
