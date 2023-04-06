@@ -24,3 +24,5 @@ SOFTWARE.
 <hr>
 
 This software makes no claims of license of either Open5e nor to SRD or OGL content provided by Open5e.
+
+This software is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
