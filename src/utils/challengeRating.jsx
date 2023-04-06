@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
-import xpThresholdsByCharLevel from './data/xpThresholdsByCharLevel.json';
+/* eslint-disable no-fallthrough */
+
+import xpThresholdssByCharLevel from './data/xpThresholdsByCharLevel.json';
 import xpByChallengeRating from './data/xpByChallengeRating.json';
 
 const xpMultiplier = (xp, numCharacters) => {
@@ -12,36 +14,58 @@ const xpMultiplier = (xp, numCharacters) => {
     if (numCharacters > 5) {
         totalXP *= 0.5;
     }
-    console.log(`Total XP: ${totalXP}`);
 
     return totalXP;
 };
 
-const getClosestChallengeRating = (data, targetValue, numCharacters) => {
+const getClosestChallengeRating = (data, targetRange, numCharacters) => {
     let start = 0;
     let end = data.length - 1;
-    let middle = Math.floor((start + end) / 2);
-    let testValue = xpMultiplier(data[middle].XP, numCharacters);
+    let middle;
+    let testValue;
+    let closestCR = null;
 
-    while (testValue !== targetValue && start < end) {
-        // Found matching value
-        if (testValue === targetValue) {
-            return data[middle].CR;
-        }
-
-        // Continue searching
-        if (targetValue < testValue) {
-            end = middle - 1;
-        } else {
-            start = middle + 1;
-        }
-
+    while (start < end && closestCR === null) {
+        // Update middle value
         middle = Math.floor((start + end) / 2);
         testValue = xpMultiplier(data[middle].XP, numCharacters);
+
+        switch (true) {
+            case testValue > targetRange[1]:
+                // Value is above range - continue search
+                end = middle + 1;
+                break;
+
+            case testValue < targetRange[0]:
+                // Value is below range - continue search
+                start = middle - 1;
+                break;
+
+            case testValue === targetRange[0] || testValue === targetRange[1] - 1:
+            // Exact match - fall through
+            case testValue > targetRange[0] && testValue < targetRange[1]:
+                // Value is within range
+                closestCR = data[middle].CR;
+                break;
+
+            default:
+                // Error if reached here
+                console.error('Error: Cannot calculate Challenge Rating - defaulting to CR 0');
+                closestCR = 0;
+                break;
+        }
     }
 
-    // No exact match so use closest value below target
-    return data[end].CR;
+    if (closestCR === null) {
+        // No exact match, return the nearest value
+        if (testValue > targetRange[1]) {
+            closestCR = data[middle - 1].CR;
+        } else {
+            closestCR = data[middle].CR;
+        }
+    }
+
+    return closestCR;
 };
 
 export const isValidChallengeRating = ({ challengeRating }) => {
@@ -53,32 +77,46 @@ export const isValidChallengeRating = ({ challengeRating }) => {
 
 export const calculateChallengeRating = (numCharacters, level, difficulty) => {
     // Determine XP Threshold for character level by difficulty
-    const diff = xpThresholdsByCharLevel.level[level - 1].difficulty;
+    const diff = xpThresholdssByCharLevel.level[level - 1].difficulty;
 
-    let xpThreshold;
+    if (diff === undefined) {
+        console.error('Error: Cannot calculate Challenge Rating - Invalid character level');
+        return null;
+    }
+
+    // Get XP Thresholds [min, max] for difficulty
+    let xpThresholds;
 
     switch (difficulty) {
         case 'Easy':
-            xpThreshold = diff.easy;
+            xpThresholds = [diff.easy, diff.medium];
             break;
         case 'Medium':
-            xpThreshold = diff.medium;
+            xpThresholds = [diff.medium, diff.hard];
             break;
         case 'Hard':
-            xpThreshold = diff.hard;
+            xpThresholds = [diff.hard, diff.deadly];
             break;
         case 'Deadly':
-            xpThreshold = diff.deadly;
+            xpThresholds = [diff.deadly, diff.max];
             break;
         default:
-            xpThreshold = null;
+            xpThresholds = null;
     }
 
-    // Determine the Party's XP Threshold
-    const partyXPThreshold = numCharacters * xpThreshold;
+    if (xpThresholds === null) {
+        console.error('Error: Cannot calculate Challenge Rating - Invalid difficulty');
+        return null;
+    }
 
-    // Get CR based on XP Threshold
-    const data = Object.keys(xpByChallengeRating).map((key) => xpByChallengeRating[key]);
+    // Determine the total party thresholds
+    const partyXPThresholds = [numCharacters * xpThresholds[0], numCharacters * xpThresholds[1]];
 
-    return getClosestChallengeRating(data, partyXPThreshold);
+    // Convert JSON to array keeping original order
+    const xpByChallengeRatingArray = Object.keys(xpByChallengeRating).map(
+        (key) => xpByChallengeRating[key],
+    );
+
+    // Return the closest Challenge Rating based on range
+    return getClosestChallengeRating(xpByChallengeRatingArray, partyXPThresholds, numCharacters);
 };
