@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import Difficulty from '../utils/difficulty';
 import { Input, Select } from './Form';
 
 function Party({ saveData }) {
     const {
         register,
-        handleSubmit,
         formState: { errors },
+        handleSubmit,
     } = useForm({ mode: 'onBlur' });
 
     const onSubmit = (data) => {
@@ -24,43 +25,74 @@ function Party({ saveData }) {
     ];
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-                label='Number of characters'
-                name='numCharacters'
-                type='number'
-                register={register}
-                required
-                max={10}
-                min={1}
-                valueAsNumber
-            />
-            {errors.numCharacters && <p>Must be between 1-10</p>}
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col flex-wrap lg:flex-row'>
+            <div className='flex flex-1 flex-col'>
+                <Input
+                    label='Number of characters'
+                    name='numCharacters'
+                    type='number'
+                    register={register}
+                    required='Required'
+                    valueAsNumber='Must be a number'
+                    max={{
+                        value: 10,
+                        message: 'Max 10',
+                    }}
+                    min={{
+                        value: 1,
+                        message: 'Min 1',
+                    }}
+                />
+                <ErrorMessage
+                    errors={errors}
+                    name='numCharacters'
+                    render={({ message }) => <p>{message}</p>}
+                />
+            </div>
 
-            <Input
-                label='Level'
-                name='level'
-                type='number'
-                register={register}
-                required
-                min={1}
-                max={20}
-                valueAsNumber
-            />
-            {errors.level && <p>Must be between 1-20</p>}
-
-            <Select
-                label='Difficulty'
-                name='difficulty'
-                options={difficultyArray}
-                register={register}
-                required
-                validate={(value) => Difficulty.difficultyType(value)}
-            />
-
-            {errors.difficulty && <p>Must select a difficulty</p>}
-
-            <input name='partySubmit' type='submit' />
+            <div className='flex flex-1 flex-col'>
+                <Input
+                    label='Level'
+                    name='level'
+                    type='number'
+                    register={register}
+                    required='Required'
+                    valueAsNumber='Must be a number'
+                    max={{
+                        value: 20,
+                        message: 'Max 20',
+                    }}
+                    min={{
+                        value: 1,
+                        message: 'Min 1',
+                    }}
+                />
+                <ErrorMessage
+                    errors={errors}
+                    name='numCharacters'
+                    render={({ message }) => <p>{message}</p>}
+                />
+            </div>
+            <div className='flex flex-1 flex-col'>
+                <Select
+                    label='Difficulty'
+                    name='difficulty'
+                    options={difficultyArray}
+                    register={register}
+                    required
+                    validate={(value) =>
+                        Difficulty.difficultyType(value) || 'Must select a difficulty'
+                    }
+                />
+                <ErrorMessage
+                    errors={errors}
+                    name='difficulty'
+                    render={({ message }) => <p>{message}</p>}
+                />
+            </div>
+            <div className='flex flex-1 flex-col'>
+                <input name='partySubmit' type='submit' />
+            </div>
         </form>
     );
 }
