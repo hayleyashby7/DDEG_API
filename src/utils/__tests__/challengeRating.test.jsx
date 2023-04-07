@@ -35,6 +35,7 @@ describe('Calculate Challenge Rating', () => {
         expect(CR.calculateChallengeRating(8, 4, 'Medium')).toBe('9');
         expect(CR.calculateChallengeRating(9, 6, 'Hard')).toBe('17');
         expect(CR.calculateChallengeRating(7, 10, 'Deadly')).toBe('25');
+        expect(CR.calculateChallengeRating(10, 20, 'Deadly')).toBe('28');
     });
 
     it('returns null for invalid character levels', () => {

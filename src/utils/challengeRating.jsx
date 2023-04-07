@@ -24,10 +24,18 @@ const getClosestChallengeRating = (data, targetRange, numCharacters) => {
     let middle;
     let testValue;
     let closestCR = null;
+    let lastMiddle;
 
     while (start < end && closestCR === null) {
         // Update middle value
         middle = Math.floor((start + end) / 2);
+        if (middle === lastMiddle) {
+            // Prevent infinite loop
+            break;
+        }
+        lastMiddle = middle;
+
+        // Get test value
         testValue = xpMultiplier(data[middle].XP, numCharacters);
 
         switch (true) {
