@@ -39,7 +39,7 @@ function Encounter({ challengeRating }) {
     }, [challengeRating]);
 
     return (
-        <>
+        <div className='bg-neutral-900 text-orange-100'>
             <h1>List of Monsters</h1>
             {error && <div>{message}</div>}{' '}
             {monsters ? (
@@ -52,7 +52,7 @@ function Encounter({ challengeRating }) {
             ) : (
                 <p>{message}</p>
             )}{' '}
-        </>
+        </div>
     );
 }
 
