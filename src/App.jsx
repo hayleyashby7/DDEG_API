@@ -22,19 +22,22 @@ function App() {
     };
 
     return (
-        <>
-            <header>
+        <div className='flex min-h-screen flex-col'>
+            <header className='shrink-0'>
                 <h1>D&D 5e Encounter Generator</h1>
             </header>
-
-            <main>
-                <Party saveData={submitData} />
-                {seeEncounter ? <Encounter challengeRating={challengeRating} /> : null}
+            <main className='grow'>
+                <section>
+                    <Party saveData={submitData} />
+                </section>
+                <section>
+                    {seeEncounter ? <Encounter challengeRating={challengeRating} /> : null}
+                </section>
             </main>
-            <footer>
-                <p>Handcoded with care &copy; Hayley Ashby 2023</p>
+            <footer className='shrink-0'>
+                <p>&copy; Hayley Ashby 2023</p>
             </footer>
-        </>
+        </div>
     );
 }
 
