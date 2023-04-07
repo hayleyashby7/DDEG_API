@@ -11,7 +11,6 @@ exports[`Party component > renders the party composition form 1`] = `
       <input
         id="numCharacters"
         name="numCharacters"
-        placeholder="1-10"
         type="number"
       />
     </label>
@@ -23,7 +22,6 @@ exports[`Party component > renders the party composition form 1`] = `
       <input
         id="level"
         name="level"
-        placeholder="1-20"
         type="number"
       />
     </label>

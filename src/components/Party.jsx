@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import Difficulty from '../utils/difficulty';
+import { Input, Select } from './Form';
 
 function Party({ saveData }) {
     const {
@@ -14,56 +15,50 @@ function Party({ saveData }) {
         saveData(data);
     };
 
+    const difficultyArray = [
+        { value: null, label: 'Select a difficulty' },
+        { value: Difficulty.Easy, label: 'Easy' },
+        { value: Difficulty.Medium, label: 'Medium' },
+        { value: Difficulty.Hard, label: 'Hard' },
+        { value: Difficulty.Deadly, label: 'Deadly' },
+    ];
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor='numCharacters' aria-labelledby='numCharacters'>
-                Number of characters
-                <input
-                    id='numCharacters'
-                    type='number'
-                    placeholder='1-10'
-                    {...register('numCharacters', {
-                        required: true,
-                        max: 10,
-                        min: 1,
-                        valueAsNumber: true,
-                    })}
-                />
-            </label>
+            <Input
+                label='Number of characters'
+                name='numCharacters'
+                type='number'
+                register={register}
+                required
+                max={10}
+                min={1}
+                valueAsNumber
+            />
             {errors.numCharacters && <p>Must be between 1-10</p>}
 
-            <label htmlFor='level' aria-labelledby='level'>
-                Level
-                <input
-                    id='level'
-                    type='number'
-                    placeholder='1-20'
-                    {...register('level', {
-                        required: true,
-                        min: 1,
-                        max: 20,
-                        valueAsNumber: true,
-                    })}
-                />
-            </label>
+            <Input
+                label='Level'
+                name='level'
+                type='number'
+                register={register}
+                required
+                min={1}
+                max={20}
+                valueAsNumber
+            />
             {errors.level && <p>Must be between 1-20</p>}
 
-            <label htmlFor='difficulty' aria-labelledby='difficulty'>
-                Difficulty
-                <select
-                    id='difficulty'
-                    {...register('difficulty', {
-                        required: true,
-                        validate: (value) => Difficulty.difficultyType(value),
-                    })}
-                >
-                    <option value={null}>Select a difficulty</option>
-                    <option value={Difficulty.Easy}>Easy</option>
-                    <option value={Difficulty.Medium}>Medium</option>
-                    <option value={Difficulty.Hard}>Hard</option>
-                    <option value={Difficulty.Deadly}>Deadly</option>
-                </select>
-            </label>
+            <Select
+                label='Difficulty'
+                name='difficulty'
+                options={difficultyArray}
+                register={register}
+                required
+                validate={(value) => Difficulty.difficultyType(value)}
+            />
+
+            {errors.difficulty && <p>Must select a difficulty</p>}
 
             <input name='partySubmit' type='submit' />
         </form>
