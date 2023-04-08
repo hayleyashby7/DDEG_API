@@ -10,7 +10,7 @@ describe('Row', () => {
         const rowKey = 'goblin';
         const data = {
             name: 'Goblin',
-            challenge_rating: 1,
+            challenge_rating: '1',
             type: 'Humanoid',
             size: 'Small',
             alignment: 'Neutral',
@@ -36,7 +36,7 @@ describe('Row', () => {
         const rowKey = 'goblin';
         const data = {
             name: 'Goblin',
-            challenge_rating: 1,
+            challenge_rating: '1',
             type: 'Humanoid',
             size: 'Small',
             alignment: 'Neutral',
