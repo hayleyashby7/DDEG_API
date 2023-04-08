@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Expanded from './Expanded';
 
 function Row({ data }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -17,11 +18,7 @@ function Row({ data }) {
                 <td>{data.size}</td>
                 <td>{data.alignment}</td>
             </tr>
-            {isExpanded ? (
-                <tr>
-                    <td>Expanded</td>
-                </tr>
-            ) : null}
+            {isExpanded ? <Expanded /> : null}
         </>
     );
 }
