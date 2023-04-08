@@ -6,7 +6,12 @@ export function Input({ label, name, type, register, ...rest }) {
     return (
         <label className='flex flex-1 flex-col' htmlFor={name} aria-labelledby={name}>
             {label}
-            <input id={name} type={type} {...register(name, { ...rest })} />
+            <input
+                className='border-2 border-solid border-neutral-900 bg-orange-100 outline-none'
+                id={name}
+                type={type}
+                {...register(name, { ...rest })}
+            />
         </label>
     );
 }
@@ -15,7 +20,12 @@ export function Select({ label, name, options, register, ...rest }) {
     return (
         <label className='flex flex-1 flex-col' htmlFor={name} aria-labelledby={name}>
             {label}
-            <select id={name} defaultValue={options[0].value} {...register(name, { ...rest })}>
+            <select
+                className='border-2 border-solid border-neutral-900 bg-orange-100 outline-none'
+                id={name}
+                defaultValue={options[0].value}
+                {...register(name, { ...rest })}
+            >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.label}

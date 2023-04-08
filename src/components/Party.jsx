@@ -25,7 +25,10 @@ function Party({ saveData }) {
     ];
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col flex-wrap lg:flex-row'>
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex flex-col flex-wrap bg-stone-400 text-red-950 sm:flex-row '
+        >
             <div className='flex flex-1 flex-col'>
                 <Input
                     label='Number of characters'
@@ -90,8 +93,12 @@ function Party({ saveData }) {
                     render={({ message }) => <p>{message}</p>}
                 />
             </div>
-            <div className='flex flex-1 flex-col'>
-                <input name='partySubmit' type='submit' />
+            <div className='flex flex-1 flex-col justify-center'>
+                <input
+                    className='rounded-lg border-2 border-solid border-orange-100 bg-red-950 p-2 text-orange-100 hover:bg-red-900 hover:text-orange-200 focus:outline-none focus:ring-2 focus:ring-red-900/50'
+                    name='partySubmit'
+                    type='submit'
+                />
             </div>
         </form>
     );

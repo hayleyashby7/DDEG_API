@@ -2,67 +2,92 @@
 
 exports[`Party component > renders the party composition form 1`] = `
 <div>
-  <form>
-    <label
-      aria-labelledby="numCharacters"
-      for="numCharacters"
+  <form
+    class="flex flex-col flex-wrap bg-stone-400 text-red-950 sm:flex-row "
+  >
+    <div
+      class="flex flex-1 flex-col"
     >
-      Number of characters
-      <input
-        id="numCharacters"
-        name="numCharacters"
-        type="number"
-      />
-    </label>
-    <label
-      aria-labelledby="level"
-      for="level"
-    >
-      Level
-      <input
-        id="level"
-        name="level"
-        type="number"
-      />
-    </label>
-    <label
-      aria-labelledby="difficulty"
-      for="difficulty"
-    >
-      Difficulty
-      <select
-        id="difficulty"
-        name="difficulty"
+      <label
+        aria-labelledby="numCharacters"
+        class="flex flex-1 flex-col"
+        for="numCharacters"
       >
-        <option>
-          Select a difficulty
-        </option>
-        <option
-          value="Easy"
+        Number of characters
+        <input
+          class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+          id="numCharacters"
+          name="numCharacters"
+          type="number"
+        />
+      </label>
+    </div>
+    <div
+      class="flex flex-1 flex-col"
+    >
+      <label
+        aria-labelledby="level"
+        class="flex flex-1 flex-col"
+        for="level"
+      >
+        Level
+        <input
+          class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+          id="level"
+          name="level"
+          type="number"
+        />
+      </label>
+    </div>
+    <div
+      class="flex flex-1 flex-col"
+    >
+      <label
+        aria-labelledby="difficulty"
+        class="flex flex-1 flex-col"
+        for="difficulty"
+      >
+        Difficulty
+        <select
+          class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+          id="difficulty"
+          name="difficulty"
         >
-          Easy
-        </option>
-        <option
-          value="Medium"
-        >
-          Medium
-        </option>
-        <option
-          value="Hard"
-        >
-          Hard
-        </option>
-        <option
-          value="Deadly"
-        >
-          Deadly
-        </option>
-      </select>
-    </label>
-    <input
-      name="partySubmit"
-      type="submit"
-    />
+          <option>
+            Select a difficulty
+          </option>
+          <option
+            value="Easy"
+          >
+            Easy
+          </option>
+          <option
+            value="Medium"
+          >
+            Medium
+          </option>
+          <option
+            value="Hard"
+          >
+            Hard
+          </option>
+          <option
+            value="Deadly"
+          >
+            Deadly
+          </option>
+        </select>
+      </label>
+    </div>
+    <div
+      class="flex flex-1 flex-col justify-center"
+    >
+      <input
+        class="rounded-lg border-2 border-solid border-orange-100 bg-red-950 p-2 text-orange-100 hover:bg-red-900 hover:text-orange-200 focus:outline-none focus:ring-2 focus:ring-red-900/50"
+        name="partySubmit"
+        type="submit"
+      />
+    </div>
   </form>
 </div>
 `;
