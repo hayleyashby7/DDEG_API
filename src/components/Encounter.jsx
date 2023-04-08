@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Row from './Table/Row';
 import { getMonstersFromAPI } from '../utils/API';
 import { isValidChallengeRating } from '../utils/challengeRating';
 
@@ -43,12 +44,22 @@ function Encounter({ challengeRating }) {
             <h1>List of Monsters</h1>
             {error && <div>{message}</div>}{' '}
             {monsters ? (
-                <ul>
-                    {' '}
-                    {monsters.map((monster) => (
-                        <li key={monster.slug}>{monster.name}</li>
-                    ))}{' '}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>CR</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Alignment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {monsters.map((monster) => (
+                            <Row key={monster.slug} data={monster} />
+                        ))}
+                    </tbody>
+                </table>
             ) : (
                 <p>{message}</p>
             )}{' '}

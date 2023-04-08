@@ -19,8 +19,22 @@ describe('Encounter', () => {
             Promise.resolve({
                 count: 2,
                 results: [
-                    { slug: 'goblin', name: 'Goblin' },
-                    { slug: 'orc', name: 'Orc' },
+                    {
+                        slug: 'goblin',
+                        name: 'Goblin',
+                        challenge_rating: 1,
+                        type: 'Humanoid',
+                        size: 'Small',
+                        alignment: 'Neutral',
+                    },
+                    {
+                        slug: 'orc',
+                        name: 'Orc',
+                        challenge_rating: 1,
+                        type: 'Humanoid',
+                        size: 'Medium',
+                        alignment: 'Chaotic',
+                    },
                 ],
             }),
         );
@@ -120,8 +134,22 @@ describe('Encounter', () => {
             Promise.resolve({
                 count: 2,
                 results: [
-                    { slug: 'goblin', name: 'Goblin' },
-                    { slug: 'orc', name: 'Orc' },
+                    {
+                        slug: 'goblin',
+                        name: 'Goblin',
+                        challenge_rating: 1,
+                        type: 'Humanoid',
+                        size: 'Small',
+                        alignment: 'Neutral',
+                    },
+                    {
+                        slug: 'orc',
+                        name: 'Orc',
+                        challenge_rating: 1,
+                        type: 'Humanoid',
+                        size: 'Medium',
+                        alignment: 'Chaotic',
+                    },
                 ],
             }),
         );
