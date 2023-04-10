@@ -25,7 +25,7 @@ function App() {
             <header className='min-w-full shrink-0 bg-red-950 text-orange-100'>
                 <h1>D&D 5e Encounter Generator</h1>
             </header>
-            <main className='flex grow flex-col '>
+            <main className='flex grow flex-col px-[10%]'>
                 <section>
                     <Party saveData={submitData} />
                 </section>
