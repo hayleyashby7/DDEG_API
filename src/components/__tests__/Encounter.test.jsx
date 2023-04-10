@@ -22,7 +22,7 @@ describe('Encounter', () => {
                     {
                         slug: 'goblin',
                         name: 'Goblin',
-                        challenge_rating: 1,
+                        challenge_rating: '1',
                         type: 'Humanoid',
                         size: 'Small',
                         alignment: 'Neutral',
@@ -30,7 +30,7 @@ describe('Encounter', () => {
                     {
                         slug: 'orc',
                         name: 'Orc',
-                        challenge_rating: 1,
+                        challenge_rating: '1',
                         type: 'Humanoid',
                         size: 'Medium',
                         alignment: 'Chaotic',
@@ -137,7 +137,7 @@ describe('Encounter', () => {
                     {
                         slug: 'goblin',
                         name: 'Goblin',
-                        challenge_rating: 1,
+                        challenge_rating: '1',
                         type: 'Humanoid',
                         size: 'Small',
                         alignment: 'Neutral',
@@ -145,7 +145,7 @@ describe('Encounter', () => {
                     {
                         slug: 'orc',
                         name: 'Orc',
-                        challenge_rating: 1,
+                        challenge_rating: '1',
                         type: 'Humanoid',
                         size: 'Medium',
                         alignment: 'Chaotic',
