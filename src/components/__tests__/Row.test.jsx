@@ -24,11 +24,17 @@ describe('Row', () => {
         });
 
         // Assert
-        expect(screen.getByText(/Goblin/i)).toBeInTheDocument();
-        expect(screen.getByText(/1/i)).toBeInTheDocument();
-        expect(screen.getByText(/Humanoid/i)).toBeInTheDocument();
-        expect(screen.getByText(/Small/i)).toBeInTheDocument();
-        expect(screen.getByText(/Neutral/i)).toBeInTheDocument();
+        // Basic row data should be rendered
+        expect(screen.getByText('Goblin', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('1', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('Humanoid', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('Small', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
+
+        // Exanded row should not be rendered
+        expect(
+            screen.queryByRole('cell', { name: /Goblin 1 Humanoid Small Neutral/i }),
+        ).not.toBeInTheDocument();
     });
 
     it('should render an expanded row with data', async () => {
@@ -52,11 +58,16 @@ describe('Row', () => {
         await user.click(screen.getByText(/Goblin/i));
 
         // Assert
-        expect(screen.getByText(/Goblin/i)).toBeInTheDocument();
-        expect(screen.getByText(/1/i)).toBeInTheDocument();
-        expect(screen.getByText(/Humanoid/i)).toBeInTheDocument();
-        expect(screen.getByText(/Small/i)).toBeInTheDocument();
-        expect(screen.getByText(/Neutral/i)).toBeInTheDocument();
-        expect(screen.getByText(/Expanded/i)).toBeInTheDocument();
+        // Basic row data should be rendered
+        expect(screen.getByText('Goblin', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('1', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('Humanoid', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('Small', { selector: 'td' })).toBeInTheDocument();
+        expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
+
+        // Exanded row should be rendered
+        expect(
+            screen.getByRole('cell', { name: /Goblin 1 Humanoid Small Neutral/i }),
+        ).toBeInTheDocument();
     });
 });
