@@ -1,5 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Expanded from './Expanded';
 
 function Row({ data }) {
@@ -11,14 +14,23 @@ function Row({ data }) {
 
     return (
         <>
-            <tr onClick={handleExpand}>
+            <tr>
                 <td>{data.name}</td>
                 <td>{data.challenge_rating}</td>
                 <td>{data.type}</td>
                 <td>{data.size}</td>
                 <td>{data.alignment}</td>
+                <td>
+                    <div>
+                        <FontAwesomeIcon
+                            icon={isExpanded ? faMinus : faPlus}
+                            onClick={handleExpand}
+                            title='Expand'
+                        />
+                    </div>
+                </td>
             </tr>
-            {isExpanded ? <Expanded /> : null}
+            {isExpanded ? <Expanded data={data} /> : null}
         </>
     );
 }
