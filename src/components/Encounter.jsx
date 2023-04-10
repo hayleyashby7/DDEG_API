@@ -56,7 +56,7 @@ function Encounter({ challengeRating }) {
                     </thead>
                     <tbody>
                         {monsters.map((monster) => (
-                            <Row key={monster.slug} data={monster} />
+                            <Row key={monster.slug} data={monster} cols={5} />
                         ))}
                     </tbody>
                 </table>

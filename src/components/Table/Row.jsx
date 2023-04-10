@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Expanded from './Expanded';
 
-function Row({ data }) {
+function Row({ data, cols }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleExpand = () => {
@@ -30,7 +30,7 @@ function Row({ data }) {
                     </div>
                 </td>
             </tr>
-            {isExpanded ? <Expanded data={data} /> : null}
+            {isExpanded ? <Expanded data={data} colSpan={cols} /> : null}
         </>
     );
 }
@@ -43,6 +43,7 @@ Row.propTypes = {
         size: PropTypes.string.isRequired,
         alignment: PropTypes.string.isRequired,
     }).isRequired,
+    cols: PropTypes.number.isRequired,
 };
 
 export default Row;

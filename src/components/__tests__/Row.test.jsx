@@ -1,10 +1,17 @@
-import { it, describe, expect } from 'vitest';
+import { it, describe, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Row from '../Table/Row';
+import Expanded from '../Table/Expanded';
+
+vi.mock('../Table/Expanded');
 
 describe('Row', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
     it('should render a row with data', () => {
         // Arrange
         const rowKey = 'goblin';
@@ -17,8 +24,14 @@ describe('Row', () => {
         };
         const tbody = document.createElement('tbody');
 
+        Expanded.mockReturnValue(
+            <tr>
+                <td>Expanded</td>
+            </tr>,
+        );
+
         // Act
-        render(<Row rowKey={rowKey} data={data} />, {
+        render(<Row key={rowKey} data={data} cols={5} />, {
             container: document.body.appendChild(tbody),
             baseElement: document.body,
         });
@@ -32,9 +45,7 @@ describe('Row', () => {
         expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
 
         // Exanded row should not be rendered
-        expect(
-            screen.queryByRole('cell', { name: /Goblin 1 Humanoid Small Neutral/i }),
-        ).not.toBeInTheDocument();
+        expect(screen.queryByRole('cell', { name: /Expanded/i })).not.toBeInTheDocument();
     });
 
     it('should render an expanded row with data', async () => {
@@ -50,8 +61,14 @@ describe('Row', () => {
         const user = userEvent.setup();
         const tbody = document.createElement('tbody');
 
+        Expanded.mockReturnValue(
+            <tr>
+                <td>Expanded</td>
+            </tr>,
+        );
+
         // Act
-        render(<Row rowKey={rowKey} data={data} />, {
+        render(<Row key={rowKey} data={data} cols={5} />, {
             container: document.body.appendChild(tbody),
             baseElement: document.body,
         });
@@ -66,9 +83,7 @@ describe('Row', () => {
         expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
 
         // Exanded row should be rendered
-        expect(
-            screen.getByRole('cell', { name: /Goblin 1 Humanoid Small Neutral/i }),
-        ).toBeInTheDocument();
+        expect(screen.getByRole('cell', { name: /Expanded/i })).toBeInTheDocument();
     });
 
     it('should remove expanded row when clicked again', async () => {
@@ -84,8 +99,14 @@ describe('Row', () => {
         const user = userEvent.setup();
         const tbody = document.createElement('tbody');
 
+        Expanded.mockReturnValue(
+            <tr>
+                <td>Expanded</td>
+            </tr>,
+        );
+
         // Act
-        render(<Row rowKey={rowKey} data={data} />, {
+        render(<Row key={rowKey} data={data} cols={5} />, {
             container: document.body.appendChild(tbody),
             baseElement: document.body,
         });
@@ -97,9 +118,7 @@ describe('Row', () => {
         expect(screen.getByText('Humanoid', { selector: 'td' })).toBeInTheDocument();
         expect(screen.getByText('Small', { selector: 'td' })).toBeInTheDocument();
         expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
-        expect(
-            screen.getByRole('cell', { name: /Goblin 1 Humanoid Small Neutral/i }),
-        ).toBeInTheDocument();
+        expect(screen.getByRole('cell', { name: /Expanded/i })).toBeInTheDocument();
 
         // Click again to collapse
         await user.click(screen.getByTitle(/Expand/i));
@@ -113,8 +132,6 @@ describe('Row', () => {
         expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
 
         // Exanded row should not be rendered
-        expect(
-            screen.queryByRole('cell', { name: /Goblin 1 Humanoid Small Neutral/i }),
-        ).not.toBeInTheDocument();
+        expect(screen.queryByRole('cell', { name: /Expanded/i })).not.toBeInTheDocument();
     });
 });
