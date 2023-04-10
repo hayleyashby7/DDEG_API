@@ -15,7 +15,7 @@
         "react-hook-form": "^7.43.9",
         "vite": "^4.2.1",
         "vite-plugin-eslint": "^1.8.1",
-        "vitest": "^0.29.8"
+        "vitest": "^0.30.0"
     },
     "scripts": {
         "predeploy": "npm run build",
@@ -42,7 +42,7 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.3",
-        "@vitest/coverage-c8": "^0.29.8",
+        "@vitest/coverage-c8": "^0.30.0",
         "autoprefixer": "^10.4.14",
         "eslint": "^8.37.0",
         "eslint-config-airbnb": "^19.0.4",
