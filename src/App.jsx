@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Encounter from './components/Encounter';
 import Party from './components/Party';
 import { calculateChallengeRating } from './utils/challengeRating';
-import './index.css';
 
 function App() {
     const [challengeRating, setChallengeRating] = useState(null);

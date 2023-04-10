@@ -4,6 +4,9 @@
     "homepage": "https://hayleyashby7.github.io/5eEncounterGenerator",
     "private": true,
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.4.0",
+        "@fortawesome/free-solid-svg-icons": "^6.4.0",
+        "@fortawesome/react-fontawesome": "^0.2.0",
         "@hookform/error-message": "^2.0.1",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^14.0.0",
@@ -20,7 +23,7 @@
     "scripts": {
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
-        "start": "vite",
+        "dev": "vite",
         "build": "vite build",
         "test": "vitest",
         "coverage": "vitest run --coverage",
@@ -54,7 +57,7 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-tailwindcss": "^3.11.0",
         "eslint-plugin-testing-library": "^5.10.2",
-        "eslint-plugin-vitest": "^0.1.1",
+        "eslint-plugin-vitest": "^0.1.4",
         "gh-pages": "^5.0.0",
         "jsdom": "^21.1.1",
         "postcss": "^8.4.21",
