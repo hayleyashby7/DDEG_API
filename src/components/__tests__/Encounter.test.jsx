@@ -40,7 +40,7 @@ describe('Encounter', () => {
         );
 
         // Act
-        render(<Encounter challengeRating={1} />);
+        render(<Encounter challengeRating='1' />);
 
         // Assert
         // Heading is displayed
@@ -61,7 +61,7 @@ describe('Encounter', () => {
         getMonstersFromAPI.mockReturnValue(Promise.reject(new Error('API call failed')));
 
         // Act
-        render(<Encounter challengeRating={1} />);
+        render(<Encounter challengeRating='1' />);
 
         // Assert
         // Heading is still displayed
@@ -82,7 +82,7 @@ describe('Encounter', () => {
         getMonstersFromAPI.mockReturnValue(Promise.resolve(new Error('API call failed')));
 
         // Act
-        render(<Encounter challengeRating={1} />);
+        render(<Encounter challengeRating='1' />);
 
         // Assert
         // Heading is displayed
@@ -112,7 +112,7 @@ describe('Encounter', () => {
         );
 
         // Act
-        render(<Encounter challengeRating={1} />);
+        render(<Encounter challengeRating='1' />);
 
         // Assert
         // Heading is displayed

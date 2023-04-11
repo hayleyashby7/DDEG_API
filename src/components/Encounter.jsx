@@ -67,7 +67,7 @@ function Encounter({ challengeRating }) {
     );
 }
 
-Encounter.propTypes = { challengeRating: PropTypes.number };
-Encounter.defaultProps = { challengeRating: -1 };
+Encounter.propTypes = { challengeRating: PropTypes.string };
+Encounter.defaultProps = { challengeRating: '-1' };
 
 export default Encounter;

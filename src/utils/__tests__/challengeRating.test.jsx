@@ -3,15 +3,21 @@ import * as CR from '../challengeRating';
 
 describe('Valid Challenge Rating', () => {
     it('returns true for valid challenge rating', () => {
-        expect(CR.isValidChallengeRating({ challengeRating: 5 })).toBe(true);
-        expect(CR.isValidChallengeRating({ challengeRating: 0 })).toBe(true);
-        expect(CR.isValidChallengeRating({ challengeRating: 30 })).toBe(true);
+        expect(CR.isValidChallengeRating({ challengeRating: '5' })).toBe(true);
+        expect(CR.isValidChallengeRating({ challengeRating: '0' })).toBe(true);
+        expect(CR.isValidChallengeRating({ challengeRating: '30' })).toBe(true);
     });
 
     it('returns false for invalid challenge rating', () => {
-        expect(CR.isValidChallengeRating({ challengeRating: -1 })).toBe(false);
-        expect(CR.isValidChallengeRating({ challengeRating: 31 })).toBe(false);
+        expect(CR.isValidChallengeRating({ challengeRating: '-1' })).toBe(false);
+        expect(CR.isValidChallengeRating({ challengeRating: '31' })).toBe(false);
         expect(CR.isValidChallengeRating({ challengeRating: 'Oopsy' })).toBe(false);
+    });
+
+    it('returns true for fractional challenge ratings', () => {
+        expect(CR.isValidChallengeRating({ challengeRating: '1/8' })).toBe(true);
+        expect(CR.isValidChallengeRating({ challengeRating: '1/4' })).toBe(true);
+        expect(CR.isValidChallengeRating({ challengeRating: '1/2' })).toBe(true);
     });
 });
 
@@ -24,7 +30,7 @@ describe('Calculate Challenge Rating', () => {
     });
 
     it('returns correct challenge rating for a small party at each difficulty point.', () => {
-        expect(CR.calculateChallengeRating(1, 3, 'Easy')).toBe('1/4');
+        expect(CR.calculateChallengeRating(1, 1, 'Easy')).toBe('1/8');
         expect(CR.calculateChallengeRating(2, 10, 'Medium')).toBe('5');
         expect(CR.calculateChallengeRating(1, 15, 'Hard')).toBe('7');
         expect(CR.calculateChallengeRating(2, 1, 'Deadly')).toBe('1');

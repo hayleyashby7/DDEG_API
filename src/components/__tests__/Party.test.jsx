@@ -90,4 +90,38 @@ describe('Party component', () => {
         expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(false);
         expect(mockSaveData).not.toBeCalled();
     });
+
+    it('should resubmit form if inputs are changed', async () => {
+        // Arrange
+        const user = userEvent.setup();
+        const mockSaveData = vi.fn();
+
+        // Act
+        render(<Party saveData={mockSaveData} />);
+
+        await user.type(screen.getByLabelText('Number of characters'), '4');
+        await user.type(screen.getByLabelText('Level'), '10');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
+
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
+
+        expect(screen.getByLabelText('Number of characters')).toHaveValue(4);
+        expect(screen.getByLabelText('Level')).toHaveValue(10);
+        expect(screen.getByLabelText('Difficulty')).toHaveValue('Easy');
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(true);
+
+        await user.type(screen.getByLabelText('Number of characters'), '[Backspace]5');
+        await user.type(screen.getByLabelText('Level'), '[Backspace][Backspace]10');
+        await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
+
+        await user.click(screen.getByRole('button', { name: 'Submit' }));
+
+        // Assert
+        expect(screen.getByLabelText('Number of characters')).toHaveValue(5);
+        expect(screen.getByLabelText('Level')).toHaveValue(10);
+        expect(screen.getByLabelText('Difficulty')).toHaveValue('Easy');
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(true);
+
+        expect(mockSaveData).toBeCalledTimes(2);
+    });
 });
