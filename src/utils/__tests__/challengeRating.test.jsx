@@ -62,3 +62,32 @@ describe('Calculate Challenge Rating', () => {
         expect(CR.calculateChallengeRating(100, 6, 'Hard')).toBeNull();
     });
 });
+
+describe('Calculate Valid Challengee Ratings', () => {
+    it('returns valid challenge rating for every possible combination of party size and character level', () => {
+        for (let i = 1; i <= 20; i += 1) {
+            for (let j = 1; j <= 10; j += 1) {
+                expect(
+                    CR.isValidChallengeRating({
+                        challengeRating: CR.calculateChallengeRating(j, i, 'Easy'),
+                    }),
+                ).toBe(true);
+                expect(
+                    CR.isValidChallengeRating({
+                        challengeRating: CR.calculateChallengeRating(j, i, 'Medium'),
+                    }),
+                ).toBe(true);
+                expect(
+                    CR.isValidChallengeRating({
+                        challengeRating: CR.calculateChallengeRating(j, i, 'Hard'),
+                    }),
+                ).toBe(true);
+                expect(
+                    CR.isValidChallengeRating({
+                        challengeRating: CR.calculateChallengeRating(j, i, 'Deadly'),
+                    }),
+                ).toBe(true);
+            }
+        }
+    });
+});

@@ -44,7 +44,7 @@ const getClosestChallengeRating = (data, targetRange, numCharacters) => {
         testValue = xpMultiplier(data[middle].XP, numCharacters);
 
         switch (true) {
-            case testValue > targetRange[1]:
+            case testValue >= targetRange[1]:
                 // Value is above range - continue search
                 end = middle + 1;
                 break;
