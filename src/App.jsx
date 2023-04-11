@@ -9,13 +9,7 @@ function App() {
 
     const submitData = (formData) => {
         setChallengeRating(
-            Number(
-                calculateChallengeRating(
-                    formData.numCharacters,
-                    formData.level,
-                    formData.difficulty,
-                ),
-            ),
+            calculateChallengeRating(formData.numCharacters, formData.level, formData.difficulty),
         );
         setSeeEncounter(true);
     };

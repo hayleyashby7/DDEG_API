@@ -18,6 +18,11 @@ const xpMultiplier = (xp, numCharacters) => {
     return totalXP;
 };
 
+const convertToFloat = (value) => {
+    const split = value.split('/');
+    return split.reduce((n, d) => n / d);
+};
+
 const getClosestChallengeRating = (data, targetRange, numCharacters) => {
     let start = 0;
     let end = data.length - 1;
@@ -77,7 +82,10 @@ const getClosestChallengeRating = (data, targetRange, numCharacters) => {
 };
 
 export const isValidChallengeRating = ({ challengeRating }) => {
-    if (challengeRating >= 0 && challengeRating <= 30) {
+    // Convert from string for comparison purposes
+    const numericCR = convertToFloat(challengeRating);
+
+    if (numericCR >= 0 && numericCR <= 30) {
         return true;
     }
     return false;
