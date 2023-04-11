@@ -105,8 +105,13 @@ describe('Party component', () => {
 
         await user.click(screen.getByRole('button', { name: 'Submit' }));
 
-        await user.type(screen.getByLabelText('Number of characters'), '5');
-        await user.type(screen.getByLabelText('Level'), '10');
+        expect(screen.getByLabelText('Number of characters')).toHaveValue(4);
+        expect(screen.getByLabelText('Level')).toHaveValue(10);
+        expect(screen.getByLabelText('Difficulty')).toHaveValue('Easy');
+        expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(true);
+
+        await user.type(screen.getByLabelText('Number of characters'), '[Backspace]5');
+        await user.type(screen.getByLabelText('Level'), '[Backspace][Backspace]10');
         await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
         await user.click(screen.getByRole('button', { name: 'Submit' }));
