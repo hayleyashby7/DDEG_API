@@ -21,10 +21,10 @@
         "vitest": "^0.30.0"
     },
     "scripts": {
-        "predeploy": "npm run build",
+        "predeploy": "vite build && tailwind -i src/index.css -o dist/output.css",
         "deploy": "gh-pages -d build",
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && tailwind -i src/index.css -o dist/output.css",
         "test": "vitest",
         "coverage": "vitest run --coverage",
         "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
