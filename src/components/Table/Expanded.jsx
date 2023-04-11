@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,17 +7,31 @@ function Expanded({ data, colSpan }) {
         <tr>
             <td colSpan={colSpan}>
                 <div className='grid grid-flow-dense gap-5 bg-orange-100 text-red-950'>
-                    <section>
+                    <section id='base-info'>
                         <h2 className='text-2xl font-extrabold'>{data.name}</h2>
                         <p className='italic'>
-                            {data.size} {data.type}, {data.alignment} {colSpan}
+                            {data.size} {data.type}, {data.alignment}{' '}
                         </p>
                         <hr />
-                        <p>Armor Class {data.armor_class}</p>
-                        <p>Hit Points {data.hit_points}</p>
-                        <p>Speed</p>
+                        <p>
+                            <span className='font-semibold'> Armor Class</span> {data.armor_class}
+                            {data.armor_desc !== '' ?? <span> ({data.armor_desc})</span>}
+                        </p>
+                        <p>
+                            <span className='font-semibold'>Hit Points</span> {data.hit_points}
+                            {data.hit_dice !== '' ?? <span> ({data.hit_dice})</span>}
+                        </p>
+                        <p>
+                            <span className='font-semibold'>Speed</span>
+                            {Object.keys(data.speed).map((speed) => (
+                                <span key={speed}>
+                                    {' '}
+                                    {speed} {data.speed[speed]}ft
+                                </span>
+                            ))}
+                        </p>
                     </section>
-                    <section>
+                    <section id='stats'>
                         <hr />
                         <div className='flex justify-evenly'>
                             <div>
@@ -45,69 +60,131 @@ function Expanded({ data, colSpan }) {
                             </div>
                         </div>
                     </section>
-                    <section>
+                    <section id='attributes'>
                         <hr />
-                        <p className='font-semibold'>Saving Throws {data.saving_throws}</p>
-                        <p>SKILLS </p>
-                        <p className='font-semibold'>Senses {data.senses}</p>
-                        <p className='font-semibold'>Languages {data.languages}</p>
-                        <p className='font-semibold'>Challenge {data.challenge_rating}</p>
-                        <hr />
-                        <h3>Special Abilities</h3>
-                        <p className='text-neutral-900'>
-                            Aenean massa lorem, bibendum eu condimentum in, bibendum sit amet felis.
-                            Vestibulum luctus enim vehicula, egestas urna eu, porttitor felis. Nulla
-                            id neque massa. Vestibulum dignissim ipsum ultricies luctus faucibus.
-                            Praesent varius, lacus vitae malesuada volutpat, ipsum leo commodo ex,
-                            eget pulvinar lorem odio sit amet urna. Sed imperdiet tempus nisl id
-                            mollis. Integer ac dictum sem, ut fermentum leo. Suspendisse iaculis
-                            posuere est vel volutpat. Integer placerat, mauris a sodales vehicula,
-                            erat diam mollis ante, sed posuere ipsum mi quis ligula. Aliquam vel
-                            venenatis nisl. Nam iaculis vestibulum dolor a pulvinar. Vestibulum enim
-                            neque, luctus eu ligula id, convallis vulputate metus.{' '}
-                        </p>
-                    </section>
-                    <section>
-                        <hr />
-                        <h3>Actions</h3>
-                        <p>
-                            ACTIONS. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Suspendisse a lacus ac enim convallis semper ut commodo magna.
-                            Suspendisse potenti. Pellentesque eu auctor enim. Integer sed nibh
-                            turpis. Mauris luctus maximus consectetur. Donec semper porttitor diam
-                            id varius. Mauris vel sapien a augue luctus placerat.{' '}
-                        </p>
-                    </section>
+                        {data.strength_save !== null ||
+                            data.dexterity_save !== null ||
+                            data.constitution_save !== null ||
+                            data.intelligence_save !== null ||
+                            data.wisdom_save !== null ||
+                            (data.charisma_save !== null && (
+                                <p>
+                                    <span className='font-semibold'>Saving Throws</span>
+                                    {data.strength_save !== null && (
+                                        <span> STR +{data.strength_save}</span>
+                                    )}
+                                    {data.dexterity_save !== null && (
+                                        <span> DEX +{data.dexterity_save}</span>
+                                    )}
+                                    {data.constitution_save !== null && (
+                                        <span> CON +{data.constitution_save}</span>
+                                    )}
+                                    {data.intelligence_save !== null && (
+                                        <span> INT +{data.intelligence_save}</span>
+                                    )}
+                                    {data.wisdom_save !== null && (
+                                        <span> WIS +{data.wisdom_save}</span>
+                                    )}
+                                    {data.charisma_save !== null && (
+                                        <span> CHA +{data.charisma_save}</span>
+                                    )}
+                                </p>
+                            ))}
+                        {Object.keys(data.skills).length > 0 && (
+                            <p>
+                                <span className='font-semibold'>Skills </span>
+                                {Object.keys(data.skills).map((skill) => (
+                                    <span key={skill}>
+                                        {skill} +{data.skills[skill]}{' '}
+                                    </span>
+                                ))}
+                            </p>
+                        )}
+                        {data.damage_vulnerabilities !== null &&
+                            data.damage_vulnerabilities !== '' && (
+                                <p>
+                                    <span className='font-semibold'>Damage Vulnerabilities</span>{' '}
+                                    {data.damage_vulnerabilities}
+                                </p>
+                            )}
+                        {data.damage_resistances !== null && data.damage_resistances !== '' && (
+                            <p>
+                                <span className='font-semibold'>Damage Resistances</span>{' '}
+                                {data.damage_resistances}
+                            </p>
+                        )}
+                        {data.damage_immunities !== null && data.damage_immunities !== '' && (
+                            <p>
+                                <span className='font-semibold'>Damage Immunities</span>{' '}
+                                {data.damage_immunities}
+                            </p>
+                        )}
+                        {data.condition_immunities !== null && data.condition_immunities !== '' && (
+                            <p>
+                                <span className='font-semibold'>Condition Immunities</span>{' '}
+                                {data.condition_immunities}
+                            </p>
+                        )}
 
-                    <section>
-                        <hr />
-                        <h3>Legendary Actions</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
-                            lacus ac enim convallis semper ut commodo magna. Suspendisse potenti.
-                            Pellentesque eu auctor enim. Integer sed nibh turpis. Mauris luctus
-                            maximus consectetur. Donec semper porttitor diam id varius. Mauris vel
-                            sapien a augue luctus placerat. Aliquam blandit elit consequat ipsum
-                            maximus interdum. Aenean cursus viverra orci, vitae molestie felis
-                            congue sed. Aliquam a purus ut sem congue aliquam. Nulla facilisi. Orci
-                            varius natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus mus. Suspendisse potenti. Sed ac nisi felis. Vivamus
-                            sollicitudin mollis enim. Nunc quis leo vestibulum, varius erat a,
-                            tincidunt urna. Praesent vulputate cursus orci eget finibus. Quisque ac
-                            lobortis lorem, eu posuere metus. Sed molestie augue nisl, at accumsan
-                            diam ultrices sed. Quisque dictum interdum dolor vel ultrices. Phasellus
-                            justo augue, varius nec mollis vel, ornare vel diam. Duis eget sem non
-                            mauris elementum maximus ac ut libero. Vivamus vehicula enim vel ipsum
-                            venenatis, ac auctor nisi vestibulum. Cras sed felis sit amet libero
-                            viverra faucibus. Quisque a viverra nisi. Morbi sit amet eros lorem.
-                            Duis molestie ultricies erat, vel interdum eros. Mauris maximus mauris
-                            eu imperdiet volutpat. Quisque orci velit, fermentum at ex et, maximus
-                            scelerisque sapien. Quisque dictum pellentesque tempor. Ut sit amet
-                            tortor eros. Nullam vitae justo et orci viverra porttitor. Curabitur nec
-                            commodo nulla, eu volutpat nibh. Morbi sed turpis imperdiet, lacinia
-                            diam vitae, varius nisi.
-                        </p>
+                        {data.senses !== null && data.senses !== '' && (
+                            <p>
+                                <span className='font-semibold'>Senses</span> {data.senses}
+                            </p>
+                        )}
+                        {data.languages !== null && data.languages !== '' && (
+                            <p>
+                                <span className='font-semibold'>Languages </span> {data.languages}
+                            </p>
+                        )}
+                        {data.challenge_rating !== null && data.challenge_rating !== '' && (
+                            <p>
+                                <span className='font-semibold'>Challenge</span>{' '}
+                                {data.challenge_rating}
+                            </p>
+                        )}
                     </section>
+                    {data.special_abilities !== null && data.special_abilities !== '' && (
+                        <section id='special'>
+                            <hr />
+                            <h3 className='font-bold'>Special Abilities</h3>
+                            <div className='text-neutral-900'>
+                                {data.special_abilities.map((ability) => (
+                                    <div key={ability.name}>
+                                        <h4 className='font-bold'>{ability.name}</h4>
+                                        <p>{ability.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                    {data.actions !== null && data.actions !== '' && (
+                        <section id='actions'>
+                            <hr />
+                            <h3 className='font-bold'>Actions</h3>
+                            <div className='text-neutral-900'>
+                                {data.actions.map((action) => (
+                                    <div key={action.name}>
+                                        <h4 className='font-bold'>{action.name}</h4>
+                                        <p>{action.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                    {data.legendary_actions !== null && data.legendary_actions !== '' && (
+                        <section id='legendary'>
+                            <hr />
+                            <h3 className='font-bold'>Legendary Actions</h3>
+                            <div className='text-neutral-900'>
+                                {data.legendary_actions.map((action) => (
+                                    <div key={action.name}>
+                                        <h4 className='font-bold'>{action.name}</h4>
+                                        <p>{action.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
                 </div>
             </td>
         </tr>
@@ -122,21 +199,32 @@ Expanded.propTypes = {
         size: PropTypes.string.isRequired,
         alignment: PropTypes.string.isRequired,
         armor_class: PropTypes.number.isRequired,
+        armor_desc: PropTypes.string.isRequired,
         hit_points: PropTypes.number.isRequired,
-        speed: PropTypes.string.isRequired,
-        strength: PropTypes.string.isRequired,
-        dexterity: PropTypes.string.isRequired,
-        constitution: PropTypes.string.isRequired,
-        intelligence: PropTypes.string.isRequired,
-        wisdom: PropTypes.string.isRequired,
-        charisma: PropTypes.string.isRequired,
-        saving_throws: PropTypes.number.isRequired,
-        skills: PropTypes.string.isRequired,
+        hit_dice: PropTypes.string.isRequired,
+        speed: PropTypes.object.isRequired,
+        strength: PropTypes.number.isRequired,
+        dexterity: PropTypes.number.isRequired,
+        constitution: PropTypes.number.isRequired,
+        intelligence: PropTypes.number.isRequired,
+        wisdom: PropTypes.number.isRequired,
+        charisma: PropTypes.number.isRequired,
+        strength_save: PropTypes.number,
+        dexterity_save: PropTypes.number,
+        constitution_save: PropTypes.number,
+        intelligence_save: PropTypes.number,
+        wisdom_save: PropTypes.number,
+        charisma_save: PropTypes.number,
+        skills: PropTypes.object.isRequired,
+        damage_vulnerabilities: PropTypes.string,
+        damage_resistances: PropTypes.string,
+        damage_immunities: PropTypes.string,
+        condition_immunities: PropTypes.string,
         senses: PropTypes.string.isRequired,
         languages: PropTypes.string.isRequired,
-        special_abilities: PropTypes.string.isRequired,
-        actions: PropTypes.string.isRequired,
-        legendary_actions: PropTypes.string.isRequired,
+        special_abilities: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+        actions: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+        legendary_actions: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     }).isRequired,
     colSpan: PropTypes.number.isRequired,
 };
