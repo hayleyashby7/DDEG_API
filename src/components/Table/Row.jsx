@@ -30,7 +30,7 @@ function Row({ data, cols }) {
                     </div>
                 </td>
             </tr>
-            {isExpanded ? <Expanded data={data} colSpan={cols} /> : null}
+            {isExpanded && <Expanded data={data} colSpan={cols} />}
         </>
     );
 }

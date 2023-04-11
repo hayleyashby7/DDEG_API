@@ -23,9 +23,7 @@ function App() {
                 <section>
                     <Party saveData={submitData} />
                 </section>
-                <section>
-                    {seeEncounter ? <Encounter challengeRating={challengeRating} /> : null}
-                </section>
+                <section>{seeEncounter && <Encounter challengeRating={challengeRating} />}</section>
             </main>
             <footer className='min-w-full shrink-0  bg-red-950 text-center text-orange-100'>
                 <p>D&D 5e Encounter Generator &copy; Hayley Ashby 2023</p>
