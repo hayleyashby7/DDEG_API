@@ -2,10 +2,22 @@ import { it, describe, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Row from '../Table/Row';
-import Expanded from '../Table/Expanded';
+import Row from '../Row';
 
-vi.mock('../Table/Expanded');
+vi.mock('../Expanded', () => {
+    return {
+        default: vi.fn(() => (
+            <tr>
+                <td>Expanded</td>
+            </tr>
+        )),
+        Expanded: vi.fn(() => (
+            <tr>
+                <td>Expanded</td>
+            </tr>
+        )),
+    };
+});
 
 describe('Row', () => {
     beforeEach(() => {
@@ -23,12 +35,6 @@ describe('Row', () => {
             alignment: 'Neutral',
         };
         const tbody = document.createElement('tbody');
-
-        Expanded.mockReturnValue(
-            <tr>
-                <td>Expanded</td>
-            </tr>,
-        );
 
         // Act
         render(<Row key={rowKey} data={data} cols={5} />, {
@@ -61,12 +67,6 @@ describe('Row', () => {
         const user = userEvent.setup();
         const tbody = document.createElement('tbody');
 
-        Expanded.mockReturnValue(
-            <tr>
-                <td>Expanded</td>
-            </tr>,
-        );
-
         // Act
         render(<Row key={rowKey} data={data} cols={5} />, {
             container: document.body.appendChild(tbody),
@@ -98,12 +98,6 @@ describe('Row', () => {
         };
         const user = userEvent.setup();
         const tbody = document.createElement('tbody');
-
-        Expanded.mockReturnValue(
-            <tr>
-                <td>Expanded</td>
-            </tr>,
-        );
 
         // Act
         render(<Row key={rowKey} data={data} cols={5} />, {

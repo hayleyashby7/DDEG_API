@@ -21,5 +21,12 @@ module.exports = {
     plugins: ['react', 'vitest', 'tailwindcss'],
     rules: {
         'react/jsx-props-no-spreading': 'off',
+        'react/function-component-definition': [
+            'error',
+            {
+                namedComponents: ['function-declaration', 'arrow-function'],
+                unnamedComponents: 'arrow-function',
+            },
+        ],
     },
 };
