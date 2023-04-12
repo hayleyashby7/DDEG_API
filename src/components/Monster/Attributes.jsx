@@ -1,37 +1,44 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { formatString } from '../../utils/dataUtils';
 
 function Attributes({ data }) {
+    const [hasSavingThrows, setHasSavingThrows] = useState(true);
+
+    useEffect(() => {
+        if (
+            data.strength_save == null &&
+            data.dexterity_save == null &&
+            data.constitution_save == null &&
+            data.intelligence_save == null &&
+            data.wisdom_save == null &&
+            data.charisma_save == null
+        ) {
+            setHasSavingThrows(false);
+        }
+    }, [data]);
+
     return (
         <section id='attributes'>
             <hr />
-            {data.strength_save !== null ||
-                data.dexterity_save !== null ||
-                data.constitution_save !== null ||
-                data.intelligence_save !== null ||
-                data.wisdom_save !== null ||
-                (data.charisma_save !== null && (
-                    <p>
-                        <span className='font-semibold'>Saving Throws</span>
-                        {data.strength_save !== null && <span> STR +{data.strength_save}</span>}
-                        {data.dexterity_save !== null && <span> DEX +{data.dexterity_save}</span>}
-                        {data.constitution_save !== null && (
-                            <span> CON +{data.constitution_save}</span>
-                        )}
-                        {data.intelligence_save !== null && (
-                            <span> INT +{data.intelligence_save}</span>
-                        )}
-                        {data.wisdom_save !== null && <span> WIS +{data.wisdom_save}</span>}
-                        {data.charisma_save !== null && <span> CHA +{data.charisma_save}</span>}
-                    </p>
-                ))}
+            {hasSavingThrows && (
+                <p>
+                    <span className='font-semibold'>Saving Throws</span>
+                    {data.strength_save !== null && <span> STR +{data.strength_save}</span>}
+                    {data.dexterity_save !== null && <span> DEX +{data.dexterity_save}</span>}
+                    {data.constitution_save !== null && <span> CON +{data.constitution_save}</span>}
+                    {data.intelligence_save !== null && <span> INT +{data.intelligence_save}</span>}
+                    {data.wisdom_save !== null && <span> WIS +{data.wisdom_save}</span>}
+                    {data.charisma_save !== null && <span> CHA +{data.charisma_save}</span>}
+                </p>
+            )}
             {Object.keys(data.skills).length > 0 && (
                 <p>
                     <span className='font-semibold'>Skills </span>
                     {Object.keys(data.skills).map((skill) => (
                         <span key={skill}>
-                            {skill} +{data.skills[skill]}{' '}
+                            {formatString(skill)} +{data.skills[skill]}{' '}
                         </span>
                     ))}
                 </p>
@@ -39,25 +46,25 @@ function Attributes({ data }) {
             {data.damage_vulnerabilities !== null && data.damage_vulnerabilities !== '' && (
                 <p>
                     <span className='font-semibold'>Damage Vulnerabilities</span>{' '}
-                    {data.damage_vulnerabilities}
+                    {formatString(data.damage_vulnerabilities)}
                 </p>
             )}
             {data.damage_resistances !== null && data.damage_resistances !== '' && (
                 <p>
                     <span className='font-semibold'>Damage Resistances</span>{' '}
-                    {data.damage_resistances}
+                    {formatString(data.damage_resistances)}
                 </p>
             )}
             {data.damage_immunities !== null && data.damage_immunities !== '' && (
                 <p>
                     <span className='font-semibold'>Damage Immunities</span>{' '}
-                    {data.damage_immunities}
+                    {formatString(data.damage_immunities)}
                 </p>
             )}
             {data.condition_immunities !== null && data.condition_immunities !== '' && (
                 <p>
                     <span className='font-semibold'>Condition Immunities</span>{' '}
-                    {data.condition_immunities}
+                    {formatString(data.condition_immunities)}
                 </p>
             )}
 
