@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input component > renders the input 1`] = `
+<div>
+  <label
+    aria-labelledby=""
+    class="flex flex-1 flex-col"
+    for=""
+  >
+    <input
+      class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+      id=""
+      type=""
+    />
+  </label>
+</div>
+`;

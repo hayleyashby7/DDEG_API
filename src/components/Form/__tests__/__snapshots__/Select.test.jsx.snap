@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Select component > renders the select 1`] = `
+<div>
+  <label
+    aria-labelledby=""
+    class="flex flex-1 flex-col"
+    for=""
+  >
+    <select
+      class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+      id=""
+    >
+      <option
+        selected=""
+        value="1"
+      >
+        Option 1
+      </option>
+      <option
+        value="2"
+      >
+        Option 2
+      </option>
+      <option
+        value="3"
+      >
+        Option 3
+      </option>
+    </select>
+  </label>
+</div>
+`;
