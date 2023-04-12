@@ -21,8 +21,8 @@
         "vitest": "^0.30.0"
     },
     "scripts": {
-        "predeploy": "vite build && tailwind -i src/index.css -o dist/output.css",
-        "deploy": "gh-pages -d build",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist",
         "dev": "vite",
         "build": "vite build && tailwind -i src/index.css -o dist/output.css",
         "test": "vitest",

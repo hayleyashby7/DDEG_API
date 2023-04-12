@@ -5,6 +5,7 @@ import eslint from 'vite-plugin-eslint';
 import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
+    base: '/5eEncounterGenerator/',
     plugins: [react(), eslint(), tailwindcss()],
     test: {
         globals: true,
