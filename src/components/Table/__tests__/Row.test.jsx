@@ -2,17 +2,16 @@ import { it, describe, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Row from '../Table/Row';
-import Expanded from '../Table/Expanded';
+import Row from '../Row';
 
-vi.mock('../Table/Expanded');
+vi.mock('../Expanded');
 
 describe('Row', () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });
 
-    it('should render a row with data', () => {
+    it('should render a row with data', async () => {
         // Arrange
         const rowKey = 'goblin';
         const data = {
@@ -23,12 +22,12 @@ describe('Row', () => {
             alignment: 'Neutral',
         };
         const tbody = document.createElement('tbody');
-
-        Expanded.mockReturnValue(
+        const mockExpanded = await import('../Expanded');
+        mockExpanded.default.mockImplementation(() => (
             <tr>
                 <td>Expanded</td>
-            </tr>,
-        );
+            </tr>
+        ));
 
         // Act
         render(<Row key={rowKey} data={data} cols={5} />, {
@@ -60,18 +59,21 @@ describe('Row', () => {
         };
         const user = userEvent.setup();
         const tbody = document.createElement('tbody');
-
-        Expanded.mockReturnValue(
+        const mockExpanded = await import('../Expanded');
+        mockExpanded.default.mockImplementation(() => (
             <tr>
                 <td>Expanded</td>
-            </tr>,
-        );
+            </tr>
+        ));
 
         // Act
         render(<Row key={rowKey} data={data} cols={5} />, {
             container: document.body.appendChild(tbody),
             baseElement: document.body,
         });
+
+        expect(mockExpanded.default).toHaveBeenCalledTimes(0);
+
         await user.click(screen.getByTitle(/Expand/i));
 
         // Assert
@@ -84,6 +86,7 @@ describe('Row', () => {
 
         // Exanded row should be rendered
         expect(screen.getByRole('cell', { name: /Expanded/i })).toBeInTheDocument();
+        expect(mockExpanded.default).toHaveBeenCalledTimes(1);
     });
 
     it('should remove expanded row when clicked again', async () => {
@@ -98,18 +101,20 @@ describe('Row', () => {
         };
         const user = userEvent.setup();
         const tbody = document.createElement('tbody');
-
-        Expanded.mockReturnValue(
+        const mockExpanded = await import('../Expanded');
+        mockExpanded.default.mockImplementation(() => (
             <tr>
                 <td>Expanded</td>
-            </tr>,
-        );
+            </tr>
+        ));
 
         // Act
         render(<Row key={rowKey} data={data} cols={5} />, {
             container: document.body.appendChild(tbody),
             baseElement: document.body,
         });
+
+        expect(mockExpanded.default).toHaveBeenCalledTimes(0);
         await user.click(screen.getByTitle(/Expand/i));
 
         //  Check data after first click to expand
@@ -119,6 +124,7 @@ describe('Row', () => {
         expect(screen.getByText('Small', { selector: 'td' })).toBeInTheDocument();
         expect(screen.getByText('Neutral', { selector: 'td' })).toBeInTheDocument();
         expect(screen.getByRole('cell', { name: /Expanded/i })).toBeInTheDocument();
+        expect(mockExpanded.default).toHaveBeenCalledTimes(1);
 
         // Click again to collapse
         await user.click(screen.getByTitle(/Expand/i));
@@ -133,5 +139,6 @@ describe('Row', () => {
 
         // Exanded row should not be rendered
         expect(screen.queryByRole('cell', { name: /Expanded/i })).not.toBeInTheDocument();
+        expect(mockExpanded.default).toHaveBeenCalledTimes(1);
     });
 });

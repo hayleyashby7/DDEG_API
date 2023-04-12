@@ -2,7 +2,7 @@ import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Party from '../Party';
+import Party from './Party';
 import Difficulty from '../../utils/difficulty';
 
 describe('Party component', () => {
@@ -26,7 +26,7 @@ describe('Party component', () => {
         await user.type(screen.getByLabelText('Level'), '10');
         await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-        await user.click(screen.getByRole('button', { name: 'Submit' }));
+        await user.click(screen.getByRole('button', { name: 'Generate' }));
 
         // Assert
         expect(screen.getByLabelText('Number of characters')).toHaveValue(4);
@@ -49,7 +49,7 @@ describe('Party component', () => {
         await user.type(screen.getByLabelText('Level'), '10');
         await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-        await user.click(screen.getByRole('button', { name: 'Submit' }));
+        await user.click(screen.getByRole('button', { name: 'Generate' }));
 
         // Assert
         expect(mockSaveData).not.toBeCalled();
@@ -67,7 +67,7 @@ describe('Party component', () => {
         await user.type(screen.getByLabelText('Level'), '18510');
         await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-        await user.click(screen.getByRole('button', { name: 'Submit' }));
+        await user.click(screen.getByRole('button', { name: 'Generate' }));
 
         // Assert
         expect(mockSaveData).not.toBeCalled();
@@ -84,7 +84,7 @@ describe('Party component', () => {
         await user.type(screen.getByLabelText('Number of characters'), '5');
         await user.type(screen.getByLabelText('Level'), '10');
 
-        await user.click(screen.getByRole('button', { name: 'Submit' }));
+        await user.click(screen.getByRole('button', { name: 'Generate' }));
 
         // Assert
         expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(false);
@@ -103,7 +103,7 @@ describe('Party component', () => {
         await user.type(screen.getByLabelText('Level'), '10');
         await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-        await user.click(screen.getByRole('button', { name: 'Submit' }));
+        await user.click(screen.getByRole('button', { name: 'Generate' }));
 
         expect(screen.getByLabelText('Number of characters')).toHaveValue(4);
         expect(screen.getByLabelText('Level')).toHaveValue(10);
@@ -114,7 +114,7 @@ describe('Party component', () => {
         await user.type(screen.getByLabelText('Level'), '[Backspace][Backspace]10');
         await userEvent.selectOptions(screen.getByLabelText('Difficulty'), 'Easy');
 
-        await user.click(screen.getByRole('button', { name: 'Submit' }));
+        await user.click(screen.getByRole('button', { name: 'Generate' }));
 
         // Assert
         expect(screen.getByLabelText('Number of characters')).toHaveValue(5);
