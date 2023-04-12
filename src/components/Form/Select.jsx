@@ -2,21 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function Input({ label, name, type, register, ...rest }) {
-    return (
-        <label className='flex flex-1 flex-col' htmlFor={name} aria-labelledby={name}>
-            {label}
-            <input
-                className='border-2 border-solid border-neutral-900 bg-orange-100 outline-none'
-                id={name}
-                type={type}
-                {...register(name, { ...rest })}
-            />
-        </label>
-    );
-}
-
-export function Select({ label, name, options, register, ...rest }) {
+function Select({ label, name, options, register, ...rest }) {
     return (
         <label className='flex flex-1 flex-col' htmlFor={name} aria-labelledby={name}>
             {label}
@@ -36,32 +22,19 @@ export function Select({ label, name, options, register, ...rest }) {
     );
 }
 
-Input.propTypes = {
-    label: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string,
-    register: PropTypes.func,
-    rest: PropTypes.object,
-};
-Input.defaultProps = {
-    label: '',
-    name: '',
-    type: '',
-    register: () => {},
-    rest: {},
-};
+export default Select;
 
 Select.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string,
-    options: PropTypes.array,
+    options: PropTypes.array.isRequired,
     register: PropTypes.func,
     rest: PropTypes.object,
 };
+
 Select.defaultProps = {
     label: '',
     name: '',
-    options: [],
     register: () => {},
     rest: {},
 };

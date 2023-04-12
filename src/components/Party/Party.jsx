@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import Difficulty from '../utils/difficulty';
-import { Input, Select } from './Form';
+import Difficulty from '../../utils/difficulty';
+import Input from '../Form/Input';
+import Select from '../Form/Select';
+import Button from '../Form/Button';
 
 function Party({ saveData }) {
     const {
@@ -94,11 +96,7 @@ function Party({ saveData }) {
                 />
             </div>
             <div className='flex flex-1 flex-col justify-center'>
-                <input
-                    className='rounded-lg border-2 border-solid border-orange-100 bg-red-950 p-2 text-orange-100 hover:bg-red-900 hover:text-orange-200 focus:outline-none focus:ring-2 focus:ring-red-900/50'
-                    name='partySubmit'
-                    type='submit'
-                />
+                <Button label='Generate' type='submit' name='generate' />
             </div>
         </form>
     );

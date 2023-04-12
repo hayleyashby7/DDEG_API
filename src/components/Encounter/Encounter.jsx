@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getMonstersFromAPI } from '../utils/API';
-import { isValidChallengeRating } from '../utils/challengeRating';
-import Table from './Table/Table';
+import { getMonstersFromAPI } from '../../utils/API';
+import { isValidChallengeRating } from '../../utils/challengeRating';
+import Table from '../Table/Table';
 
 function Encounter({ challengeRating }) {
     const [monsters, setMonsters] = useState([]);
