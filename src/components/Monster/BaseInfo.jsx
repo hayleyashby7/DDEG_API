@@ -12,11 +12,11 @@ function BaseInfo({ data }) {
             <hr />
             <p>
                 <span className='font-semibold'> Armor Class</span> {data.armor_class}
-                {data.armor_desc !== '' ?? <span> ({data.armor_desc})</span>}
+                {data.armor_desc !== '' && <span> ({data.armor_desc})</span>}
             </p>
             <p>
                 <span className='font-semibold'>Hit Points</span> {data.hit_points}
-                {data.hit_dice !== '' ?? <span> ({data.hit_dice})</span>}
+                {data.hit_dice !== '' && <span> ({data.hit_dice})</span>}
             </p>
             <p>
                 <span className='font-semibold'>Speed</span>

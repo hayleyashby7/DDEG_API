@@ -1,15 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Row from './Row';
 
 function Table({ headers, data }) {
-    const [columns, setColumns] = useState(0);
-
-    useEffect(() => {
-        setColumns(headers.length);
-    }, [headers]);
-
     return (
         <table>
             <thead>
@@ -21,7 +15,7 @@ function Table({ headers, data }) {
             </thead>
             <tbody>
                 {data.map((item) => (
-                    <Row key={item.slug} data={item} cols={columns} />
+                    <Row key={item.slug} data={item} cols={headers.length} />
                 ))}
             </tbody>
         </table>
