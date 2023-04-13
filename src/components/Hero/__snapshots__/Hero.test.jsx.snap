@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Hero component > renders the component 1`] = `
+<div>
+  <section
+    class="h-screen  bg-dragon bg-cover bg-right bg-no-repeat"
+  >
+    <div
+      class="h-screen   flex flex-col bg-neutral-900/50"
+    >
+      <header
+        class=" flex flex-none flex-col text-center"
+      >
+        <h1
+          class="font-['Goblin_One'] text-4xl lg:text-8xl"
+        >
+          DDEG
+        </h1>
+        <h2
+          class="font-['Alegreya_Sans_SC'] text-2xl"
+        >
+          Dungeons & Dragons Encounter Generator
+        </h2>
+      </header>
+      <div
+        class="flex flex-1 grow flex-col justify-evenly text-center"
+      >
+        <h2
+          class="font-['Alegreya_Sans_SC'] text-2xl lg:text-5xl"
+        >
+          Take the stress out of being a DM
+        </h2>
+        <p
+          class=" font-['Alegreya_Sans'] text-xl lg:text-3xl"
+        >
+          Generate an encounter customised to YOUR party
+        </p>
+        <span>
+          <button
+            class="rounded-lg border-2 border-solid border-orange-100 bg-red-950 p-2 font-['Alegreya_Sans'] text-orange-100 hover:bg-red-900 hover:text-orange-200 focus:outline-none focus:ring-2 focus:ring-red-900/50"
+            rest="[object Object]"
+            type="button"
+          >
+            Build Your Encounter
+          </button>
+        </span>
+      </div>
+    </div>
+  </section>
+</div>
+`;
