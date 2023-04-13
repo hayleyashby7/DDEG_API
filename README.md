@@ -1,4 +1,5 @@
-# 5e Encounter Generator
+# DDEG - Dungeons & Dragons Encounter Generator
+
 An encounter generator for Dungeons &amp; Dragons 5e.
 
 This encounter generator will allow you to enter a number of characters, their level and select a difficulty. It will then calculate the CR and Experience required and return a list of suggested monsters for the encounter. You can expand these monsters for full details of each one.
