@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
     content: {
         relative: true,
@@ -10,12 +8,8 @@ module.exports = {
     theme: {
         extend: {
             backgroundImage: {
-                dragon: "url('/src/assets/dragon.png')",
-            },
-            fontFamily: {
-                sans: ['Alegreya Sans', 'Alegreya Sans SC', ...defaultTheme.fontFamily.sans],
-                serif: ['Fraunces', 'Libre Baskerville', ...defaultTheme.fontFamily.serif],
-                cursive: ['Goblin One'],
+                dragon: "url('/src/assets/dragon.svg')",
+                paper: "url('/src/assets/paper.svg')",
             },
         },
     },
