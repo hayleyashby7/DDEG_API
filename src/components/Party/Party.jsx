@@ -74,7 +74,7 @@ function Party({ saveData }) {
                 />
                 <ErrorMessage
                     errors={errors}
-                    name='numCharacters'
+                    name='level'
                     render={({ message }) => <p>{message}</p>}
                 />
             </div>

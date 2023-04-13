@@ -35,6 +35,8 @@ describe('Party component', () => {
         expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(true);
 
         expect(mockSaveData).toBeCalled();
+        expect(screen.queryByText('Max 10', { selector: 'p' })).not.toBeInTheDocument();
+        expect(screen.queryByText('Max 20', { selector: 'p' })).not.toBeInTheDocument();
     });
 
     it('should not validate form with invalid number of characters', async () => {
@@ -53,6 +55,7 @@ describe('Party component', () => {
 
         // Assert
         expect(mockSaveData).not.toBeCalled();
+        expect(screen.getByText('Max 10', { selector: 'p' })).toBeInTheDocument();
     });
 
     it('should not validate form with invalid character level', async () => {
@@ -71,6 +74,7 @@ describe('Party component', () => {
 
         // Assert
         expect(mockSaveData).not.toBeCalled();
+        expect(screen.getByText('Max 20', { selector: 'p' })).toBeInTheDocument();
     });
 
     it('should not validate form with invalid difficulty', async () => {
@@ -89,6 +93,7 @@ describe('Party component', () => {
         // Assert
         expect(Difficulty.difficultyType(screen.getByLabelText('Difficulty').value)).toBe(false);
         expect(mockSaveData).not.toBeCalled();
+        expect(screen.getByText('Must select a difficulty', { selector: 'p' })).toBeInTheDocument();
     });
 
     it('should resubmit form if inputs are changed', async () => {
