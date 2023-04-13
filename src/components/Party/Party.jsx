@@ -29,7 +29,7 @@ function Party({ saveData }) {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col flex-wrap bg-stone-400 text-red-950 sm:flex-row '
+            className='flex flex-col flex-wrap bg-stone-400 text-red-950  lg:flex-row'
         >
             <div className='flex flex-1 flex-col'>
                 <Input
