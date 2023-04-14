@@ -4,15 +4,11 @@ import Hero from './components/Hero/Hero';
 import Encounter from './components/Encounter/Encounter';
 import Party from './components/Party/Party';
 import { calculateChallengeRating } from './utils/challengeRating';
+import PaperScroll from './components/PaperScroll/PaperScroll';
 
 function App() {
     const [challengeRating, setChallengeRating] = useState(null);
-    const [seeParty, setSeeParty] = useState(false);
     const [seeEncounter, setSeeEncounter] = useState(false);
-
-    const clickHero = () => {
-        setSeeParty(true);
-    };
 
     const submitData = (formData) => {
         setChallengeRating(
@@ -23,12 +19,20 @@ function App() {
 
     return (
         <div className='flex min-h-screen flex-col bg-neutral-900 text-orange-100'>
-            <Hero clickCB={clickHero} />
-            <main className='flex grow flex-col px-[10%]'>
-                <section>{seeParty && <Party saveData={submitData} />}</section>
-                <section>{seeEncounter && <Encounter challengeRating={challengeRating} />}</section>
-            </main>
-            <footer className='min-w-full shrink-0 bg-red-950 text-center text-xs text-orange-100'>
+            <Hero />
+            <PaperScroll
+                contents={
+                    <main className='flex grow flex-col px-[10%]'>
+                        <section>
+                            <Party saveData={submitData} />
+                        </section>
+                        <section>
+                            {seeEncounter && <Encounter challengeRating={challengeRating} />}
+                        </section>
+                    </main>
+                }
+            />
+            <footer className='min-w-full shrink-0 bg-red-950 pt-6 text-center text-xs text-orange-100'>
                 <p className='font-bold'>
                     DDEG - Dungeons & Dragons Encounter Generator &copy; Hayley Ashby 2023
                 </p>

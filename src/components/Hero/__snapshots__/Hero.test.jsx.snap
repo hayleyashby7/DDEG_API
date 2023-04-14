@@ -3,29 +3,33 @@
 exports[`Hero component > renders the component 1`] = `
 <div>
   <section
-    class="h-screen  bg-dragon bg-cover bg-top bg-no-repeat"
+    class="relative h-screen bg-dragon bg-cover bg-top bg-no-repeat"
+    data-testid="hero-main"
   >
     <div
-      class="h-screen   flex flex-col bg-neutral-900/50"
+      class="flex h-screen flex-col bg-neutral-900/50"
     >
       <header
-        class=" flex flex-none flex-col text-center "
+        class="sticky top-0 z-[999] flex flex-none flex-col py-5 text-center font-['MedievalSharp']"
       >
         <h1
-          class="font-['Goblin_One'] text-4xl lg:text-8xl"
+          class="text-4xl md:text-8xl"
         >
           DDEG
         </h1>
         <h2
-          class="font-['Alegreya_Sans_SC'] text-2xl"
+          class="text-lg md:text-2xl"
         >
           Dungeons & Dragons Encounter Generator
         </h2>
       </header>
       <div
-        class="flex flex-1 grow flex-col justify-evenly text-center"
+        class="flex flex-1 flex-col justify-evenly text-center"
+        data-testid="hero-content"
       >
-        <div>
+        <div
+          class="relative flex-col bg-orange-100 bg-[size:150%] text-red-950 before:absolute before:bottom-full before:left-0 before:h-5 before:w-full before:rotate-180 before:bg-paper before:bg-bottom after:absolute after:left-0 after:top-full after:h-5 after:w-full after:bg-paper after:bg-bottom"
+        >
           <h2
             class="font-['Alegreya_Sans_SC'] text-2xl lg:text-5xl"
           >
@@ -38,13 +42,7 @@ exports[`Hero component > renders the component 1`] = `
           </p>
         </div>
         <span>
-          <button
-            class="rounded-lg border-2 border-solid border-orange-100 bg-red-950 p-2 font-['Alegreya_Sans'] text-orange-100 hover:bg-red-900 hover:text-orange-200 focus:outline-none focus:ring-2 focus:ring-red-900/50"
-            rest="[object Object]"
-            type="button"
-          >
-            Build Your Encounter
-          </button>
+          Build Your Encounter
         </span>
       </div>
     </div>
