@@ -25,7 +25,9 @@ exports[`Hero component > renders the component 1`] = `
       <div
         class="flex flex-1 grow flex-col justify-evenly text-center"
       >
-        <div>
+        <div
+          class="relative flex-col bg-orange-100 bg-[size:150%] text-red-950 before:absolute before:bottom-full before:left-0 before:h-5 before:w-full before:rotate-180 before:bg-paper before:bg-bottom after:absolute after:left-0 after:top-full after:h-5 after:w-full after:bg-paper after:bg-bottom"
+        >
           <h2
             class="font-['Alegreya_Sans_SC'] text-2xl lg:text-5xl"
           >
