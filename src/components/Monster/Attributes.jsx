@@ -1,12 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { formatString } from '../../utils/dataUtils';
 
 function Attributes({ data }) {
-    const [hasSavingThrows, setHasSavingThrows] = useState(true);
-
-    useEffect(() => {
+    const checkSaves = () => {
         if (
             data.strength_save == null &&
             data.dexterity_save == null &&
@@ -15,9 +13,12 @@ function Attributes({ data }) {
             data.wisdom_save == null &&
             data.charisma_save == null
         ) {
-            setHasSavingThrows(false);
+            return false;
         }
-    }, [data]);
+        return true;
+    };
+
+    const hasSavingThrows = checkSaves();
 
     return (
         <section id='attributes'>
