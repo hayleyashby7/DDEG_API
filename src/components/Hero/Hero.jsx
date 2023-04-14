@@ -23,11 +23,9 @@ function Hero({ clickCB }) {
                     isMinimised ? 'h-[20vh]' : 'h-screen '
                 }  flex flex-col bg-neutral-900/50`}
             >
-                <header className=' flex flex-none flex-col text-center '>
-                    <h1 className="font-['Goblin_One'] text-4xl lg:text-8xl">DDEG</h1>
-                    <h2 className="font-['Alegreya_Sans_SC'] text-2xl">
-                        Dungeons & Dragons Encounter Generator
-                    </h2>
+                <header className="flex flex-none flex-col text-center font-['MedievalSharp']">
+                    <h1 className='text-4xl md:text-8xl'>DDEG</h1>
+                    <h2 className='text-lg md:text-2xl'>Dungeons & Dragons Encounter Generator</h2>
                 </header>
 
                 {!isMinimised && (
