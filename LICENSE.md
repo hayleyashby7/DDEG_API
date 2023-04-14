@@ -23,6 +23,9 @@ SOFTWARE.
 
 <hr>
 
-This software makes no claims of license of either Open5e nor to SRD or OGL content provided by Open5e.
+This software makes no claims of license of either Open5e nor to SRD or OGL content provided by Open5e. (https://open5e.com/)
 
 This software is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
+
+Ripped effect SVG Copyright (c) 2023 by Chris Coyier  (https://codepen.io/chriscoyier/pen/oNdPBL)
+
