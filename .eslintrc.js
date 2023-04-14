@@ -10,6 +10,7 @@ module.exports = {
         'plugin:vitest/recommended',
         'plugin:prettier/recommended',
         'plugin:tailwindcss/recommended',
+        'plugin:json/recommended',
     ],
     parserOptions: {
         ecmaFeatures: {
