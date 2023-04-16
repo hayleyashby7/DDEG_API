@@ -10,7 +10,7 @@ exports[`Hero component > renders the component 1`] = `
       class="flex h-screen flex-col bg-neutral-900/50"
     >
       <header
-        class="sticky top-0 z-[999] flex flex-none flex-col py-5 text-center font-['MedievalSharp']"
+        class="fixed top-0 z-[999] flex w-screen flex-none flex-col py-5 text-center font-['MedievalSharp'] transition-colors duration-500"
       >
         <h1
           class="text-4xl md:text-8xl"
@@ -25,7 +25,6 @@ exports[`Hero component > renders the component 1`] = `
       </header>
       <div
         class="flex flex-1 flex-col justify-evenly text-center"
-        data-testid="hero-content"
       >
         <div
           class="relative flex-col bg-orange-100 bg-[size:150%] text-red-950 before:absolute before:bottom-full before:left-0 before:h-5 before:w-full before:rotate-180 before:bg-paper before:bg-bottom after:absolute after:left-0 after:top-full after:h-5 after:w-full after:bg-paper after:bg-bottom"

@@ -8,7 +8,7 @@ exports[`Select component > renders the select 1`] = `
     for=""
   >
     <select
-      class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+      class="form-select solid rounded  border-2 border-neutral-900 bg-orange-100 px-2 py-1 outline-none"
       id=""
     >
       <option
