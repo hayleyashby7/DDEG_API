@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -7,7 +8,7 @@ function Select({ label, name, options, register, ...rest }) {
         <label className='flex flex-1 flex-col' htmlFor={name} aria-labelledby={name}>
             {label}
             <select
-                className='border-2 border-solid border-neutral-900 bg-orange-100 outline-none'
+                className='form-select solid rounded  border-2 border-neutral-900 bg-orange-100 px-2 py-1 outline-none'
                 id={name}
                 defaultValue={options[0].value}
                 {...register(name, { ...rest })}

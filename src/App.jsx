@@ -22,7 +22,10 @@ function App() {
             <Hero />
             <PaperScroll
                 contents={
-                    <main className='flex grow flex-col px-[10%]'>
+                    <main
+                        className='flex grow flex-col
+                     px-[10%] py-5 lg:h-screen'
+                    >
                         <section>
                             <Party saveData={submitData} />
                         </section>

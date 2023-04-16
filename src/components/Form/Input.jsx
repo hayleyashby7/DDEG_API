@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +9,7 @@ function Input({ label, name, type, register, ...rest }) {
             {label}
             <input
                 onChange={rest.onChange}
-                className='border-2 border-solid border-neutral-900 bg-orange-100 outline-none'
+                className='form-input solid rounded  border-2 border-neutral-900 bg-orange-100 px-2 py-1 outline-none'
                 id={name}
                 type={type}
                 {...register(name, { ...rest })}
