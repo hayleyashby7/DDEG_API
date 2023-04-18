@@ -41,10 +41,20 @@ function Encounter({ challengeRating }) {
 
     return (
         <div className='bg-neutral-900 text-orange-100'>
-            <h1>List of Monsters</h1>
             {error && <div>{message}</div>}{' '}
             {monsters ? (
-                <Table headers={['Name', 'CR', 'Type', 'Size', 'Alignment', '']} data={monsters} />
+                <Table
+                    headers={[
+                        { name: 'Name', data: 'name', important: true },
+                        { name: 'CR', data: 'challenge_rating', important: true },
+                        { name: 'Type', data: 'type', important: false },
+                        { name: 'Size', data: 'size', important: false },
+                        { name: 'Alignment', data: 'alignment', important: false },
+                        { name: '', data: null, important: true },
+                    ]}
+                    data={monsters}
+                    className=''
+                />
             ) : (
                 <p>{message}</p>
             )}{' '}
