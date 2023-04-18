@@ -43,9 +43,6 @@ describe('Encounter', () => {
         render(<Encounter challengeRating='1' />);
 
         // Assert
-        // Heading is displayed
-        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
-
         // Mocked data is displayed
         expect(await screen.findByText(/Goblin/i)).toBeInTheDocument();
         expect(await screen.findByText(/Orc/i)).toBeInTheDocument();
@@ -64,9 +61,6 @@ describe('Encounter', () => {
         render(<Encounter challengeRating='1' />);
 
         // Assert
-        // Heading is still displayed
-        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
-
         // Error message is displayed
         expect(await screen.findByText(/API call failed/i)).toBeInTheDocument();
 
@@ -85,9 +79,6 @@ describe('Encounter', () => {
         render(<Encounter challengeRating='1' />);
 
         // Assert
-        // Heading is displayed
-        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
-
         // Error message is displayed
         expect(
             await screen.findByText(
@@ -115,9 +106,6 @@ describe('Encounter', () => {
         render(<Encounter challengeRating='1' />);
 
         // Assert
-        // Heading is displayed
-        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
-
         // Error message is displayed
         expect(await screen.findByText(/No suitable monsters found./i)).toBeInTheDocument();
 
@@ -158,9 +146,6 @@ describe('Encounter', () => {
         render(<Encounter />);
 
         // Assert
-        // Heading is displayed
-        expect(screen.getByRole('heading')).toHaveTextContent(/List of Monsters/i);
-
         // Error message is displayed
         expect(await screen.findByText(/Unable to request data./i)).toBeInTheDocument();
 

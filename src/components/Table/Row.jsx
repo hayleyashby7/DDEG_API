@@ -15,13 +15,13 @@ function Row({ data, cols }) {
     return (
         <>
             <tr>
-                <td>{data.name}</td>
-                <td>{data.challenge_rating}</td>
-                <td>{data.type}</td>
-                <td>{data.size}</td>
-                <td>{data.alignment}</td>
+                <td className='table-cell'>{data.name}</td>
+                <td className='table-cell'>{data.challenge_rating}</td>
+                <td className='hidden md:table-cell'>{data.type}</td>
+                <td className='hidden md:table-cell'>{data.size}</td>
+                <td className='hidden md:table-cell'>{data.alignment}</td>
                 <td>
-                    <div>
+                    <div className='table-cell '>
                         <FontAwesomeIcon
                             icon={isExpanded ? faMinus : faPlus}
                             onClick={handleExpand}

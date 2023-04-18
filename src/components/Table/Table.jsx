@@ -2,14 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Row from './Row';
+import Header from './Header';
 
 function Table({ headers, data }) {
     return (
-        <table>
+        <table className='table w-full border-separate text-left'>
             <thead>
                 <tr>
                     {headers.map((header) => (
-                        <th key={header}>{header}</th>
+                        <Header key={header.name} header={header} />
                     ))}
                 </tr>
             </thead>

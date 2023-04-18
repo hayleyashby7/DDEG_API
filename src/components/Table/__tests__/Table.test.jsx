@@ -5,7 +5,14 @@ import Table from '../Table';
 
 vi.mock('../Row');
 
-const headers = ['Name', 'Challenge Rating', 'Type', 'Size', 'Alignment'];
+const headers = [
+    { name: 'Name', data: 'name', important: true },
+    { name: 'Challenge Rating', data: 'challenge_rating', important: true },
+    { name: 'Type', data: 'type', important: false },
+    { name: 'Size', data: 'size', important: false },
+    { name: 'Alignment', data: 'alignment', important: false },
+    { name: '', data: null, important: true },
+];
 
 describe('Table', () => {
     beforeEach(() => {

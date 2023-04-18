@@ -2,24 +2,39 @@
 
 exports[`Table > should render the component 1`] = `
 <div>
-  <table>
+  <table
+    class="table w-full border-separate text-left"
+  >
     <thead>
       <tr>
-        <th>
+        <th
+          class="table-cell"
+        >
           Name
         </th>
-        <th>
+        <th
+          class="table-cell"
+        >
           Challenge Rating
         </th>
-        <th>
+        <th
+          class="hidden md:table-cell"
+        >
           Type
         </th>
-        <th>
+        <th
+          class="hidden md:table-cell"
+        >
           Size
         </th>
-        <th>
+        <th
+          class="hidden md:table-cell"
+        >
           Alignment
         </th>
+        <th
+          class="table-cell"
+        />
       </tr>
     </thead>
     <tbody>
