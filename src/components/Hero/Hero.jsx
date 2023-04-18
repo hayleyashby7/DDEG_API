@@ -32,7 +32,7 @@ function Hero() {
             <div className='flex h-screen flex-col bg-neutral-900/50'>
                 <header
                     ref={heroHeader}
-                    className="sticky top-0 z-[999] flex flex-none flex-col py-5 text-center font-['MedievalSharp']"
+                    className="fixed top-0 z-[999] flex w-screen flex-none flex-col py-5 text-center font-['MedievalSharp'] transition-colors duration-500"
                 >
                     <h1 className='text-4xl md:text-8xl'>DDEG</h1>
                     <h2 className='text-lg md:text-2xl'>Dungeons & Dragons Encounter Generator</h2>

@@ -8,7 +8,7 @@ exports[`Input component > renders the input 1`] = `
     for=""
   >
     <input
-      class="border-2 border-solid border-neutral-900 bg-orange-100 outline-none"
+      class="form-input solid rounded  border-2 border-neutral-900 bg-orange-100 px-2 py-1 outline-none"
       id=""
       type=""
     />

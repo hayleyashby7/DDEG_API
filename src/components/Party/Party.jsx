@@ -29,7 +29,7 @@ function Party({ saveData }) {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col flex-wrap bg-stone-400 text-red-950  lg:flex-row'
+            className='my-5 flex flex-col flex-wrap justify-end gap-4 rounded bg-stone-400/50 p-5 text-red-950 lg:flex-row lg:justify-between'
         >
             <div className='flex flex-1 flex-col'>
                 <Input
@@ -95,7 +95,7 @@ function Party({ saveData }) {
                     render={({ message }) => <p>{message}</p>}
                 />
             </div>
-            <div className='flex flex-1 flex-col justify-center'>
+            <div className='flex flex-1 flex-col justify-end'>
                 <Button label='Generate' type='submit' name='generate' />
             </div>
         </form>
