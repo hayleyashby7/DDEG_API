@@ -1,7 +1,8 @@
 {
-    "name": "5e-encounter-generator",
+    "name": "ddeg_client",
     "version": "0.1.0",
-    "homepage": "https://hayleyashby7.github.io/5eEncounterGenerator",
+    "description": "DDEG - Dungeons & Dragons Encounter Generator for D&D 5e",
+    "homepage": "https://hayleyashby7.github.io/DDEG",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.0",
