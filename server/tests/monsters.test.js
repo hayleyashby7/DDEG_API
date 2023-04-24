@@ -25,3 +25,12 @@ describe('GET /api/monsters', () => {
         expect(response.body).toHaveProperty('success', true);
     });
 });
+
+// Test GET /monsters/:challengeRating
+describe('GET /api/monsters/:challengeRating', () => {
+    it('should return 200 OK', async () => {
+        const response = await request(app).get('/api/monsters/0');
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty('success', true);
+    });
+});
