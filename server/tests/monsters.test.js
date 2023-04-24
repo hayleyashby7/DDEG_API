@@ -27,7 +27,7 @@ describe('GET /api/monsters', () => {
 });
 
 // Test GET /monsters/:challengeRating
-describe('GET /api/monsters/:challengeRating', () => {
+describe('GET /api/monsters/:challenge-rating', () => {
     it('should return 200 OK', async () => {
         const response = await request(app).get('/api/monsters/0');
         expect(response.statusCode).toBe(200);
