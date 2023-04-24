@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "Backend for DDEG - Dungeons & Dragons Encounter Generator",
     "main": "app.js",
-    "type": "module",
     "scripts": {
         "start": "cross-env NODE_ENV=production node app",
         "dev": "cross-env NODE_ENV=development nodemon app",
@@ -24,6 +23,7 @@
         "babel-jest": "^29.5.0",
         "cross-env": "^7.0.3",
         "eslint": "^8.39.0",
+        "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-prettier": "^4.2.1",
         "nodemon": "^2.0.22",
