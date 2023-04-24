@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
+import morgan from 'morgan';
 
 // Load environment variables
 config({ path: './config/config.env' });
@@ -11,10 +12,20 @@ const app = express();
 // Set CORS
 app.use(cors());
 
-// Set PORT
-const PORT = process.env.PORT || 5000;
+// Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Listen to PORT
-app.listen(PORT, () =>
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`),
-);
+// Developer logging
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
+app.get('/api/monsters', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Show all monsters',
+    });
+});
+
+export default app;
