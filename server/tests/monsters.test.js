@@ -1,10 +1,8 @@
 import { beforeEach, afterEach, describe, it, expect } from '@jest/globals';
 import mongoose from 'mongoose';
-import supertest from 'supertest';
+import request from 'supertest';
 import { config } from 'dotenv';
 import app from '../app';
-
-const requestWithSuperTest = supertest(app);
 
 // Load environment variables
 config({ path: './config/config.env' });
@@ -22,8 +20,8 @@ afterEach(async () => {
 // Test GET /monsters
 describe('GET /api/monsters', () => {
     it('should return 200 OK', async () => {
-        const res = await requestWithSuperTest.get('/api/monsters');
-        expect(res.status).toEqual(200);
-        expect(res.body).toHaveProperty('success', true);
+        const response = await request(app).get('/api/monsters');
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty('success', true);
     });
 });
