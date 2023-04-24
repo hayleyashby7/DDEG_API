@@ -2,11 +2,11 @@
     "name": "ddeg_server",
     "version": "1.0.0",
     "description": "Backend for DDEG - Dungeons & Dragons Encounter Generator",
-    "main": "app.js",
+    "main": "server.js",
     "type": "module",
     "scripts": {
-        "start": "cross-env NODE_ENV=production node app",
-        "dev": "cross-env NODE_ENV=development nodemon app",
+        "start": "cross-env NODE_ENV=production node server",
+        "dev": "cross-env NODE_ENV=development nodemon server",
         "test": "cross-env NODE_ENV=test jest --testTimeout=5000"
     },
     "author": "Hayley Ashby",
