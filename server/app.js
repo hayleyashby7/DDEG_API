@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import morgan from 'morgan';
+import router from './routes/monsters.js';
 
 // Load environment variables
 config({ path: './config/config.env' });
@@ -21,11 +22,7 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
-app.get('/api/monsters', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Show all monsters',
-    });
-});
+// Routes
+app.use('/api/monsters', router);
 
 export default app;
