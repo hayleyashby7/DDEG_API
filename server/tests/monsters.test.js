@@ -1,7 +1,13 @@
+import { beforeEach, afterEach, describe, it, expect } from '@jest/globals';
 import mongoose from 'mongoose';
-import app from '../app';
 import supertest from 'supertest';
+import { config } from 'dotenv';
+import app from '../app';
+
 const requestWithSuperTest = supertest(app);
+
+// Load environment variables
+config({ path: './config/config.env' });
 
 // Connect to DB before tests
 beforeEach(async () => {
