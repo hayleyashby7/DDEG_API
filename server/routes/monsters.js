@@ -1,12 +1,8 @@
 import express from 'express';
+import getMonsters from '../controllers/monstersController';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Show all monsters',
-    });
-});
+router.get('/', getMonsters);
 
 export default router;
