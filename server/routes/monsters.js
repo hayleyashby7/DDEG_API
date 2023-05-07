@@ -1,8 +1,8 @@
 import express from 'express';
-import getMonsters from '../controllers/monstersController';
+import monsters from '../controllers/monsters.js';
 
 const router = express.Router();
 
-router.get('/', getMonsters);
+router.get('/monsters', monsters.getAll);
 
 export default router;
