@@ -5,7 +5,7 @@ An encounter generator for Dungeons &amp; Dragons 5e.
 
 This encounter generator will allow you to enter a number of characters, their level and select a difficulty. It will then calculate the CR and Experience required and return a list of suggested monsters for the encounter. You can expand these monsters for full details of each one.
 
-Monster stats are supplied via [Open5e API](https://open5e.com/) under the Open Gaming License Version 1.0a
+Monster stats were initially sourced from [Open5e API](https://open5e.com/) under the Open Gaming License Version 1.0a
 <hr />
 Created using
 <br />
