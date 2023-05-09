@@ -29,6 +29,7 @@ export default db.define(
         },
         armor_class: { type: DataTypes.INTEGER, allowNull: false },
         armor_desc: { type: DataTypes.STRING, allowNull: false },
+        challenge_rating: { type: DataTypes.DOUBLE, allowNull: false },
         hit_points: { type: DataTypes.INTEGER, allowNull: false },
         hit_dice: { type: DataTypes.STRING, allowNull: false },
         speed_id: {
