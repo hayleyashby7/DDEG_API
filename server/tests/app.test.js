@@ -67,7 +67,6 @@ describe('GET /monsters', () => {
             expect(response.body[0].challenge_rating).toBeDefined();
             expect(response.body[0].hit_points).toBeDefined();
             expect(response.body[0].hit_dice).toBeDefined();
-            expect(response.body[0].speed_id).toBeDefined();
         });
     });
 
@@ -100,7 +99,6 @@ describe('GET /monsters', () => {
             expect(response.body[0].challenge_rating).toBeDefined();
             expect(response.body[0].hit_points).toBeDefined();
             expect(response.body[0].hit_dice).toBeDefined();
-            expect(response.body[0].speed_id).toBeDefined();
         });
     });
 });

@@ -32,11 +32,6 @@ export default db.define(
         challenge_rating: { type: DataTypes.DOUBLE, allowNull: false },
         hit_points: { type: DataTypes.INTEGER, allowNull: false },
         hit_dice: { type: DataTypes.STRING, allowNull: false },
-        speed_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: { model: 'speed', key: 'id' },
-        },
     },
     {
         sequelize: db,
