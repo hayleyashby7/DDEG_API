@@ -35,7 +35,7 @@ afterAll(async () => {
 describe('GET /monsters', () => {
     describe('given the challenge rating', () => {
         test('should return with a 200 status code', async () => {
-            const response = await supertest(app).get('/monsters?challengeRating=1');
+            const response = await supertest(app).get('/monsters?challengeRating=30');
             expect(response.statusCode).toBe(200);
         });
 
@@ -45,8 +45,11 @@ describe('GET /monsters', () => {
         });
 
         test('should get the monsters with the given challenge rating', async () => {
-            const response = await supertest(app).get('/monsters?challengeRating=1');
-            expect(response.body[0].challenge_rating).toEqual(1);
+            const challengeRating = 13;
+            const response = await supertest(app).get(
+                `/monsters?challengeRating=${challengeRating}`,
+            );
+            expect(response.body[0].challenge_rating).toEqual(challengeRating);
         });
 
         test('should respond with a json object that contains an array of monsters', async () => {
@@ -57,10 +60,11 @@ describe('GET /monsters', () => {
 
         test('should respond with a json object that contains an array of monsters with the correct properties', async () => {
             const response = await supertest(app).get('/monsters?challengeRating=1');
+            console.log(response.body[0]);
             expect(response.body[0].id).toBeDefined();
             expect(response.body[0].name).toBeDefined();
-            expect(response.body[0].size_id).toBeDefined();
-            expect(response.body[0].type_id).toBeDefined();
+            expect(response.body[0].sizeId).toBeDefined();
+            expect(response.body[0].typeId).toBeDefined();
             expect(response.body[0].alignment).toBeDefined();
             expect(response.body[0].armor_class).toBeDefined();
             expect(response.body[0].armor_desc).toBeDefined();
@@ -89,10 +93,11 @@ describe('GET /monsters', () => {
 
         test('should respond with a json object that contains an array of monsters with the correct properties', async () => {
             const response = await supertest(app).get('/monsters');
+            console.log(response.body[0]);
             expect(response.body[0].id).toBeDefined();
             expect(response.body[0].name).toBeDefined();
-            expect(response.body[0].size_id).toBeDefined();
-            expect(response.body[0].type_id).toBeDefined();
+            expect(response.body[0].sizeId).toBeDefined();
+            expect(response.body[0].typeId).toBeDefined();
             expect(response.body[0].alignment).toBeDefined();
             expect(response.body[0].armor_class).toBeDefined();
             expect(response.body[0].armor_desc).toBeDefined();
