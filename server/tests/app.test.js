@@ -60,7 +60,6 @@ describe('GET /monsters', () => {
 
         test('should respond with a json object that contains an array of monsters with the correct properties', async () => {
             const response = await supertest(app).get('/monsters?challengeRating=1');
-            console.log(response.body[0]);
             expect(response.body[0].id).toBeDefined();
             expect(response.body[0].name).toBeDefined();
             expect(response.body[0].sizeId).toBeDefined();
@@ -93,7 +92,6 @@ describe('GET /monsters', () => {
 
         test('should respond with a json object that contains an array of monsters with the correct properties', async () => {
             const response = await supertest(app).get('/monsters');
-            console.log(response.body[0]);
             expect(response.body[0].id).toBeDefined();
             expect(response.body[0].name).toBeDefined();
             expect(response.body[0].sizeId).toBeDefined();

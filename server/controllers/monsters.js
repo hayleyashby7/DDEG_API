@@ -1,5 +1,6 @@
 import Monster from '../models/Monster';
 import Size from '../models/Size';
+import Type from '../models/Type';
 
 export default {
     get: async (req, res, next) => {
@@ -10,7 +11,6 @@ export default {
                     where: {
                         challenge_rating: req.query.challengeRating,
                     },
-                    include: [Size],
                 });
                 return res.status(200).json(monsters);
             } else {
