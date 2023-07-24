@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { DataTypes } from 'sequelize';
 
 import db from '../services/db.js';
 
@@ -12,30 +12,33 @@ export default db.define(
             autoIncrement: true,
         },
         name: { type: DataTypes.STRING, allowNull: false },
-        size_id: {
+        sizeId: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: { model: 'size', key: 'id' },
+            field: 'size_id',
+            references: {
+                model: 'sizes',
+                key: 'id',
+            },
         },
-        type_id: {
+        typeId: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: { model: 'type', key: 'id' },
+            field: 'type_id',
+            references: {
+                model: 'types',
+                key: 'id',
+            },
         },
         alignment: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: { model: 'alignment', key: 'id' },
         },
         armor_class: { type: DataTypes.INTEGER, allowNull: false },
         armor_desc: { type: DataTypes.STRING, allowNull: false },
+        challenge_rating: { type: DataTypes.DOUBLE, allowNull: false },
         hit_points: { type: DataTypes.INTEGER, allowNull: false },
         hit_dice: { type: DataTypes.STRING, allowNull: false },
-        speed_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: { model: 'speed', key: 'id' },
-        },
     },
     {
         sequelize: db,
