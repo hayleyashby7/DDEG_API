@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 const connect = async () => {
     console.log('Connecting to database...');
     try {
-        await db.authenticate();
+        await db;
         console.log('Connection to database has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);

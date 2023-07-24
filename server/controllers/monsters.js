@@ -1,21 +1,23 @@
-import Monster from '../models/Monster';
-import Size from '../models/Size';
-import Type from '../models/Type';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 export default {
     get: async (req, res, next) => {
         try {
-            // Find by Challenge Rating
             if (req.query.challengeRating) {
-                const monsters = await Monster.findAll({
+                const monsters = await prisma.monsters.findMany({
                     where: {
-                        challenge_rating: req.query.challengeRating,
+                        challenge_rating: parseFloat(req.query.challengeRating),
+                    },
+                    include: {
+                        types: true,
+                        sizes: true,
                     },
                 });
                 return res.status(200).json(monsters);
             } else {
                 // Return all monsters
-                const monsters = await Monster.findAll();
+                const monsters = await prisma.monsters.findMany();
                 return res.status(200).json(monsters);
             }
         } catch (error) {

@@ -1,9 +1,9 @@
-import { Sequelize } from 'sequelize';
+import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 
 // Load environment variables
 config({ path: './config/config.env' });
 
-export default new Sequelize(process.env.DB_URI, {
-    logging: false,
-});
+const db = createClient(process.env.DB_URL, process.env.DB_KEY);
+
+export default db;
