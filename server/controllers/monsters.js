@@ -10,8 +10,8 @@ export default {
                         challenge_rating: parseFloat(req.query.challengeRating),
                     },
                     include: {
-                        types: true,
-                        sizes: true,
+                        types: { select: { type: true } },
+                        sizes: { select: { size: true } },
                     },
                 });
                 return res.status(200).json(monsters);
