@@ -12,6 +12,9 @@ export default {
                     include: {
                         types: { select: { type: true } },
                         sizes: { select: { size: true } },
+                        monsters_senses: {
+                            select: { senses: { select: { sense: true } }, value: true },
+                        },
                     },
                 });
                 return res.status(200).json(monsters);
