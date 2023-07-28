@@ -15,6 +15,7 @@ export default {
                         monsters_senses: {
                             select: { senses: { select: { sense: true } }, value: true },
                         },
+                        monster_stats: true,
                     },
                 });
                 return res.status(200).json(monsters);

@@ -19,6 +19,7 @@ model monsters {
   challenge_rating Float
   hit_points       Int
   hit_dice         String
+  monster_stats    monster_stats[]
   sizes            sizes             @relation(fields: [size_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   types            types             @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   monsters_senses  monsters_senses[]
@@ -54,4 +55,24 @@ model senses {
   id              Int               @id
   sense           String
   monsters_senses monsters_senses[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model monster_stats {
+  stat_id      Int
+  monster_id   Int
+  score        Int
+  modifier     Int
+  saving_throw Int?
+  monsters     monsters @relation(fields: [monster_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  stats        stats    @relation(fields: [stat_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([stat_id, monster_id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model stats {
+  id            Int             @id @default(autoincrement())
+  stat          String
+  monster_stats monster_stats[]
 }
