@@ -52,7 +52,7 @@ export const monstersService = {
 
     getAllMonsters: async () => {
         try {
-            return await db.monsters.findAll({ include: monster_structure });
+            return await db.monsters.findMany({ include: monster_structure });
         } catch (error) {
             throw error;
         }
