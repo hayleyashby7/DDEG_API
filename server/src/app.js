@@ -1,12 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import router from './routes/monsters.js';
+import { router } from './routes/monsters.js';
 import { config } from 'dotenv';
 
-
 // Load environment variables
-config({ path: './config/config.env' });
+config({ path: '.env' });
 
 // Initialise express
 const app = express();
@@ -24,6 +23,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
-app.get('/monsters', router);
+app.get('/', (req, res) => {
+    res.status(200).json({ message: `DDEG API` });
+});
+
+app.use('/api', router);
 
 export default app;

@@ -1,9 +1,9 @@
 import app from './app.js';
 import { config } from 'dotenv';
-import db from './services/db.js';
+import db from './database/db.js';
 
 // Load environment variables
-config({ path: './config/config.env' });
+config({ path: '.env' });
 
 // Set PORT
 const PORT = process.env.PORT || 5000;
@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 const connect = async () => {
     console.log('Connecting to database...');
     try {
-        await db;
+        await db.$connect();
         console.log('Connection to database has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
