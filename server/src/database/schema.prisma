@@ -22,7 +22,6 @@ model monsters {
   sizes            sizes             @relation(fields: [size_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   types            types             @relation(fields: [type_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   actions          actions[]
-  legendary_actions legendary_actions[]
   monsters_senses  monsters_senses[]
   monster_languages monster_languages[]
   monster_skills   monster_skills[]
@@ -51,16 +50,7 @@ model actions {
   damage_bonus Int?
   legendary Boolean?
   monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  legendary_actions legendary_actions @relation(fields: [id], references: [id], onDelete: Restrict, onUpdate: Restrict)
  
-}
-
-model legendary_actions {
-  id          Int     @id @default(autoincrement())
-  monster_id  Int
-  desc        String
-  actions   actions[]
-  monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)  
 }
 
 model monsters_senses {
