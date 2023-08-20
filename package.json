@@ -5,8 +5,8 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
-        "start": "cross-env node ./src/server",
-        "dev": "cross-env nodemon ./src/server",
+        "start": "node ./src/server",
+        "dev": "nodemon ./src/server",
         "test": "jest --verbose",
         "lint": "eslint src/**/*.js --fix"
     },
@@ -28,7 +28,6 @@
     "devDependencies": {
         "@babel/preset-env": "^7.21.4",
         "babel-jest": "^29.5.0",
-        "cross-env": "^7.0.3",
         "eslint": "^8.39.0",
         "nodemon": "^2.0.22",
         "prettier": "^2.8.8",
