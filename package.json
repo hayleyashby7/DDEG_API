@@ -5,6 +5,7 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
+        "build": "prisma generate --schema=./src/database/schema.prisma && node ./src/server",
         "start": "node ./src/server",
         "dev": "nodemon ./src/server",
         "test": "jest --verbose",
