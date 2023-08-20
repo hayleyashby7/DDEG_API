@@ -1,8 +1,10 @@
 import app from '../app';
 import supertest from 'supertest';
 import monstersService from '../services/monsters';
+import { authenticateUser } from '../middleware/auth';
 
 jest.mock('../services/monsters');
+jest.mock('../middleware/auth');
 
 beforeAll(async () => {
     jest.resetAllMocks();
@@ -45,6 +47,7 @@ describe('GET /api/monsters', () => {
         test('should return with a 200 status code', async () => {
             // Arrange
             monstersService.getByChallengeRating.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get('/api/monsters?challengeRating=10');
@@ -56,6 +59,7 @@ describe('GET /api/monsters', () => {
         test('should specify JSON in the content type header', async () => {
             // Arrange
             monstersService.getByChallengeRating.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get('/api/monsters?challengeRating=10');
@@ -68,6 +72,7 @@ describe('GET /api/monsters', () => {
             // Arrange
             const challengeRating = 10;
             monstersService.getByChallengeRating.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get(
@@ -81,6 +86,7 @@ describe('GET /api/monsters', () => {
         test('should respond with a json object that contains an array of monsters', async () => {
             // Arrange
             monstersService.getByChallengeRating.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get('/api/monsters?challengeRating=10');
@@ -95,6 +101,7 @@ describe('GET /api/monsters', () => {
         test('should return with a 200 status code', async () => {
             // Arrange
             monstersService.getAllMonsters.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get('/api/monsters');
@@ -106,6 +113,7 @@ describe('GET /api/monsters', () => {
         test('should specify JSON in the content type header', async () => {
             // Arrange
             monstersService.getAllMonsters.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get('/api/monsters');
@@ -116,6 +124,7 @@ describe('GET /api/monsters', () => {
         test('should respond with a json object that contains an array of monsters', async () => {
             // Arrange
             monstersService.getAllMonsters.mockResolvedValueOnce(mockMonsters);
+            authenticateUser.mockImplementation((req, res, next) => next());
 
             //Act
             const response = await supertest(app).get(`/api/monsters`);
