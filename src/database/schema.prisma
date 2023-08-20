@@ -22,8 +22,9 @@ model monsters {
   sizes            sizes             @relation(fields: [size_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   types            types             @relation(fields: [type_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   actions          actions[]
-  monsters_senses  monsters_senses[]
+  monster_senses  monster_senses[]
   monster_languages monster_languages[]
+  language_desc    String?
   monster_skills   monster_skills[]
   monster_speeds   monster_speeds[]
 }
@@ -53,7 +54,7 @@ model actions {
  
 }
 
-model monsters_senses {
+model monster_senses {
   sense_id   Int
   monster_id Int
   value      String
@@ -66,7 +67,7 @@ model monsters_senses {
 model senses {
   id              Int               @id
   sense           String
-  monsters_senses monsters_senses[]
+  monsters_senses monster_senses[]
 }
 
 model monster_stats {
@@ -90,6 +91,8 @@ model stats {
 model monster_languages {
   monster_id  Int
   language_id Int
+  range       String?
+  misc        String?
   monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   languages   languages @relation(fields: [language_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
@@ -133,4 +136,3 @@ model speeds {
   name        String
   monster_speeds monster_speeds[]
 }
-
