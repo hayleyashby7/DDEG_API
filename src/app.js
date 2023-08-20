@@ -1,8 +1,8 @@
+import { config } from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { router } from './routes/monsters.js';
-import { config } from 'dotenv';
 
 // Load environment variables
 config({ path: '.env' });
