@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import { router } from './routes/monsters.js';
+import { router } from './routes/routes.js';
 
 // Load environment variables
 config({ path: '.env' });
