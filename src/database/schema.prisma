@@ -42,30 +42,29 @@ model types {
 }
 
 model actions {
-  id          Int     @id @default(autoincrement())
-  monster_id  Int
-  name        String
-  desc        String  
+  id           Int      @id @default(autoincrement())
+  monster_id   Int
+  name         String
+  desc         String
   attack_bonus Int?
-  damage_dice String?
+  damage_dice  String?
   damage_bonus Int?
-  legendary Boolean?
-  monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
- 
+  legendary    Boolean?
+  monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
 }
 
 model monster_senses {
   sense_id   Int
   monster_id Int
   value      String
-  monsters   monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "monster_id")
-  senses     senses   @relation(fields: [sense_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "sense_id")
+  monsters   monsters @relation(fields: [monster_id], references: [id], onUpdate: NoAction, map: "monster_id")
+  senses     senses   @relation(fields: [sense_id], references: [id], onUpdate: NoAction, map: "sense_id")
 
   @@id([sense_id, monster_id], map: "monster_sense")
 }
 
 model senses {
-  id              Int               @id
+  id              Int              @id
   sense           String
   monsters_senses monster_senses[]
 }
@@ -76,8 +75,8 @@ model monster_stats {
   score        Int
   modifier     Int
   saving_throw Int?
-  monsters     monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  stats        stats    @relation(fields: [stat_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
+  stats        stats    @relation(fields: [stat_id], references: [id], onUpdate: Restrict)
 
   @@id([stat_id, monster_id])
 }
@@ -100,39 +99,39 @@ model monster_languages {
 }
 
 model languages {
-  id          Int     @id @default(autoincrement())
-  name        String
+  id                Int                 @id @default(autoincrement())
+  name              String
   monster_languages monster_languages[]
 }
 
 model monster_skills {
-  monster_id  Int
-  skill_id    Int
-  score       Int
-  monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  skills      skills @relation(fields: [skill_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  monster_id Int
+  skill_id   Int
+  score      Int
+  monsters   monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
+  skills     skills   @relation(fields: [skill_id], references: [id], onUpdate: Restrict)
 
   @@id([monster_id, skill_id])
 }
 
 model skills {
-  id          Int     @id @default(autoincrement())
-  name        String
+  id             Int              @id @default(autoincrement())
+  name           String
   monster_skills monster_skills[]
 }
 
-model monster_speeds{
-  monster_id  Int
-  speed_id    Int
-  range       Int
-  monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  speeds      speeds @relation(fields: [speed_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+model monster_speeds {
+  monster_id Int
+  speed_id   Int
+  range      Int
+  monsters   monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
+  speeds     speeds   @relation(fields: [speed_id], references: [id], onUpdate: Restrict)
 
   @@id([monster_id, speed_id])
 }
 
 model speeds {
-  id          Int     @id @default(autoincrement())
-  name        String
+  id             Int              @id @default(autoincrement())
+  name           String
   monster_speeds monster_speeds[]
 }
