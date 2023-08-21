@@ -1,61 +1,26 @@
-import { authenticateUser, generateToken } from './auth';
-import Jwt from 'jsonwebtoken';
-import { config } from 'dotenv';
+import { authenticateUser } from './auth';
+import { authDB } from '../database/db';
 
-// Load environment variables for access token
-config({ path: '.env' });
+jest.mock('../database/db', () => ({
+    authDB: {
+        from: jest.fn(),
+    },
+}));
 
-describe('generateToken', () => {
-    test('generateToken should return a token', () => {
-        // Arrange
-        const user = {
-            username: 'test',
-        };
+beforeAll(async () => {
+    jest.resetAllMocks();
+});
 
-        // Act
-        const token = generateToken(user);
-
-        // Assert
-        expect(token).toBeDefined();
-    });
-
-    test('generateToken should return a token that can be decoded', () => {
-        // Arrange
-        const user = {
-            username: 'test',
-        };
-
-        // Act
-        const token = generateToken(user);
-        const decoded = Jwt.verify(token, process.env.TOKEN_SECRET);
-
-        // Assert
-        expect(decoded).toBeDefined();
-        expect(decoded.username).toBe(user.username);
-    });
-
-    test('generateToken should return a token that expires in 30 minutes', () => {
-        // Arrange
-        const user = {
-            username: 'test',
-        };
-
-        // Act
-        const token = generateToken(user);
-        const decoded = Jwt.verify(token, process.env.TOKEN_SECRET);
-
-        // Assert
-        expect(decoded).toBeDefined();
-        expect(decoded.exp - decoded.iat).toBe(1800);
-    });
+afterEach(() => {
+    jest.clearAllMocks();
 });
 
 describe('authenticateUser', () => {
-    test('should return 401 if no token is provided', () => {
+    test('should return 401 if no api key is provided', async () => {
         // Arrange
         const req = {
             headers: {
-                authorization: '',
+                'x-api-key': '',
             },
         };
         const res = {
@@ -63,18 +28,24 @@ describe('authenticateUser', () => {
         };
         const next = jest.fn();
 
+        jest.spyOn(authDB, 'from').mockImplementation(() => ({
+            select: () => ({
+                eq: () => null,
+            }),
+        }));
+
         //Act
-        authenticateUser(req, res, next);
+        await authenticateUser(req, res, next);
 
         // Assert
+        expect(jest.spyOn(authDB, 'from')).toHaveBeenCalledTimes(0);
         expect(res.sendStatus).toHaveBeenCalledWith(401);
     });
-
-    test('should return 403 if token is invalid', () => {
+    test('should return 403 if api key is not valid', async () => {
         // Arrange
         const req = {
             headers: {
-                authorization: 'Bearer invalid-token',
+                'x-api-key': 'not a valid key',
             },
         };
         const res = {
@@ -82,38 +53,49 @@ describe('authenticateUser', () => {
         };
         const next = jest.fn();
 
+        jest.spyOn(authDB, 'from').mockImplementation(() => ({
+            select: () => ({
+                eq: () => ({
+                    error: 'Invalid key',
+                    data: null,
+                }),
+            }),
+        }));
+
         //Act
-        authenticateUser(req, res, next);
+        await authenticateUser(req, res, next);
 
         // Assert
+        expect(jest.spyOn(authDB, 'from')).toHaveBeenCalledTimes(1);
         expect(res.sendStatus).toHaveBeenCalledWith(403);
     });
 
-    test('should call next if token is valid', () => {
+    test('should call next if api key is valid', async () => {
         // Arrange
-        const user = {
-            username: 'test',
-        };
-
-        const token = generateToken(user);
-
         const req = {
             headers: {
-                authorization: `Bearer ${token}`,
+                'x-api-key': '123',
             },
-            body: { username: 'test' },
         };
-
         const res = {
             sendStatus: jest.fn(),
         };
-
         const next = jest.fn();
 
+        jest.spyOn(authDB, 'from').mockImplementation(() => ({
+            select: () => ({
+                eq: () => ({
+                    error: null,
+                    data: { id: 1, key: '123' },
+                }),
+            }),
+        }));
+
         //Act
-        authenticateUser(req, res, next);
+        await authenticateUser(req, res, next);
 
         // Assert
+        expect(jest.spyOn(authDB, 'from')).toHaveBeenCalledTimes(1);
         expect(next).toHaveBeenCalled();
     });
 });
