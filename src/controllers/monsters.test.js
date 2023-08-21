@@ -97,6 +97,20 @@ const mockMonsters = [
                 range: '120 ft',
             },
         ],
+        monster_senses: [
+            {
+                senses: {
+                    sense: 'Darkvision',
+                },
+                value: '120ft',
+            },
+            {
+                senses: {
+                    sense: 'Passive Perception',
+                },
+                value: '20',
+            },
+        ],
     },
     {
         id: 80,
@@ -172,6 +186,20 @@ const mockMonsters = [
                     name: 'Telepathy',
                 },
                 range: '120 ft',
+            },
+        ],
+        monster_senses: [
+            {
+                senses: {
+                    sense: 'Darkvision',
+                },
+                value: '120ft',
+            },
+            {
+                senses: {
+                    sense: 'Passive Perception',
+                },
+                value: '19',
             },
         ],
     },
@@ -257,6 +285,7 @@ describe('GET /api/monsters', () => {
                 sizes: mockMonsters[0].sizes,
                 monster_stats: mockMonsters[0].monster_stats,
                 monster_languages: mockMonsters[0].monster_languages,
+                monster_senses: mockMonsters[0].monster_senses,
             });
         });
 

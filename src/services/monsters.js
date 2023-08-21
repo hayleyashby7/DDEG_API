@@ -17,7 +17,9 @@ const monster_structure = {
             range: true,
         },
     },
-
+    monster_senses: {
+        select: { senses: { select: { sense: true } }, value: true },
+    },
 };
 
 export const monstersService = {
