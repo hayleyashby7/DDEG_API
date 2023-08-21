@@ -24,6 +24,9 @@ const monster_structure = {
     monster_skills: {
         select: { skills: { select: { skill: true } }, score: true },
     },
+    monster_speeds: {
+        select: { speeds: { select: { speed: true } }, range: true },
+    },
 };
 
 export const monstersService = {

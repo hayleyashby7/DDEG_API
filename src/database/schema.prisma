@@ -131,6 +131,6 @@ model monster_speeds {
 
 model speeds {
   id             Int              @id @default(autoincrement())
-  name           String
+  speed           String
   monster_speeds monster_speeds[]
 }

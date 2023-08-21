@@ -125,6 +125,20 @@ const mockMonsters = [
                 score: 10,
             },
         ],
+        monster_speeds: [
+            {
+                speeds: {
+                    speed: 'swim',
+                },
+                range: 40,
+            },
+            {
+                speeds: {
+                    speed: 'walk',
+                },
+                range: 10,
+            },
+        ],
     },
     {
         id: 80,
@@ -230,6 +244,20 @@ const mockMonsters = [
                 score: 9,
             },
         ],
+        monster_speeds: [
+            {
+                speeds: {
+                    speed: 'fly',
+                },
+                range: 90,
+            },
+            {
+                speeds: {
+                    speed: 'walk',
+                },
+                range: 30,
+            },
+        ],
     },
 ];
 
@@ -315,6 +343,7 @@ describe('GET /api/monsters', () => {
                 monster_languages: mockMonsters[0].monster_languages,
                 monster_senses: mockMonsters[0].monster_senses,
                 monster_skills: mockMonsters[0].monster_skills,
+                monster_speeds: mockMonsters[0].monster_speeds,
             });
         });
 
