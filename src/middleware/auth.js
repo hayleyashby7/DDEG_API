@@ -1,18 +1,13 @@
-import Jwt from 'jsonwebtoken';
+import { authDB } from '../database/db.js';
 
-export const authenticateUser = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+export const authenticateUser = async (req, res, next) => {
+    const key = req.headers['x-api-key'];
 
-    if (!token) return res.sendStatus(401);
+    if (!key) return res.sendStatus(401);
     else {
-        Jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-            if (err) return res.sendStatus(403);
-            req.user = user;
-            next();
-        });
+        const { data, error } = await authDB.from('users').select('*').eq('key', key);
+
+        if (error || data === null) return res.sendStatus(403);
+        next();
     }
 };
-
-export const generateToken = (user) =>
-    Jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
