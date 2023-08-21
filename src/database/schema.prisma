@@ -91,7 +91,6 @@ model monster_languages {
   monster_id  Int
   language_id Int
   range       String?
-  misc        String?
   monsters    monsters @relation(fields: [monster_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   languages   languages @relation(fields: [language_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
