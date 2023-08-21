@@ -1,4 +1,4 @@
-import db from '../database/db.js';
+import { db } from '../database/db.js';
 
 const monster_structure = {
     types: { select: { type: true } },
