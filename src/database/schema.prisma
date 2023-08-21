@@ -66,6 +66,7 @@ model monster_senses {
 model senses {
   id              Int              @id
   sense           String
+  range       String?
   monsters_senses monster_senses[]
 }
 
