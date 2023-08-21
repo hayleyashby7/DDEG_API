@@ -115,7 +115,7 @@ model monster_skills {
 
 model skills {
   id             Int              @id @default(autoincrement())
-  name           String
+  skill           String
   monster_skills monster_skills[]
 }
 

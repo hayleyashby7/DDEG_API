@@ -20,6 +20,10 @@ const monster_structure = {
     monster_senses: {
         select: { senses: { select: { sense: true } }, value: true },
     },
+
+    monster_skills: {
+        select: { skills: { select: { skill: true } }, score: true },
+    },
 };
 
 export const monstersService = {

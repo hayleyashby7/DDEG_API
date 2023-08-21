@@ -111,6 +111,20 @@ const mockMonsters = [
                 value: '20',
             },
         ],
+        monster_skills: [
+            {
+                skills: {
+                    skill: 'History',
+                },
+                score: 12,
+            },
+            {
+                skills: {
+                    skill: 'Perception',
+                },
+                score: 10,
+            },
+        ],
     },
     {
         id: 80,
@@ -202,6 +216,20 @@ const mockMonsters = [
                 value: '19',
             },
         ],
+        monster_skills: [
+            {
+                skills: {
+                    skill: 'Insight',
+                },
+                score: 9,
+            },
+            {
+                skills: {
+                    skill: 'Perception',
+                },
+                score: 9,
+            },
+        ],
     },
 ];
 
@@ -286,6 +314,7 @@ describe('GET /api/monsters', () => {
                 monster_stats: mockMonsters[0].monster_stats,
                 monster_languages: mockMonsters[0].monster_languages,
                 monster_senses: mockMonsters[0].monster_senses,
+                monster_skills: mockMonsters[0].monster_skills,
             });
         });
 
