@@ -3,7 +3,14 @@ import { db } from '../database/db.js';
 const monster_structure = {
     types: { select: { type: true } },
     sizes: { select: { size: true } },
-   
+    monster_stats: {
+        select: {
+            stats: { select: { stat: true } },
+            score: true,
+            modifier: true,
+            saving_throw: true,
+        },
+    },
 };
 
 export const monstersService = {
