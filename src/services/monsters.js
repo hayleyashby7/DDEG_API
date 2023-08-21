@@ -11,6 +11,13 @@ const monster_structure = {
             saving_throw: true,
         },
     },
+    monster_languages: {
+        select: {
+            languages: { select: { name: true } },
+            range: true,
+        },
+    },
+
 };
 
 export const monstersService = {

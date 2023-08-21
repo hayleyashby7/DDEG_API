@@ -83,6 +83,20 @@ const mockMonsters = [
                 saving_throw: 0,
             },
         ],
+        monster_languages: [
+            {
+                languages: {
+                    name: 'Deep Speech',
+                },
+                range: '',
+            },
+            {
+                languages: {
+                    name: 'Telepathy',
+                },
+                range: '120 ft',
+            },
+        ],
     },
     {
         id: 80,
@@ -95,7 +109,7 @@ const mockMonsters = [
         challenge_rating: 10,
         hit_points: 136,
         hit_dice: '16d8 + 64',
-        language_desc: null,
+        language_desc: 'All',
         types: {
             type: 'Celestial',
         },
@@ -150,6 +164,14 @@ const mockMonsters = [
                 score: 20,
                 modifier: 5,
                 saving_throw: 9,
+            },
+        ],
+        monster_languages: [
+            {
+                languages: {
+                    name: 'Telepathy',
+                },
+                range: '120 ft',
             },
         ],
     },
@@ -234,6 +256,7 @@ describe('GET /api/monsters', () => {
                 types: mockMonsters[0].types,
                 sizes: mockMonsters[0].sizes,
                 monster_stats: mockMonsters[0].monster_stats,
+                monster_languages: mockMonsters[0].monster_languages,
             });
         });
 
