@@ -27,6 +27,7 @@ const monster_structure = {
     monster_speeds: {
         select: { speeds: { select: { speed: true } }, range: true },
     },
+    actions: { select: { actions: true, legendary_actions: true, reactions: true } },
 };
 
 export const monstersService = {

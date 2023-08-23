@@ -44,12 +44,9 @@ model types {
 model actions {
   id           Int      @id @default(autoincrement())
   monster_id   Int
-  name         String
-  desc         String
-  attack_bonus Int?
-  damage_dice  String?
-  damage_bonus Int?
-  legendary    Boolean?
+  actions      String
+  legendary_actions    String?
+  reactions     String?
   monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
 }
 
