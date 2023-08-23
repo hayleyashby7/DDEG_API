@@ -27,6 +27,7 @@ model monsters {
   language_desc    String?
   monster_skills   monster_skills[]
   monster_speeds   monster_speeds[]
+  traits traits[]
 }
 
 model sizes {
@@ -130,4 +131,11 @@ model speeds {
   id             Int              @id @default(autoincrement())
   speed           String
   monster_speeds monster_speeds[]
+}
+
+model traits {
+  id           Int      @id @default(autoincrement())
+  monster_id   Int
+  traits       String
+  monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
 }
