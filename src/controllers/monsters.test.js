@@ -153,6 +153,7 @@ const mockMonsters = [
                 traits: "<p><em><strong>Amphibious.</strong></em> The aboleth can breathe air and water. </p><p><em><strong>Mucous Cloud.</strong></em> While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within 5 feet of it must make a DC 14 Constitution saving throw. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater. </p><p><em><strong>Probing Telepathy.</strong></em> If a creature communicates telepathically with the aboleth, the aboleth learns the creature's greatest desires if the aboleth can see the creature.</p>",
             },
         ],
+        attributes: [],
     },
     {
         id: 80,
@@ -285,6 +286,15 @@ const mockMonsters = [
                 traits: "<p><em><strong>Angelic Weapons.</strong></em> The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals an extra 4d8 radiant damage (included in the attack). </p><p><em><strong>Innate Spellcasting.</strong></em> The deva's spellcasting ability is Charisma (spell save DC 17). The deva can innately cast the following spells, requiring only verbal components: </p><p>At will: detect evil and good </p><p>1/day each: commune, raise dead </p><p><em><strong>Magic Resistance.</strong></em> The deva has advantage on saving throws against spells and other magical effects.</p>",
             },
         ],
+        attributes: [
+            {
+                damage_immunities: '',
+                damage_resistances:
+                    'Radiant; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
+                damage_vulnerabilities: '',
+                condition_immunities: 'Charmed, Exhaustion, Frightened',
+            },
+        ],
     },
 ];
 
@@ -373,6 +383,7 @@ describe('GET /api/monsters', () => {
                 monster_speeds: mockMonsters[0].monster_speeds,
                 actions: mockMonsters[0].actions,
                 traits: mockMonsters[0].traits,
+                attributes: mockMonsters[0].attributes,
             });
         });
 

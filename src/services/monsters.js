@@ -29,6 +29,14 @@ const monster_structure = {
     },
     actions: { select: { actions: true, legendary_actions: true, reactions: true } },
     traits: { select: { traits: true } },
+    attributes: {
+        select: {
+            damage_immunities: true,
+            damage_resistances: true,
+            damage_vulnerabilities: true,
+            condition_immunities: true,
+        },
+    },
 };
 
 export const monstersService = {

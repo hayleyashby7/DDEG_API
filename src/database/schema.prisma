@@ -28,6 +28,7 @@ model monsters {
   monster_skills   monster_skills[]
   monster_speeds   monster_speeds[]
   traits traits[]
+  attributes attributes[]
 }
 
 model sizes {
@@ -138,4 +139,14 @@ model traits {
   monster_id   Int
   traits       String
   monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
+}
+model attributes{
+  id           Int      @id @default(autoincrement())
+  monster_id   Int
+  damage_immunities String? 
+  condition_immunities String? 
+  damage_resistances String? 
+  damage_vulnerabilities String? 
+  monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
+
 }
