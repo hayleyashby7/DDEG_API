@@ -1,6 +1,8 @@
-import { authDB } from '../database/db.js';
+import { authDB } from '../database/db';
+import { NextFunction, Request, Response } from 'express';
 
-export const authenticateUser = async (req, res, next) => {
+export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.headers);
     const key = req.headers['x-api-key'];
 
     if (!key) return res.sendStatus(401);

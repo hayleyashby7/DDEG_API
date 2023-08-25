@@ -1,6 +1,6 @@
 import express from 'express';
-import * as monsters from '../controllers/monsters.js';
-import { authenticateUser } from '../middleware/auth.js';
+import * as monsters from '../controllers/monsters';
+import { authenticateUser } from '../middleware/auth';
 
 export const router = express.Router();
 
