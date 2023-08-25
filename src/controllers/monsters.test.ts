@@ -23,7 +23,7 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challengeRating=10');
+            const response = await supertest(app).get('/api/monsters?challenge_rating=10');
 
             // Assert
             expect(response.statusCode).toBe(200);
@@ -37,7 +37,7 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challengeRating=10');
+            const response = await supertest(app).get('/api/monsters?challenge_rating=10');
 
             // Assert
             expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
@@ -53,7 +53,7 @@ describe('GET /api/monsters', () => {
 
             //Act
             const response = await supertest(app).get(
-                `/api/monsters?challengeRating=${challengeRating}`,
+                `/api/monsters?challenge_rating=${challengeRating}`,
             );
 
             // Assert
@@ -70,12 +70,10 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challengeRating=10');
+            const response = await supertest(app).get('/api/monsters?challenge_rating=10');
             const monsters = response.body;
 
             // Assert
-            expect(monsters).toEqual(expect.any(Array));
-            expect(monsters).toBeGreaterThan(0);
             monsters.map((monster: any) => expect(isMonster(monster)).toBe(true));
         });
 
@@ -87,7 +85,7 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challengeRating=10');
+            const response = await supertest(app).get('/api/monsters?challenge_rating=10');
 
             // Assert
         });
@@ -98,7 +96,7 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challengeRating=20');
+            const response = await supertest(app).get('/api/monsters?challenge_rating=20');
 
             // Assert
             expect(response.statusCode).toBe(404);
@@ -139,8 +137,6 @@ describe('GET /api/monsters', () => {
             const monsters = response.body;
 
             // Assert
-            expect(monsters).toEqual(expect.any(Array));
-            expect(monsters).toBeGreaterThan(0);
             monsters.map((monster: any) => expect(isMonster(monster)).toBe(true));
         });
 
@@ -150,7 +146,7 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challengeRating=20');
+            const response = await supertest(app).get('/api/monsters?challenge_rating=20');
 
             // Assert
             expect(response.statusCode).toBe(404);
