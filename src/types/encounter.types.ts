@@ -1,7 +1,14 @@
-import { Difficulty } from "./difficulty.types";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Difficulty } from './difficulty.types';
+import { Monster } from './monster.types';
 
 export interface EncounterRequest {
     characters: number;
     level: number;
     difficulty: Difficulty;
+}
+
+export interface Encounter {
+    challengeRating: number | null;
+    monsters: Monster[];
 }

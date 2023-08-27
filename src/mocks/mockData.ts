@@ -1,5 +1,6 @@
 import { Monster, MonsterData } from '../types/monster.types';
 import { User } from '../types/user.types';
+import { EncounterRequest, Encounter } from '../types/encounter.types';
 
 export const mockChallengeRatingMonsters: Monster[] = [
     {
@@ -1156,4 +1157,15 @@ export const mockAuthUser: User = {
     key: '1234567890',
     created_at: '2020-01-01T00:00:00.000Z' as unknown as Date,
     updated_at: '2020-01-01T00:00:00.000Z' as unknown as Date,
+};
+
+export const mockEncounterRequest: EncounterRequest = {
+    characters: 5,
+    level: 10,
+    difficulty: 'Medium',
+};  
+
+export const mockEnounterResponse: Encounter = {
+    challengeRating: 10,
+    monsters: mockChallengeRatingMonsters,
 };
