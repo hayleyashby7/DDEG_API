@@ -1,10 +1,10 @@
-import xpChallengeRatings from '../data/xpByChallengeRating.json';
-import xpThresholds from '../data/xpThresholdsByCharLevel.json';
+import xpChallengeRatings from '../files/xpByChallengeRating.json';
+import xpThresholds from '../files/xpThresholdsByCharLevel.json';
 import { Difficulty } from '../types/difficulty.types';
 import { ExpRange, XPChallengeRating } from '../types/challenge_rating.types';
 import { EncounterRequest } from '../types/encounter.types';
 
-const validEncounterRequest = (EncounterRequest: EncounterRequest): boolean => {
+export const validEncounterRequest = (EncounterRequest: EncounterRequest): boolean => {
     const { characters, level, difficulty } = EncounterRequest;
 
     if (!characters || !level || !difficulty) {
@@ -22,7 +22,7 @@ const validEncounterRequest = (EncounterRequest: EncounterRequest): boolean => {
     return true;
 };
 
-const xpMultiplier = (xp: number, characters: number) => {
+export const xpMultiplier = (xp: number, characters: number) => {
     let totalXP = xp;
 
     if (characters < 3) {
@@ -36,19 +36,13 @@ const xpMultiplier = (xp: number, characters: number) => {
     return totalXP;
 };
 
-const convertToFloat = (value: string) => {
-    const [numerator, denominator] = value.split('/');
-    return parseFloat(numerator) / parseFloat(denominator);
+export const xpRangeForLevel = (level: number): ExpRange => {
+    if (level < 1) return xpThresholds.level[0].difficulty;
+    if (level > 20) return xpThresholds.level[19].difficulty;
+    return xpThresholds.level[level - 1].difficulty;
 };
 
-const isValidChallengeRating = (challengeRating: string) => {
-    const challengeRatingNumber = convertToFloat(challengeRating);
-    return challengeRatingNumber >= 0 && challengeRatingNumber <= 30;
-};
-
-const xpRangeForLevel = (level: number): ExpRange => xpThresholds.level[level - 1].difficulty;
-
-const xpRangeByDifficulty = (difficulty: Difficulty, LevelRange: ExpRange): number[] => {
+export const xpRangeByDifficulty = (difficulty: Difficulty, LevelRange: ExpRange): number[] => {
     switch (difficulty) {
         case 'Easy':
             return [LevelRange.easy, LevelRange.medium];
@@ -63,26 +57,31 @@ const xpRangeByDifficulty = (difficulty: Difficulty, LevelRange: ExpRange): numb
     }
 };
 
-const xpRangeForParty = (characters: number, xpRange: number[]): number[] => [
-    characters * xpRange[0],
-    characters * xpRange[1],
-];
+export const xpRangeForParty = (characters: number, xpRange: number[]): number[] => {
+    if (characters < 1 || characters > 20) return xpRange;
+    if (xpRange[0] > xpRange[1]) return xpRange;
+
+    return [characters * xpRange[0], characters * xpRange[1]];
+};
 
 const xpByChallengeRating: XPChallengeRating[] = Object.values(xpChallengeRatings);
 
-const getClosestChallengeRating = (
+export const getClosestChallengeRating = (
     data: XPChallengeRating[],
     targetRange: number[],
     characters: number,
-): number | null => {
+): string | null => {
     let start = 0;
     let end = data.length - 1;
     let middle = 0;
     let testValue = 0;
-    let closestCR = null;
+    1;
+    let closestCR = '';
     let lastMiddle = 0;
 
-    while (start <= end && closestCR === null) {
+    if (data.length === 0 || targetRange.length !== 2) return null;
+
+    while (start <= end && closestCR === '') {
         // Update middle value
         middle = Math.floor((start + end) / 2);
 
@@ -115,13 +114,11 @@ const getClosestChallengeRating = (
 
             default:
                 // Error if reached here
-                console.error('Error: Cannot calculate Challenge Rating - defaulting to CR 0');
-                closestCR = 0;
-                break;
+                return null;
         }
     }
 
-    if (closestCR === null) {
+    if (closestCR === '') {
         // No exact match, return the nearest value
         if (testValue > targetRange[1]) {
             closestCR = data[middle - 1].CR;
@@ -130,16 +127,15 @@ const getClosestChallengeRating = (
         }
     }
 
-    return closestCR as number;
+    return closestCR;
 };
 
-export const calculateChallengeRating = (EncounterRequest: EncounterRequest): number | null => {
+export const calculateChallengeRating = (EncounterRequest: EncounterRequest): string | null => {
     const { characters, level, difficulty } = EncounterRequest;
-    const challengeRating: number | null = null;
 
     if (!validEncounterRequest(EncounterRequest)) {
         console.error('Error: Cannot calculate Challenge Rating - invalid request');
-        return challengeRating;
+        return null;
     }
 
     return getClosestChallengeRating(

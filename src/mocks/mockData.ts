@@ -1,6 +1,7 @@
 import { Monster, MonsterData } from '../types/monster.types';
 import { User } from '../types/user.types';
 import { EncounterRequest, Encounter } from '../types/encounter.types';
+import { XPChallengeRating } from '../types/challenge_rating.types';
 
 export const mockChallengeRatingMonsters: Monster[] = [
     {
@@ -1160,12 +1161,22 @@ export const mockAuthUser: User = {
 };
 
 export const mockEncounterRequest: EncounterRequest = {
-    characters: 5,
-    level: 10,
-    difficulty: 'Medium',
-};  
+    characters: 4,
+    level: 6,
+    difficulty: 'Hard',
+};
 
 export const mockEnounterResponse: Encounter = {
     challengeRating: 10,
     monsters: mockChallengeRatingMonsters,
 };
+
+export const mockXpRange: number[] = [5700, 6400];
+
+export const mockXPChallengeRating: XPChallengeRating[] = [
+    { CR: '1/8', XP: 25 },
+    { CR: '9', XP: 5000 },
+    { CR: '10', XP: 5900 },
+    { CR: '11', XP: 7200 },
+    { CR: '30', XP: 155000 },
+];
