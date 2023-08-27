@@ -16,7 +16,7 @@ describe('monstersService', () => {
             dbMock.monsters.findMany.mockResolvedValueOnce(mockDBMonstersByChallengeRating);
 
             // Act
-            const monsters = await monstersService.getByChallengeRating(challengeRating);
+           await monstersService.getByChallengeRating(challengeRating);
 
             // Assert
             expect(dbMock.monsters.findMany).toHaveBeenCalledWith({
@@ -58,7 +58,7 @@ describe('monstersService', () => {
             dbMock.monsters.findMany.mockResolvedValueOnce(mockDBAllMonsters);
 
             // Act
-            const monsters = await monstersService.getAllMonsters();
+            await monstersService.getAllMonsters();
 
             // Assert
             expect(dbMock.monsters.findMany).toHaveBeenCalledWith({

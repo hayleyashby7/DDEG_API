@@ -95,7 +95,7 @@ export interface Monster {
     reactions?: string;
 }
 
-export const isMonster = (object: any): object is Monster => true;
+export const isMonster = (object: unknown): object is Monster => true;
 
 interface Speed {
     movement_type: string;

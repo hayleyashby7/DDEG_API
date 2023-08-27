@@ -74,7 +74,7 @@ describe('GET /api/monsters', () => {
             const monsters = response.body;
 
             // Assert
-            monsters.map((monster: any) => expect(isMonster(monster)).toBe(true));
+            monsters.map((monster: unknown) => expect(isMonster(monster)).toBe(true));
         });
 
         test('should return monster array with expected values', async () => {
@@ -85,7 +85,7 @@ describe('GET /api/monsters', () => {
             (authenticateUser as jest.Mock).mockImplementation((req, res, next) => next());
 
             //Act
-            const response = await supertest(app).get('/api/monsters?challenge_rating=10');
+            await supertest(app).get('/api/monsters?challenge_rating=10');
 
             // Assert
         });
@@ -137,7 +137,7 @@ describe('GET /api/monsters', () => {
             const monsters = response.body;
 
             // Assert
-            monsters.map((monster: any) => expect(isMonster(monster)).toBe(true));
+            monsters.map((monster: unknown) => expect(isMonster(monster)).toBe(true));
         });
 
         test('should return with a 404 status code if no monsters are found', async () => {

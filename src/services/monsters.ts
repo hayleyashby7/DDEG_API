@@ -83,29 +83,21 @@ const monsterObject = (monster: MonsterData): Monster => {
 };
 
 export const monstersService = {
-    getByChallengeRating: async (challenge_rating: number) => {
-        try {
-            const data = await db.monsters.findMany({
-                where: {
-                    challenge_rating: challenge_rating,
-                },
-                include: monster_request,
-            });
-            const monsters = data.map((monster: any) => monsterObject(monster));
-            return monsters;
-        } catch (error) {
-            throw error;
-        }
+    getByChallengeRating: async (challenge_rating: number): Promise<Monster[]> => {
+        const data = await db.monsters.findMany({
+            where: {
+                challenge_rating: challenge_rating,
+            },
+            include: monster_request,
+        });
+        const monsters = data.map((monster) => monsterObject(monster as MonsterData));
+        return monsters;
     },
 
-    getAllMonsters: async () => {
-        try {
-            const data = await db.monsters.findMany({ include: monster_request });
-            const monsters = data.map((monster: any) => monsterObject(monster));
-            return monsters;
-        } catch (error) {
-            throw error;
-        }
+    getAllMonsters: async (): Promise<Monster[]> => {
+        const data = await db.monsters.findMany({ include: monster_request });
+        const monsters = data.map((monster) => monsterObject(monster as MonsterData));
+        return monsters;
     },
 };
 
