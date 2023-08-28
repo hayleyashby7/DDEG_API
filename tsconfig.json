@@ -2,6 +2,7 @@
     "extends": "@tsconfig/recommended/tsconfig.json",
     "include": ["./src/**/*"],
     "exclude": ["node_modules"],
+    "outDir": "./",
     "compilerOptions": {
         "strict": true,
         "target": "ES2022",
