@@ -1,7 +1,8 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-    clearMocks: true,
+    resetMocks: true,
+    restoreMocks: true,
     preset: 'ts-jest',
     testEnvironment: 'node',
     setupFilesAfterEnv: ['./src/mocks/mockDB.ts'],

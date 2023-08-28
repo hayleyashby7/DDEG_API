@@ -8,10 +8,6 @@ import { Monster, isMonster } from '../types/monster.types';
 jest.mock('../services/monsters');
 jest.mock('../middleware/auth');
 
-beforeAll(async () => {
-    jest.resetAllMocks();
-});
-
 // Test GET /api/monsters
 describe('GET /api/monsters', () => {
     describe('when challenge rating passed as a query parameter', () => {

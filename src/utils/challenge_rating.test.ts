@@ -1,59 +1,6 @@
 import { Difficulty } from '../types/difficulty.types';
-import { EncounterRequest } from '../types/encounter.types';
 import * as challengeRating from './challenge_rating';
 import { mockEncounterRequest, mockXPChallengeRating, mockXpRange } from '../mocks/mockData';
-
-describe('validEncounterRequest', () => {
-    test('returns true if valid request provided', () => {
-        const request: EncounterRequest = {
-            characters: 1,
-            level: 1,
-            difficulty: 'Easy',
-        };
-
-        expect(challengeRating.validEncounterRequest(request)).toBe(true);
-    });
-
-    test('returns false if less that 1 character provided', () => {
-        const request: EncounterRequest = {
-            characters: 0,
-            level: 1,
-            difficulty: 'Easy',
-        };
-
-        expect(challengeRating.validEncounterRequest(request)).toBe(false);
-    });
-
-    test('returns false if more that 20 characters provided', () => {
-        const request: EncounterRequest = {
-            characters: 21,
-            level: 1,
-            difficulty: 'Easy',
-        };
-
-        expect(challengeRating.validEncounterRequest(request)).toBe(false);
-    });
-
-    test('returns false if level too low', () => {
-        const request: EncounterRequest = {
-            characters: 1,
-            level: 0,
-            difficulty: 'Easy',
-        };
-
-        expect(challengeRating.validEncounterRequest(request)).toBe(false);
-    });
-
-    test('returns false if level too high', () => {
-        const request: EncounterRequest = {
-            characters: 1,
-            level: 21,
-            difficulty: 'Easy',
-        };
-
-        expect(challengeRating.validEncounterRequest(request)).toBe(false);
-    });
-});
 
 describe('xpMultiplier', () => {
     test('returns 1 if 3-5 characters', () => {
@@ -205,22 +152,18 @@ describe('calculateChallengeRating', () => {
     test('returns the correct challenge rating for a given encounter', () => {
         expect(challengeRating.calculateChallengeRating(mockEncounterRequest)).toBe('9');
     });
+});
 
-    test('returns null if the requested encounter is invalid', () => {
-        expect(
-            challengeRating.calculateChallengeRating({
-                characters: 0,
-                level: 0,
-                difficulty: 'Easy',
-            }),
-        ).toBe(null);
+describe('convertChallengeRatingToFloat', () => {
+    test('returns the correct float value for a fractional challenge rating', () => {
+        expect(challengeRating.convertChallengeRatingToFloat('1/8')).toBe(0.125);
     });
 
-    test('sends an error to the console if the requested encounter is invalid', () => {
-        const spy = jest.spyOn(console, 'error');
-        challengeRating.calculateChallengeRating({ characters: 0, level: 0, difficulty: 'Easy' });
-        expect(spy).toHaveBeenCalledWith(
-            'Error: Cannot calculate Challenge Rating - invalid request',
-        );
+    test('returns the correct float value for a whole challenge rating', () => {
+        expect(challengeRating.convertChallengeRatingToFloat('10')).toBe(10);
+    });
+
+    test('returns null if the given challenge rating is invalid', () => {
+        expect(challengeRating.convertChallengeRatingToFloat('Invalid')).toBe(null);
     });
 });

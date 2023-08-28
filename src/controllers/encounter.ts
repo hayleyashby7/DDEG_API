@@ -10,12 +10,13 @@ export const generateEncounter = async (req: Request, res: Response, next: NextF
 
         const encounter = await encounterService.generateEncounter(request);
 
-        if (!encounter) {
+        if (!encounter.monsters) {
             return res.status(400).json({ error: 'No encounter generated' });
         }
 
         return res.status(200).json({ ...encounter });
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        const error = err as Error;
+        next(res.status(400).json({ error: error.message }));
     }
 };

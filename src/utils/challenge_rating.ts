@@ -4,24 +4,6 @@ import { Difficulty } from '../types/difficulty.types';
 import { ExpRange, XPChallengeRating } from '../types/challenge_rating.types';
 import { EncounterRequest } from '../types/encounter.types';
 
-export const validEncounterRequest = (EncounterRequest: EncounterRequest): boolean => {
-    const { characters, level, difficulty } = EncounterRequest;
-
-    if (!characters || !level || !difficulty) {
-        return false;
-    }
-
-    if (characters < 1 || characters > 20) {
-        return false;
-    }
-
-    if (level < 1 || level > 20) {
-        return false;
-    }
-
-    return true;
-};
-
 export const xpMultiplier = (xp: number, characters: number) => {
     let totalXP = xp;
 
@@ -133,14 +115,21 @@ export const getClosestChallengeRating = (
 export const calculateChallengeRating = (EncounterRequest: EncounterRequest): string | null => {
     const { characters, level, difficulty } = EncounterRequest;
 
-    if (!validEncounterRequest(EncounterRequest)) {
-        console.error('Error: Cannot calculate Challenge Rating - invalid request');
-        return null;
-    }
-
     return getClosestChallengeRating(
         xpByChallengeRating,
         xpRangeForParty(characters, xpRangeByDifficulty(difficulty, xpRangeForLevel(level))),
         characters,
     );
+};
+
+export const convertChallengeRatingToFloat = (challengeRating: string): number | null => {
+    // Not a valid challenge rating
+    if (challengeRating.replace(/[^0-9/]/g, '') === '') return null;
+
+    // Whole number
+    if (!challengeRating.includes('/')) return parseInt(challengeRating);
+
+    // Fractional number
+    const [numerator, denominator] = challengeRating.split('/');
+    return parseFloat(numerator) / parseFloat(denominator);
 };
