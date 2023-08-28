@@ -1,15 +1,13 @@
 {
     "extends": "@tsconfig/recommended/tsconfig.json",
-    "include": ["./src/**/*"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules"],
-    "outDir": "./",
     "compilerOptions": {
         "strict": true,
-        "target": "ES2022",
+        "target": "ES2020",
         "module": "ES2015",
         "moduleResolution": "node",
-        "rootDir": "./src",
-        "outDir": "./build",
+        "outDir": "./dist",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
