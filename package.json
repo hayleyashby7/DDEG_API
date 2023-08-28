@@ -1,7 +1,7 @@
 {
     "name": "ddeg_api",
     "version": "1.0.0",
-    "description": "API for DDEG - Dungeons & Dragons Encounter Generator",
+    "description": "API server for DDEG - Dungeons & Dragons Encounter Generator",
     "main": "index.js",
     "scripts": {
         "build": "tsc && prisma generate --schema=src/database/schema.prisma",
