@@ -1,6 +1,7 @@
-import { db } from '../database/db.js';
+import { db } from '../database/db';
+import { Monster, MonsterData } from '../types/monster.types';
 
-const monster_structure = {
+export const monster_request = {
     types: { select: { type: true } },
     sizes: { select: { size: true } },
     monster_stats: {
@@ -39,7 +40,7 @@ const monster_structure = {
     },
 };
 
-const monsterObject = (monster) => {
+const monsterObject = (monster: MonsterData): Monster => {
     return {
         name: monster.name,
         size: monster.sizes.size,
@@ -62,10 +63,10 @@ const monsterObject = (monster) => {
         skills: monster.monster_skills.map((skill) => {
             return { skill: skill.skills.skill, score: skill.score };
         }),
-        damage_immunities: monster.attributes.damage_immunities,
-        damage_resistances: monster.attributes.damage_resistances,
-        damage_vulnerabilities: monster.attributes.damage_vulnerabilities,
-        condition_immunities: monster.attributes.condition_immunities,
+        damage_immunities: monster.attributes?.damage_immunities,
+        damage_resistances: monster.attributes?.damage_resistances,
+        damage_vulnerabilities: monster.attributes?.damage_vulnerabilities,
+        condition_immunities: monster.attributes?.condition_immunities,
         senses: monster.monster_senses.map((sense) => {
             return { sense: sense.senses.sense, value: sense.value };
         }),
@@ -74,43 +75,29 @@ const monsterObject = (monster) => {
         }),
         language_desc: monster.language_desc,
         challenge_rating: monster.challenge_rating,
-        traits: monster.traits.map((trait) => {
-            return { trait: trait.traits };
-        }),
-        actions: monster.actions.map((action) => {
-            return {
-                action: action.actions,
-                legendary_actions: action.legendary_actions,
-                reactions: action.reactions,
-            };
-        }),
+        traits: monster.traits?.traits,
+        actions: monster.actions?.actions,
+        legendary_actions: monster.actions?.legendary_actions,
+        reactions: monster.actions?.reactions,
     };
 };
 
 export const monstersService = {
-    getByChallengeRating: async (challengeRating) => {
-        try {
-            const data = await db.monsters.findMany({
-                where: {
-                    challenge_rating: parseFloat(challengeRating),
-                },
-                include: monster_structure,
-            });
-            const monsters = data.map((monster) => monsterObject(monster));
-            return monsters;
-        } catch (error) {
-            throw error;
-        }
+    getByChallengeRating: async (challenge_rating: number): Promise<Monster[]> => {
+        const data = await db.monsters.findMany({
+            where: {
+                challenge_rating: challenge_rating,
+            },
+            include: monster_request,
+        });
+        const monsters = data.map((monster) => monsterObject(monster as MonsterData));
+        return monsters;
     },
 
-    getAllMonsters: async () => {
-        try {
-            const data = await db.monsters.findMany({ include: monster_structure });
-            const monsters = data.map((monster) => monsterObject(monster));
-            return monsters;
-        } catch (error) {
-            throw error;
-        }
+    getAllMonsters: async (): Promise<Monster[]> => {
+        const data = await db.monsters.findMany({ include: monster_request });
+        const monsters = data.map((monster) => monsterObject(monster as MonsterData));
+        return monsters;
     },
 };
 

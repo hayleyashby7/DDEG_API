@@ -1,6 +1,6 @@
-import app from './app.js';
+import app from './app';
 import { config } from 'dotenv';
-import { db } from './database/db.js';
+import { db } from './database/db';
 
 // Load environment variables
 config({ path: '.env' });

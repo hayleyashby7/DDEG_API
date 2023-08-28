@@ -21,14 +21,14 @@ model monsters {
   monster_stats    monster_stats[]
   sizes            sizes             @relation(fields: [size_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   types            types             @relation(fields: [type_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
-  actions          actions[]
+  actions          actions?
   monster_senses  monster_senses[]
   monster_languages monster_languages[]
   language_desc    String?
   monster_skills   monster_skills[]
   monster_speeds   monster_speeds[]
-  traits traits[]
-  attributes attributes[]
+  traits traits?
+  attributes attributes?
 }
 
 model sizes {
@@ -45,7 +45,7 @@ model types {
 
 model actions {
   id           Int      @id @default(autoincrement())
-  monster_id   Int
+  monster_id   Int  @unique
   actions      String
   legendary_actions    String?
   reactions     String?
@@ -136,17 +136,24 @@ model speeds {
 
 model traits {
   id           Int      @id @default(autoincrement())
-  monster_id   Int
+  monster_id   Int  @unique
   traits       String
   monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
 }
 model attributes{
   id           Int      @id @default(autoincrement())
-  monster_id   Int
+  monster_id   Int  @unique
   damage_immunities String? 
   condition_immunities String? 
   damage_resistances String? 
   damage_vulnerabilities String? 
   monsters     monsters @relation(fields: [monster_id], references: [id], onUpdate: Restrict)
 
+}
+
+model users {
+  user_id    String    @id @unique @default(dbgenerated("auth.uid()")) @db.Uuid
+  key        String    @unique @db.VarChar
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
 }
