@@ -1,13 +1,13 @@
 {
-    "name": "ddeg_server",
+    "name": "ddeg_api",
     "version": "1.0.0",
     "description": "API for DDEG - Dungeons & Dragons Encounter Generator",
-    "main": "server.js",
+    "main": "index.js",
     "scripts": {
-        "build": "prisma generate --schema=./src/database/schema.prisma",
+        "build": "rm -rf dist && tsc && prisma generate --schema=src/database/schema.prisma",
         "test": "jest --verbose --coverage",
-        "start": "nodemon --exec npx ts-node src/server.ts",
-        "dev": "nodemon src/server.ts",
+        "start": "ts-node src/index.ts",
+        "dev": "nodemon src/index.ts",
         "lint": "eslint src/**/*.ts --fix"
     },
     "author": "Hayley Ashby",
