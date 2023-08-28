@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { router } from './routes/routes';
+import { Request, Response } from 'express';
 
 // Load environment variables
 config({ path: '.env' });
@@ -23,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.status(200).json({ message: `DDEG API` });
 });
 
