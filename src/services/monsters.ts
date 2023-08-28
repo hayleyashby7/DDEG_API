@@ -90,13 +90,14 @@ export const monstersService = {
             },
             include: monster_request,
         });
-        const monsters = data.map((monster) => monsterObject(monster as MonsterData));
+
+        const monsters = data.map((monster: unknown) => monsterObject(monster as MonsterData));
         return monsters;
     },
 
     getAllMonsters: async (): Promise<Monster[]> => {
         const data = await db.monsters.findMany({ include: monster_request });
-        const monsters = data.map((monster) => monsterObject(monster as MonsterData));
+        const monsters = data.map((monster: unknown) => monsterObject(monster as MonsterData));
         return monsters;
     },
 };
