@@ -6,7 +6,7 @@
     "scripts": {
         "build": "tsc && prisma generate --schema=src/database/schema.prisma",
         "test": "jest --verbose --coverage",
-        "start": "npx ts-node src/index.ts",
+        "start": "ts-node src/index.ts",
         "dev": "nodemon src/index.ts",
         "lint": "eslint src/**/*.ts --fix"
     },
@@ -16,7 +16,8 @@
         "@prisma/client": "^5.2.0",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
-        "express": "^4.18.2"
+        "express": "^4.18.2",
+        "ts-node": "^10.9.1"
     },
     "devDependencies": {
         "@tsconfig/recommended": "^1.0.2",
