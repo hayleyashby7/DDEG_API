@@ -6,7 +6,7 @@
     "scripts": {
         "build": "prisma generate --schema=./src/database/schema.prisma",
         "test": "jest --verbose --coverage",
-        "start": "ts-node src/server.ts",
+        "start": "nodemon --exec npx ts-node src/server.ts",
         "dev": "nodemon src/server.ts",
         "lint": "eslint src/**/*.ts --fix"
     },
