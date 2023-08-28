@@ -5,8 +5,8 @@
     "compilerOptions": {
         "strict": true,
         "target": "ES2020",
+        "module": "ES2015",
         "moduleResolution": "node",
-        "module": "CommonJS",
         "outDir": "dist",
         "resolveJsonModule": true,
         "esModuleInterop": true,
@@ -15,5 +15,11 @@
         "typeRoots": ["node_modules/@types"],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
+    },
+    "ts-node": {
+        "esm": true,
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
     }
 }
