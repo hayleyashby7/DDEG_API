@@ -4,7 +4,7 @@
     "description": "API for DDEG - Dungeons & Dragons Encounter Generator",
     "main": "index.js",
     "scripts": {
-        "build": "rm -rf dist && tsc && prisma generate --schema=src/database/schema.prisma",
+        "build": "tsc && prisma generate --schema=src/database/schema.prisma",
         "test": "jest --verbose --coverage",
         "start": "ts-node src/index.ts",
         "dev": "nodemon src/index.ts",
