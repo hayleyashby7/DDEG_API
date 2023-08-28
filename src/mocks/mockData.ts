@@ -1167,7 +1167,7 @@ export const mockEncounterRequest: EncounterRequest = {
 };
 
 export const mockEnounterResponse: Encounter = {
-    challengeRating: 10,
+    challengeRating: '10',
     monsters: mockChallengeRatingMonsters,
 };
 

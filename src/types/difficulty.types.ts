@@ -10,3 +10,7 @@ export enum DIFFICULTIES {
 }
 
 export type Difficulties = (typeof DIFFICULTIES)[Difficulty];
+
+export const isDifficulty = (difficulty: string): difficulty is Difficulty => {
+    return DIFFICULTY.includes(difficulty as Difficulty);
+}

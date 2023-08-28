@@ -9,6 +9,6 @@ export interface EncounterRequest {
 }
 
 export interface Encounter {
-    challengeRating: number | null;
+    challengeRating: string | null;
     monsters: Monster[];
 }
