@@ -2,11 +2,11 @@
     "name": "ddeg_api",
     "version": "1.0.0",
     "description": "API server for DDEG - Dungeons & Dragons Encounter Generator",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
         "build": "tsc && prisma generate --schema=src/database/schema.prisma",
         "test": "jest --verbose --coverage",
-        "start": "ts-node src/index.ts",
+        "start": "node dist/index.js",
         "dev": "nodemon src/index.ts",
         "lint": "eslint src/**/*.ts --fix"
     },
@@ -41,7 +41,6 @@
         "prisma": "^5.2.0",
         "supertest": "^6.3.3",
         "ts-jest": "^29.1.1",
-        "ts-node": "^10.9.1",
         "typescript": "^5.1.6"
     }
 }

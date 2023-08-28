@@ -5,10 +5,9 @@
     "compilerOptions": {
         "strict": true,
         "target": "ES2020",
-        "module": "ES2015",
         "moduleResolution": "node",
-        "rootDir": "./src",
-        "outDir": "./dist",
+        "module": "CommonJS",
+        "outDir": "dist",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
@@ -16,11 +15,5 @@
         "typeRoots": ["node_modules/@types"],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
-    },
-    "ts-node": {
-        "esm": true,
-        "compilerOptions": {
-            "module": "CommonJS"
-        }
     }
 }
