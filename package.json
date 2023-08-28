@@ -6,8 +6,8 @@
     "scripts": {
         "build": "prisma generate --schema=./src/database/schema.prisma",
         "test": "jest --verbose --coverage",
-        "start": "ts-node src/server.ts",
-        "dev": "nodemon src/server.ts",
+        "start": "ts-node ./src/server.ts",
+        "dev": "nodemon ./src/server.ts",
         "lint": "eslint src/**/*.ts --fix"
     },
     "author": "Hayley Ashby",
