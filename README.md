@@ -3,7 +3,7 @@
 ## Summary
 API for [DDEG - Dungeons & Dragons Encounter Generator](https://github.com/hayleyashby7/DDEG)
 
-Deployed to https://ddeg-api.cyclic.cloud/ 
+Deployed to https://ddeg-api.fly.dev/
 
 
 ## Tech Stack
