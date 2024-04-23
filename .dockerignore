@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+dist/
+
+# testing
+coverage/
+
+# production
+build/
+
+# config
+*.env*
+
+
+ 
+npm-debug.log*
+
