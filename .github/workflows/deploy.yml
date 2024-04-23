@@ -1,14 +1,14 @@
-name: Fly Deploy
+name: Deploy
 on:
     push:
         branches:
-            - main # change to main if needed
+            - main
 jobs:
     deploy:
         name: Deploy to Fly
         if: github.event_name == 'push'
         runs-on: ubuntu-latest
-        concurrency: deploy-group # optional: ensure only one action runs at a time
+        concurrency: deploy-group
         steps:
             - uses: actions/checkout@v4
             - uses: superfly/flyctl-actions/setup-flyctl@master
